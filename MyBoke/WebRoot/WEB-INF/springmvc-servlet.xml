@@ -91,12 +91,14 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">      
 	    <property name="exceptionMappings"> 
 	      <props> 
-	      	<prop key="java.lang.Exception">error</prop> 
+	      	<prop key="java.lang.Exception">forword:error</prop> 
 	      </props>
 	    </property> 
   	</bean>
 	
 	<!--导入applicationContext.xml 或者放到web.xml管理-->
 	<import resource="classpath:applicationContext.xml"/>
+	<!--导入applicationContext_verifyCode.xml 或者放到web.xml管理-->
+	<import resource="classpath:applicationContext_verifyCode.xml"/>
 
 </beans>

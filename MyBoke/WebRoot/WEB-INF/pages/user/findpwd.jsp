@@ -66,7 +66,7 @@
 					</p>
 					<p class="animated bounceInRight">
 						<i class="iconfont icon-verify left" id="icon_pwd"></i>
-						<input type="text" placeholder="请输入验证码" maxlength="5" id="pwd" class="input">
+						<input type="text" placeholder="请输入验证码" maxlength="4" id="pwd" class="input">
 						<i class="iconfont icon-error" id="error"></i>
 						<img src="yzm.do" id="yzm" alt="验证码" onclick="this.src='yzm.do?'+ new Date();"/>
 					</p>
