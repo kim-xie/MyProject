@@ -19,6 +19,9 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	<!-- mvc:resources 资源文件的处理. -->
+	<!-- <mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>  -->
+	
 	<!--
      	 文件上传的配置 1kb=1024byte 1MB = 1024KB
      	依赖包：
@@ -87,14 +90,14 @@
 		</mvc:interceptor>
 	</mvc:interceptors>  -->
 	
-	<!-- 统一异常处理 -->
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">      
-	    <property name="exceptionMappings"> 
-	      <props> 
-	      	<prop key="java.lang.Exception">forword:error</prop> 
-	      </props>
-	    </property> 
-  	</bean>
+  	 <!-- 统一异常处理 -->
+    <!--  <bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+     	<property name="exceptionMappings">
+     		<props>
+     			<prop key="java.lang.RuntimeException">forward:error</prop>
+     		</props>
+     	</property>
+     </bean> -->
 	
 	<!--导入applicationContext.xml 或者放到web.xml管理-->
 	<import resource="classpath:applicationContext.xml"/>

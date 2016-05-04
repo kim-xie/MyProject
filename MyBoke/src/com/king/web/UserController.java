@@ -103,7 +103,6 @@ public class UserController extends BaseController {
 	@RequestMapping("/checkUserEmail.do")
 	public String checkUserEmail(String userEmail) {
 		if (TmStringUtils.isEmail(userEmail)) {
-			
 			boolean email = userService.checkUserEmail(userEmail);
 			if(email){
 				return "EmailIsAlive";

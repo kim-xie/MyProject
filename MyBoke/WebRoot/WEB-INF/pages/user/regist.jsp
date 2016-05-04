@@ -342,8 +342,8 @@
 		//展示提示框信息		
 		function showTip(animate,icon,color,message){
 			$("#tip").css("display","block");
-			$("#tip").addClass("animated "+ animate);
-			$("#tip").children("i").addClass("iconfont "+icon).css("color",color);
+			$("#tip").removeClass().addClass("animated "+ animate);
+			$("#tip").children("i").removeClass().addClass("iconfont "+icon).css("color",color);
 			$("#tip").children("span").html(message);
 		};
 			
