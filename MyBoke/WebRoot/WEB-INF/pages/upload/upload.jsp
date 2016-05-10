@@ -3,7 +3,6 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  
   	<title>头像上传页面</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -15,23 +14,21 @@
 		*{padding: 0;margin:0}
 		ul,li{list-style:none;}
 		a{color:#333;text-decoration: none;}
-		body{font-size:14px;font-family: "微软雅黑";background:#333}
-		#box{width:400px;background:#fff;text-align:center;border:2px solid #ccc;margin:100px auto;color:#fff;padding:0px 5px 5px 5px;position:relative;}
+		body{font-size:14px;font-family:"微软雅黑";background:#333;overflow:hidden;}
+		#box{width:400px;background:#fff;text-align:center;border:2px solid #ccc;margin:10px auto;color:#fff;padding:0px 5px 5px 5px;position:relative;}
 		#box .uppadbox{margin-top:10px;height:160px;background:#eaeaea;border:2px dashed #c5c5c5;position:relative;z-index: 2}
 		#box .uppadbox h3{line-height:125px;font-size:24px;color:#c5c5c5;text-shadow: 1px 1px 1px #999;}
 		#box .uppadbox p{color:#c5c5c5}
 		
-		#box .buttons{height:75px;line-height:75px;position:relative;z-index:2}
+		#box .buttons{height:70px;line-height:70px;position:relative;z-index:2}
 		#box .buttons a{padding:8px 16px;background:#333;color:#fff;border-radius:2px;}
 		#box .buttons a:hover{background:#111}
 		
 		#prograssbar{position:absolute;width:100%;height:0%;bottom:0;left:0;background:linear-gradient(green,red);z-index:1}
 		
-		
 		#preview-pane{position:absolute;z-index:2000;top:10px;right:-280px;padding:6px;border:1px rgba(0,0,0,.4) solid;background-color:white;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;-webkit-box-shadow:1px 1px 5px 2px rgba(0,0,0,0.2);-moz-box-shadow:1px 1px 5px 2px rgba(0,0,0,0.2);box-shadow:1px 1px 5px 2px rgba(0,0,0,0.2);}
 		#preview-pane .preview-container{width:200px;height:200px;overflow:hidden;border-radius:50%;text-align:center;line-height:200px;font-size:24px;color:#c5c5c5;text-shadow: 1px 1px 1px #999;}
 		#preview-pane .preview-container #preview{width:100%;height:100%;}
-		
 		
 		/*滚动条兼容*/
 		::-webkit-scrollbar{width:10px;height:6px;background:#ccc;}
@@ -54,7 +51,7 @@
 
   	<div id="box">
 		
-		 <img src="" data-bgsrc="" width="400" height="400" id="target"/>
+		 <img src="" data-bgsrc="" width="400" height="400" id="target" style="background:#fff;"/>
 		 
 		 <div id="preview-pane">
 		    <div class="preview-container">
@@ -136,7 +133,6 @@
 		  var day = date.getDate();
 		  //参数打包
 		  var params = {bgsrc:src,x:x,y:y,w:w,h:h,smallsrc:"resources/imgs/header_pic/"+year+"/"+month+"/"+day+"/header_pic.jpg"};
-		
 		  $.ajax({
 			  type:"post",
 			  url:basePath+"/upload/cutImg.do",
@@ -151,7 +147,11 @@
 				  
 			  }
 		  });
-	  }
+	  };
+	  
+	function cancle(){
+		window.location.reload(true);
+	};
 	</script>
   	<!-- 上传头像 -->
   	<script type="text/javascript">
@@ -241,7 +241,8 @@
 		  					//var smallImg = $("<img src='' class='jcrop-preview' id='preview'/>");
 		  					//$("#box").prepend(bigImg);
 		  					//$("#box").find("#preview-pane .preview-container").append(smallImg);
-		  					
+		  					var mark = $("#target").is(":hidden");
+		  					alert(mark);
 		  					$("#target,#preview").data("bgsrc",json.url).attr("src",basePath+src);
 		  					jcrop_api.setImage(basePath+src);
 		  				}

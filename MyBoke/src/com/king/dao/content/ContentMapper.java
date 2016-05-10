@@ -1,4 +1,4 @@
-package com.king.dao;
+package com.king.dao.content;
 
 import java.util.List;
 

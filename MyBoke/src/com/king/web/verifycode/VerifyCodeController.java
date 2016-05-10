@@ -1,4 +1,4 @@
-package com.king.web;
+package com.king.web.verifycode;
 
 import java.awt.image.BufferedImage;
 
@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.king.web.BaseController;
 
 @Controller
 @RequestMapping("/user")

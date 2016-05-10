@@ -1,4 +1,4 @@
-package com.king.service;
+package com.king.service.content;
 
 import java.util.List;
 

@@ -11,8 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.king.bean.Content;
-import com.king.dao.ContentMapper;
-import com.king.service.ContentService;
+import com.king.dao.content.ContentMapper;
+import com.king.service.content.ContentService;
 
 public class Test {
 	/**

@@ -1,4 +1,4 @@
-package com.king.web;
+package com.king.web.upload;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.king.util.ImageUtil;
 import com.king.util.TmFileUtil;
+import com.king.web.BaseController;
 
 @Controller
 @RequestMapping("/upload")

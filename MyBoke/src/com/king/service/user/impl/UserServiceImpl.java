@@ -1,4 +1,4 @@
-package com.king.service.impl;
+package com.king.service.user.impl;
 
 import javax.annotation.Resource;
 
@@ -8,8 +8,8 @@ import com.king.bean.Login;
 import com.king.bean.MailInfo;
 import com.king.bean.Regist;
 import com.king.bean.User;
-import com.king.dao.UserMapper;
-import com.king.service.UserService;
+import com.king.dao.user.UserMapper;
+import com.king.service.user.UserService;
 import com.king.util.SimpleMail;
 @Service("userService")
 public class UserServiceImpl implements UserService{

@@ -1,4 +1,4 @@
-package com.king.web;
+package com.king.web.gather;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.king.bean.Content;
 import com.king.bean.Gather;
-import com.king.service.ContentService;
+import com.king.service.content.ContentService;
 import com.king.util.TmStringUtils;
 
 

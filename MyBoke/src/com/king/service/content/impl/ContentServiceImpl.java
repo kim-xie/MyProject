@@ -1,4 +1,4 @@
-package com.king.service.impl;
+package com.king.service.content.impl;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.king.bean.Content;
-import com.king.dao.ContentMapper;
-import com.king.service.ContentService;
+import com.king.dao.content.ContentMapper;
+import com.king.service.content.ContentService;
 @Service("contentService")
 public class ContentServiceImpl implements ContentService{
 	

@@ -10,7 +10,7 @@
 	<%@include file="/WEB-INF/pages/common/common.jsp"%>
 	<style>	
 		*{padding:0;margin:0;}
-		body{background:url("${basePath}/resources/img/2.jpg")no-repeat;background-size:cover;font-size:12px;font-family:"微软雅黑";position:relative;}
+		body{background:url("${basePath}/resources/imgs/2.jpg")no-repeat;background-size:cover;font-size:12px;font-family:"微软雅黑";position:relative;}
 		/*<!--提示栏 start-->*/
 		#tip{width:100%;height:60px;position:absolute;left:0;top:0;background-color:#3499DA;line-height:60px;text-align:center;display:none;}
 		#tip i{font-size:25px;color:yellow;}
@@ -80,7 +80,7 @@
 					</p>
 					<p class="animated rotateInUpRight">
 						<span class="login">
-							已有账号？<a href="login.html">马上登录</a>
+							已有账号？<a href="${basePath}/user/toLogin.do" onclick="toLogin();">马上登录</a>
 						</span>						
 					</p>
 				</div>
@@ -96,6 +96,11 @@
 		var $regist = null;
 		var $input = null;
 		var $error = null;
+		
+		//马上登录
+		function toLogin(){
+			window.location.href = basePath+"/user/toLogin.do";
+		}
 		
 		$(function(){
 			//获取对应的参数
@@ -126,9 +131,6 @@
 				 if(!userName){
 					$(this).css("borderBottom","");
 					$(this).prev().css("color","");
-					showTip("bounceInDown","icon-tip","yellow","请输入您的用户名！");
-					$user.focus();
-					return;
 				 }else if( len<3 || len>9){
 					 showTip("bounceInDown","icon-Error","red","请输入长度为3~9的用户名！");
 					 $user.next().addClass("icon-error").css("display","block");

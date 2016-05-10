@@ -1,7 +1,4 @@
-package com.king.web;
-
-import static com.king.util.TzConstant.SESSION_USER;
-import static com.king.util.TzConstant.SESSION_USER_USERNAME;
+package com.king.web.user;
 
 import java.util.Date;
 
@@ -13,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.code.kaptcha.Constants;
 import com.king.bean.Login;
 import com.king.bean.Regist;
 import com.king.bean.User;
-import com.king.service.UserService;
+import com.king.service.user.UserService;
 import com.king.util.TmStringUtils;
+import com.king.web.BaseController;
 
 @Controller
 @RequestMapping("/user")
@@ -27,7 +26,6 @@ public class UserController extends BaseController {
 	 */
 	@Resource(name = "userService")
 	private UserService userService;
-
 	/**
 	 * 前往登录页面
 	 * @Title: toLogin
@@ -40,7 +38,6 @@ public class UserController extends BaseController {
 	public String toLogin() {
 		return "user/login";
 	}
-
 	/**
 	 * 前往注册页面
 	 * @Title: toRegist
@@ -53,7 +50,6 @@ public class UserController extends BaseController {
 	public String toRegist() {
 		return "user/regist";
 	}
-
 	/**
 	 * 前往找回密码页面
 	 * @Title: toFindPwd
@@ -66,9 +62,29 @@ public class UserController extends BaseController {
 	public String toFindPwd() {
 		return "user/findpwd";
 	}
+	/**
+	 * 前往注册成功页面
+	 * @Title: toMsg 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
 	@RequestMapping("/toMsg.do")
 	public String toMsg() {
 		return "user/msg";
+	}
+	/**
+	 * 前往个人资料页面
+	 * @Title: toPerson 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/toPerson.do")
+	public String toPerson() {
+		return "user/person";
 	}
 	/**
 	 * 注册用户名校验
@@ -89,7 +105,6 @@ public class UserController extends BaseController {
 			return "UserIsCorrect";
 		}
 	}
-
 	/**
 	 * 注册邮箱校验
 	 * @Title: checkUserEmail
@@ -113,7 +128,6 @@ public class UserController extends BaseController {
 			return "emailError";
 		}
 	}
-
 	/**
 	 * 注册
 	 * @Title: regist
@@ -175,7 +189,6 @@ public class UserController extends BaseController {
 			return "user/activeSuccess";
 		}
 	}
-	
 	/**
 	 * 登录
 	 * @Title: loginIn
@@ -192,24 +205,29 @@ public class UserController extends BaseController {
 			if (TmStringUtils.isNotEmpty(login.getUserName())
 					&& TmStringUtils.isNotEmpty(login.getPassword())) {
 				
-				login.setPassword(TmStringUtils.md5Base64(login.getPassword()));
-				
-				User user = userService.loginIn(login);
-				
-				if (user != null && user.getUserName().equals(login.getUserName()) && user.getUserPassword().equals(login.getPassword())) {
-					if(user.getActive().equals(1)){
-						session.setAttribute(SESSION_USER, user);
-						session.setAttribute(SESSION_USER_USERNAME,
-								user.getUserName());
-						return "success";
-					}else{
-						return "noActive";
+				String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+				String verifyCode = request.getParameter("verifyCode");
+				System.out.println(verifyCode);
+				if(verifyCode!=null && !verifyCode.equalsIgnoreCase(code)){
+					return "vrfError";
+				}else{
+					login.setPassword(TmStringUtils.md5Base64(login.getPassword()));
+					User user = userService.loginIn(login);
+					System.out.println(user.getUserEmail());
+					if (user != null && user.getUserName().equals(login.getUserName()) && user.getUserPassword().equals(login.getPassword())) {
+						if(user.getActive().equals(1)){
+							session.setAttribute("user",user);
+							session.setAttribute("userName",user.getUserName());
+							return "success";
+						}else{
+							return "noActive";
+						}
+					} else {
+						return "fail";
 					}
-				} else {
-					return "fail";
 				}
 			} else {
-				return "null";// 请输入账号和密码
+				return "null";
 			}
 		} else {
 			return "error";
@@ -225,10 +243,9 @@ public class UserController extends BaseController {
 	 * @throws
 	 */
 	@RequestMapping("/loginout.do")
-	@ResponseBody
 	public String logout() {
 		session.invalidate();
-		return "success";
+		return "user/login";
 	}
 
 }

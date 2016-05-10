@@ -11,7 +11,7 @@
 	<style>	
 		*{padding:0;margin:0;}
 		a{text-decoration: none;}
-		body{background:url("${basePath}/resources/img/2.jpg")no-repeat;background-size:cover;font-size: 12px;font-family:"微软雅黑";position:relative;}
+		body{background:url("${basePath}/resources/imgs/2.jpg")no-repeat;background-size:cover;font-size: 12px;font-family:"微软雅黑";position:relative;}
 		
 		/*<!--提示栏 start-->*/
 		#tip{width:100%;height:60px;position:absolute;left:0;top:0;background-color:#3499DA;line-height:60px;text-align:center;display:none;}

@@ -10,6 +10,7 @@
   <servlet>
 	  <servlet-name>springmvc</servlet-name>
 	  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	  <!-- 如果没有命名空间则spring的配置文件名必须是: servletName-servlet.xml -->
 	  <init-param>
 	      <param-name>namespace</param-name>
 	      <param-value>springmvc-servlet</param-value>
@@ -22,10 +23,10 @@
   </servlet-mapping>
   
   <!-- 静态资源文件的处理 -->
-  <!-- <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>/resources/*</url-pattern>
-  </servlet-mapping> -->
+  </servlet-mapping>
   
   <!-- spring的配置文件的加载  也可Import到Springmvc管理 -->
   <!-- <context-param>
@@ -36,6 +37,20 @@
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	  </listener>
   -->
+  
+  <!-- 框架异常处理 -->
+  <error-page>
+  	<exception-type>404</exception-type>
+  	<error-code>error/error.html</error-code>
+  </error-page>
+   <error-page>
+  	<exception-type>500</exception-type>
+  	<error-code>error/error.html</error-code>
+  </error-page>
+   <error-page>
+  	<exception-type>java.lang.exception</exception-type>
+  	<error-code>error/error.html</error-code>
+  </error-page>
   
   <!-- 统一编码过滤器 -->
   <filter>

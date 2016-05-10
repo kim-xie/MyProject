@@ -1,6 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="http://at.alicdn.com/t/font_1461237269_3670769.css">
-<link rel="stylesheet" href="${basePath}/resources/css/animate.css">
-<link rel="stylesheet" type="text/css" href="${basePath}/resources/css/sganimate.css"/>
-<script type="text/javascript">var basePath="${basePath}";</script>
-<script type="text/javascript" src="${basePath}/resources/js/jquery-1.11.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1462703034_1145148.css">
+<link rel="stylesheet" type="text/css" href="${basePath}/resources/sg/css/sg.css"/>
+<link rel="stylesheet" type="text/css" href="${basePath}/resources/sg/css/animate.css">
+<link rel="stylesheet" type="text/css" href="${basePath}/resources/sg/css/sganimate.css"/>
+<script type="text/javascript">var basePath="${basePath}";var adminPath="${basePath}/admin";</script>
+<script type="text/javascript" src="${basePath}/resources/sg/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${basePath}/resources/sg/sgutil.js"></script>
+<script type="text/javascript" src="${basePath}/resources/sg/sg.js"></script>
+<script type="text/javascript" src="${basePath}/resources/js/admin.js"></script>
+
+

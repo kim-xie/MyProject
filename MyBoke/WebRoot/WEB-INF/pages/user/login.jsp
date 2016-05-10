@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,7 +9,7 @@
 	<%@include file="/WEB-INF/pages/common/common.jsp"%>
 	<style>	
 		*{padding:0;margin:0;}
-		body{background:url("${basePath}/resources/img/2.jpg")no-repeat;background-size:cover;font-size: 12px;font-family:"微软雅黑";position:relative;}
+		body{background:url("${basePath}/resources/imgs/2.jpg")no-repeat;background-size:cover;font-size: 12px;font-family:"微软雅黑";position:relative;}
 		
 		/*<!--提示栏 start-->*/
 		#tip{width:100%;height:60px;position:absolute;left:0;top:0;background-color:#3499DA;line-height:60px;text-align:center;display:none;}
@@ -25,6 +24,8 @@
 		/*<!--logo end-->*/
 		/*<!--loginForm start-->*/
 		#form{width:250px;height:180px;margin:0 auto;}
+		#yzm{width:40%;height:100%;vertical-align:middle;position:absolute;right:0;top:0;cursor:pointer;}
+		#error{position:absolute;right:100px;top:2px;font-size:20px;}
 		#form p{margin-bottom:25px;width:100%;position:relative;height:35px;line-height:35px;}
 		#form p:nth-child(3){margin-bottom:10px;}
 		#form p input{width:100%;height:100%;border:none;outline:none;text-indent:2.5em;font-size:16px;font-weight:600;}
@@ -68,15 +69,21 @@
 						<input type="password" placeholder="请输入密码" class="input"  maxlength="20" id="pwd">
 						<i class="iconfont icon"></i>
 					</p>
+					<p class="animated bounceInLeft" style="display:none;" id="verify">
+						<i class="iconfont icon-verify left" id="icon_yzm"></i>
+						<input type="text" placeholder="请输入验证码" class="input"  maxlength="4" id="verifycode">
+						<i class="iconfont icon" id="error"></i>
+						<img src="yzm.do" id="yzm" alt="验证码" onclick="this.src='yzm.do?'+ new Date();"/>
+					</p>
 					<p class="animated bounceIn">
 						<input id="login" type="button" value="登录" onclick="loginIn(this)">
 					</p>
 					<p class="animated rotateInUpRight">
 						<span class="regist">
-							<a href="regist.html">立即注册</a>
+							<a href="${basePath}/user/toRegist.do" onclick="toRegist();">立即注册</a>
 						</span>
 						<span class="pwd">
-							<a href="pwd.html" target="_blank">忘记密码?</a>
+							<a href="${basePath}/user/toFindPwd.do" onclick="toFindPwd();">忘记密码?</a>
 						</span>
 					</p>
 				</div>
@@ -90,6 +97,18 @@
 		var $login = null;
 		var $input = null;
 		var $error = null;
+		//登录拦截
+		var loginIndex = 0;
+		
+		//马上注册
+		function toRegist(){
+			window.location.href = basePath+"/user/toRegist.do";
+		}
+		
+		//找回密码
+		function toFindPwd(){
+			window.open(basePath+"/user/toFindPwd.do");
+		}
 		
 		$(function(){
 			//获取对应的参数
@@ -110,18 +129,21 @@
 					$("#tip").fadeOut(500);
 				});
 			});
+			//验证码
+			$("#verifycode").keydown(function(){
+				$(this).next().removeClass().addClass("iconfont icon-error").css({"display":"block","color":"rgba(152, 151, 151, 0.59)","cursor":"pointer"});
+			});
+			$("#error").hover(function(){
+				$(this).css("color","#3499DA");
+			},function(){$(this).css("color","rgba(152, 151, 151, 0.59)");});
 			
-			
-			//失去焦点事件
+			 //失去焦点事件
 			 $user.blur(function(){
 				 var userName = $(this).val().trim();
 				 var len = userName.length;
 				 if(!userName){
 					$(this).css("borderBottom","");
 					$(this).prev().css("color","");
-					showTip("bounceInDown","icon-tip","yellow","请输入您的用户名！");
-					$user.focus();
-					return;
 				 }else if( len<3 || len>9){
 					 showTip("bounceInDown","icon-Error","red","请输入长度为3~9的用户名！");
 					 $user.next().addClass("icon-error").css("display","block");
@@ -188,7 +210,7 @@
 			//回车登录
 	 		$(document).keydown(function(e){
 	 			if(e.keyCode==13){
-	 				$login.trigger("click");
+	 				loginIn();
 	  			}
 	 		});
 			
@@ -211,45 +233,135 @@
 		};
 		//简单校验
 		function loginIn(obj){
-			var userVal = $user.val().trim();
-			var pwdVal = $pwd.val().trim();
-			
-			if(userVal && pwdVal && $user.blur() && $pwd.blur()){
-				showTip("bounceInDown","icon-correct","green","登陆中请稍等...");
-				$login.val("登陆中...").off("click");
-				$error.off("click");
-				var params = {userName:userVal,password:pwdVal};
-				//alert(JSON.stringify(params));
-				//ajax提交数据
-				$.ajax({
-					type:"post",
-					url:basePath+"/user/login.do",
-					data:params,
-					success:function(data){
-						var data = data.trim(); 
-						//alert(data);
-						if(data=="error" || data=="null" || data=="fail"){
-							$pwd.val("");
-							$pwd.focus();
-		  					$login.val("登录").on("click");
-							$error.on("click");
-		  					showTip("fadeInUp","icon-Error","red","登录失败...用户名或密码错误！");
-		  					$pwd.next().css("display","none");
-		  				}else if(data=="noActive"){
-		  					showTip("fadeInUp","icon-Error","red","该用户名还未激活请前往邮箱激活！");
-		  					$user.val("");
-		  					$pwd.val("");
-		  					$user.focus();
-		  					$login.val("登录").on("click");
-							$error.on("click");
-							$user.next().css("display","none");
-							$pwd.next().css("display","none");
-		  				}else if(data=="success"){
-		  					window.location.href = basePath+"/index.do";
-		  				}
-					}
-				});
+			var mark = $("#verify").is(":hidden");
+			if(loginIndex == 2){
+				$("#verify").css("display","block");
 			}
+			if(mark){
+				var userVal = $user.val().trim();
+				var pwdVal = $pwd.val().trim();
+				
+				if(!userVal && !pwdVal){
+					showTip("fadeInUp","icon-Error","red","请填写完整的登录信息！");
+					$user.focus();
+					return;
+				}
+				if(!userVal){
+					showTip("fadeInUp","icon-Error","red","请填写用户名！");
+					$user.focus();
+					return;
+				}
+				if(!pwdVal){
+					showTip("fadeInUp","icon-Error","red","请填写密码！");
+					$pwd.focus();
+					return;
+				}
+				if(userVal && pwdVal && $user.blur() && $pwd.blur()){
+					showTip("bounceInDown","icon-correct","green","登陆中请稍等...");
+					$login.val("登陆中...").off("click");
+					$error.off("click");
+					var params = {userName:userVal,password:pwdVal};
+					$.ajax({
+						type:"post",
+						url:basePath+"/user/login.do",
+						data:params,
+						success:function(data){
+							var data = data.trim(); 
+							if(data=="error" || data=="null" || data=="fail"){
+								$pwd.val("");
+								$pwd.focus();
+			  					$login.val("登录").on("click");
+								$error.on("click");
+			  					showTip("fadeInUp","icon-Error","red","登录密码错误！");
+			  					$pwd.next().css("display","none");
+			  					loginIndex++;
+			  				}else if(data=="noActive"){
+			  					showTip("fadeInUp","icon-Error","red","该用户名还未激活请前往邮箱激活！");
+			  					$user.val("");
+			  					$pwd.val("");
+			  					$user.focus();
+			  					$login.val("登录").on("click");
+								$error.on("click");
+								$user.next().css("display","none");
+								$pwd.next().css("display","none");
+								loginIndex++;
+			  				}else if(data=="success"){
+			  					window.location.href = basePath+"/index.do";
+			  				}
+						}
+					});
+				}
+			}else{
+				var userVal = $user.val().trim();
+				var pwdVal = $pwd.val().trim();
+				var yzmVal = $("#verifycode").val().trim();
+				
+				if(!userVal && !pwdVal && !yzmVal){
+					showTip("fadeInUp","icon-Error","red","请填写完整的登录信息！");
+					$user.focus();
+					return;
+				}
+				if(!userVal){
+					showTip("fadeInUp","icon-Error","red","请填写用户名！");
+					$user.focus();
+					return;
+				}
+				if(!pwdVal){
+					showTip("fadeInUp","icon-Error","red","请填写密码！");
+					$pwd.focus();
+					return;
+				}
+				if(!yzmVal){
+					showTip("fadeInUp","icon-Error","red","请填写验证码！");
+					$("#verifycode").focus();
+					return;
+				}
+				if(userVal && pwdVal && yzmVal && $user.blur() && $pwd.blur()){
+					showTip("bounceInDown","icon-correct","green","登陆中请稍等...");
+					$login.val("登陆中...").off("click");
+					$error.off("click");
+					var params = {userName:userVal,password:pwdVal,verifyCode:yzmVal};
+					$.ajax({
+						type:"post",
+						url:basePath+"/user/login.do",
+						data:params,
+						success:function(data){
+							var data = data.trim(); 
+							if(data=="error" || data=="null" || data=="fail"){
+								$pwd.val("");
+								$pwd.focus();
+			  					$login.val("登录").on("click");
+								$error.on("click");
+			  					showTip("fadeInUp","icon-Error","red","登录失败...用户名或密码错误！");
+			  					$pwd.next().css("display","none");
+			  					loginIndex++;
+			  				}else if(data=="noActive"){
+			  					showTip("fadeInUp","icon-Error","red","该用户名还未激活请前往邮箱激活！");
+			  					$user.val("");
+			  					$pwd.val("");
+			  					$user.focus();
+			  					$login.val("登录").on("click");
+								$error.on("click");
+								$user.next().css("display","none");
+								$pwd.next().css("display","none");
+								loginIndex++;
+			  				}else if(data=="success"){
+			  					window.location.href = basePath+"/index.do";
+			  				}else if(data == "vrfError"){
+			  					showTip("fadeInUp","icon-Error","red","验证码错误,请重新输入");
+			  					$("#verifycode").val("");
+			  					$("#verifycode").next().css("display","none");
+			  					$("#verifycode").focus();
+			  					$login.val("登录").on("click");
+								$error.on("click");
+								loginIndex++;
+			  				}
+						}
+					});
+				}
+			}
+			
+				
 		};
 		
 		</script>

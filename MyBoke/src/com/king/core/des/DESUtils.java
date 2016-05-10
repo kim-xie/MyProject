@@ -73,7 +73,7 @@ public class DESUtils {
 		
 		try {
 			System.out.println(getEncryptString("root"));
-			System.out.println(getEncryptString("xiaoer"));
+			System.out.println(getEncryptString("mysql"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
