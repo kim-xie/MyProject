@@ -12,12 +12,14 @@ public class User implements Serializable {
 	// 实现IO序列化 可以以流的形式输出
 	private static final long serialVersionUID = 1L;
 	// 主键
-	private String userId;
+	private Integer userId;
+	// 角色id
+	private Integer roleId;
 	// 用户名
 	private String userName;
 	// 密码
 	private String userPassword;
-	// 性别 1--男性 0--女性
+	// 性别 2--保密 1--男性 0--女性
 	private Integer userSex;
 	// 年龄
 	private Integer userAge;
@@ -35,29 +37,50 @@ public class User implements Serializable {
 	private Integer active;
 	// 是否删除 1--已删除 0--未删除
 	private Integer isDelete;
-	// 是否是明星用户 1--明星用户 0--普通用户
+	// 是否明星用户 1--明星用户 0--普通用户
 	private Integer state;
+	// 是否禁用   1--禁用 0--未禁用
+	private Integer forbiden;
 	// 激活码
 	private String activeCode;
+	// qq
+	private String qq;
+	// 微信
+	private String weixin;
+	// 生日
+	private String birthday;
+	// 地址
+	private String address;
+	// 描述
+	private String description;
+	//用户ip
+	private String ip;
+	//用户ip地址
+	private String ipAddress;
 
 	// 无参构造器
 	public User() {
 
 	}
-
 	// 有参构造器
-	public User(String userId) {
+	public User(Integer userId) {
 		this.userId = userId;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
+	
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -154,6 +177,14 @@ public class User implements Serializable {
 		this.state = state;
 	}
 
+	public Integer getForbiden() {
+		return forbiden;
+	}
+
+	public void setForbiden(Integer forbiden) {
+		this.forbiden = forbiden;
+	}
+
 	public String getActiveCode() {
 		return activeCode;
 	}
@@ -162,8 +193,60 @@ public class User implements Serializable {
 		this.activeCode = activeCode;
 	}
 
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getWeixin() {
+		return weixin;
+	}
+
+	public void setWeixin(String weixin) {
+		this.weixin = weixin;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getIpAddress() {
+		return ipAddress;
+	}
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
 }

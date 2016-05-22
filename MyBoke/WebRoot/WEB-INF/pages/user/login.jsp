@@ -9,7 +9,7 @@
 	<%@include file="/WEB-INF/pages/common/common.jsp"%>
 	<style>	
 		*{padding:0;margin:0;}
-		body{background:url("${basePath}/resources/imgs/2.jpg")no-repeat;background-size:cover;font-size: 12px;font-family:"微软雅黑";position:relative;}
+		body{background-size:cover;font-size: 12px;font-family:"微软雅黑";position:relative;}
 		
 		/*<!--提示栏 start-->*/
 		#tip{width:100%;height:60px;position:absolute;left:0;top:0;background-color:#3499DA;line-height:60px;text-align:center;display:none;}
@@ -260,7 +260,7 @@
 					showTip("bounceInDown","icon-correct","green","登陆中请稍等...");
 					$login.val("登陆中...").off("click");
 					$error.off("click");
-					var params = {userName:userVal,password:pwdVal};
+					var params = {userName:userVal,userPassword:pwdVal};
 					$.ajax({
 						type:"post",
 						url:basePath+"/user/login.do",
@@ -320,7 +320,7 @@
 					showTip("bounceInDown","icon-correct","green","登陆中请稍等...");
 					$login.val("登陆中...").off("click");
 					$error.off("click");
-					var params = {userName:userVal,password:pwdVal,verifyCode:yzmVal};
+					var params = {userName:userVal,userPassword:pwdVal,verifyCode:yzmVal};
 					$.ajax({
 						type:"post",
 						url:basePath+"/user/login.do",
@@ -360,10 +360,7 @@
 					});
 				}
 			}
-			
-				
 		};
-		
 		</script>
 	</body>
 </html>

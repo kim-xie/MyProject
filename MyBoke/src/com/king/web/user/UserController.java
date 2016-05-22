@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.code.kaptcha.Constants;
-import com.king.bean.Login;
-import com.king.bean.Regist;
 import com.king.bean.User;
+import com.king.bean.UserParams;
 import com.king.service.user.UserService;
 import com.king.util.TmStringUtils;
+import com.king.util.ip.TmIpUtil;
 import com.king.web.BaseController;
 
 @Controller
@@ -139,22 +139,24 @@ public class UserController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/regist.do", method = RequestMethod.POST)
-	public String regist(Regist regist,ModelMap map) {
-		if (regist != null) {
-			if (TmStringUtils.isNotEmpty(regist.getUserName())
-					&& TmStringUtils.isNotEmpty(regist.getUserPassword())
-					&& TmStringUtils.isNotEmpty(regist.getUserEmail())) {
+	public String regist(UserParams userParams,ModelMap map) {
+		if (userParams != null) {
+			if (TmStringUtils.isNotEmpty(userParams.getUserName())
+					&& TmStringUtils.isNotEmpty(userParams.getUserPassword())
+					&& TmStringUtils.isNotEmpty(userParams.getUserEmail())) {
 			
-				if (TmStringUtils.isEmail(regist.getUserEmail())) {
-					boolean email = userService.checkUserEmail(regist.getUserEmail());
+				if (TmStringUtils.isEmail(userParams.getUserEmail())) {
+					boolean email = userService.checkUserEmail(userParams.getUserEmail());
 					if(email){
 						return "EmailIsAlive";
 					}else{
-						regist.setUserPassword(TmStringUtils.md5Base64(regist
-								.getUserPassword()));
-						regist.setActiveCode(TmStringUtils.uuid());
-						regist.setCreateTime(TmStringUtils.dateFormat(new Date()));
-						if (userService.regist(regist)){
+						userParams.setUserPassword(TmStringUtils.md5Base64(userParams.getUserPassword()));
+						userParams.setActiveCode(TmStringUtils.uuid());
+						userParams.setCreateTime(TmStringUtils.dateFormat(new Date()));
+						userParams.setHeaderPic("/resources/imgs/header_pic/headerpic.jpg");
+						userParams.setIp(TmIpUtil.getIpAddress(request));
+						userParams.setIpAddress(TmIpUtil.ipLocation(request));
+						if (userService.saveUser(userParams)){
 							return "success";
 						}
 						return "EmailIsCorrect";
@@ -200,24 +202,33 @@ public class UserController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginIn(Login login) {
-		if (login != null) {
-			if (TmStringUtils.isNotEmpty(login.getUserName())
-					&& TmStringUtils.isNotEmpty(login.getPassword())) {
+	public String loginIn(UserParams userParams) {
+		if (userParams != null) {
+			if (TmStringUtils.isNotEmpty(userParams.getUserName())
+					&& TmStringUtils.isNotEmpty(userParams.getUserPassword())) {
 				
 				String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 				String verifyCode = request.getParameter("verifyCode");
-				System.out.println(verifyCode);
+				
 				if(verifyCode!=null && !verifyCode.equalsIgnoreCase(code)){
 					return "vrfError";
 				}else{
-					login.setPassword(TmStringUtils.md5Base64(login.getPassword()));
-					User user = userService.loginIn(login);
-					System.out.println(user.getUserEmail());
-					if (user != null && user.getUserName().equals(login.getUserName()) && user.getUserPassword().equals(login.getPassword())) {
+					userParams.setUserPassword(TmStringUtils.md5Base64(userParams.getUserPassword()));
+					User user = userService.getUser(userParams);
+					if (user != null && user.getUserName().equals(userParams.getUserName()) && user.getUserPassword().equals(userParams.getUserPassword())) {
 						if(user.getActive().equals(1)){
 							session.setAttribute("user",user);
+							session.setAttribute("userEmail",user.getUserEmail());
 							session.setAttribute("userName",user.getUserName());
+							session.setAttribute("userSex",user.getUserSex());
+							session.setAttribute("userTel",user.getUserTel());
+							session.setAttribute("userAge",user.getUserAge());
+							session.setAttribute("userWeixin",user.getWeixin());
+							session.setAttribute("userQq",user.getQq());
+							session.setAttribute("userHeaderPic",user.getHeaderPic());
+							session.setAttribute("userDescription",user.getDescription());
+							//日记监控用户行为和获取请求参数
+							request.getServletContext().setAttribute("user_log", user);
 							return "success";
 						}else{
 							return "noActive";
@@ -233,6 +244,7 @@ public class UserController extends BaseController {
 			return "error";
 		}
 	};
+	
 
 	/**
 	 * 注销登录

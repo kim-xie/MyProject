@@ -2,31 +2,240 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.king.dao.content.ContentMapper">
-	<select id="findAll" resultMap="contentResultMap">
-			select * from content
+	<select id="findContents" parameterType="ContentParams" resultType="Content">
+			SELECT 
+				id,
+				userid as userId,
+        		username as userName,
+				headerPic,
+				title,
+				subTitle,
+				description,
+				content,
+				static_link as staticLink,
+				is_top as isTop,
+				is_delete as isDelete,
+				is_comment as isComment,
+				status,
+				push,
+				comments,
+				hits,
+				collections,
+				loves,
+				tag,
+				width,
+				height,
+				channel_id as channelId,
+				category_name as categoryName,
+				image,
+				thumnail,
+				create_time as createTime
+			FROM 
+				content
+			<trim prefix="WHERE" prefixOverrides="AND | OR">  
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(channelId)">
+					and channel_id = #{channelId}
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+					and  title LIKE '%${keyword}%'
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(isDelete)">
+					and  is_delete = #{isDelete}
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==1"><!-- 今天 -->
+					AND TO_DAYS(create_time) = to_days(now())
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==2"><!-- 昨天-->
+					AND <![CDATA[AND TO_DAYS(NOW())-TO_DAYS(create_time)=1]]>
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==3"><!-- 近五天-->
+					AND <![CDATA[AND DATE_SUB(NOW(), INTERVAL 5 DAY) <= date(create_time)]]>
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==4"><!-- 本周 -->
+					AND  WEEKOFYEAR(create_time)=WEEKOFYEAR(NOW())
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==5"><!-- 上周 -->
+					AND YEARWEEK(date_format(create_time,'%Y-%m-%d')) = YEARWEEK(now())-1
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==6"><!-- 本月 -->
+					AND date_format(create_time,'%Y-%m')=date_format(now(),'%Y-%m')
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==7"><!-- 上月 -->
+					AND date_format(create_time,'%Y-%m')=date_format(DATE_SUB(NOW(), INTERVAL 1 MONTH),'%Y-%m')
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==8"><!-- 上季度 -->
+					AND  QUARTER(create_time)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+				</if>
+				<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==9"><!-- 本季度 -->
+					AND  QUARTER(create_time)=QUARTER(now())
+				</if>
+			</trim>
+			ORDER BY ${order}
+			LIMIT #{pageNo} ,#{pageSize};
 	</select>
-	<select id="findById" parameterType="integer" resultMap="contentResultMap">
-			select * from content where id=#{id}
+	
+	<!-- 查询总记录数  -->
+	<select id="count" resultType="int" parameterType="ContentParams">
+		SELECT
+			count(1) 
+		FROM
+			content 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(channelId)">
+				and  channel_id = #{channelId}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and   title LIKE '%${keyword}%'
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(isDelete)">
+				and  is_delete = #{isDelete}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==1"><!-- 今天 -->
+				AND TO_DAYS(create_time) = to_days(now())
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==2"><!-- 昨天-->
+				AND <![CDATA[AND TO_DAYS(NOW())-TO_DAYS(create_time)=1]]>
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==3"><!-- 近五天-->
+				AND <![CDATA[AND DATE_SUB(NOW(), INTERVAL 5 DAY) <= date(create_time)]]>
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==4"><!-- 本周 -->
+				AND  WEEKOFYEAR(create_time)=WEEKOFYEAR(NOW())
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==5"><!-- 上周 -->
+				AND YEARWEEK(date_format(create_time,'%Y-%m-%d')) = YEARWEEK(now())-1
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==6"><!-- 本月 -->
+				AND date_format(create_time,'%Y-%m')=date_format(now(),'%Y-%m')
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==7"><!-- 上月 -->
+				AND date_format(create_time,'%Y-%m')=date_format(DATE_SUB(NOW(), INTERVAL 1 MONTH),'%Y-%m')
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==8"><!-- 上季度 -->
+				AND  QUARTER(create_time)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==9"><!-- 本季度 -->
+				AND  QUARTER(create_time)=QUARTER(now())
+			</if>
+		</trim>
 	</select>
-	<insert id="save" parameterType="content">
-			insert into content(content,title,create_time,tag) values(#{content},#{title},#{createTime},#{tag}) 
-	</insert>
-	<update id="update" parameterType="content">
-			update content set content=#{content},title=#{title} where id=#{id}
+	
+	<!-- 根据id查询内容  -->
+	<select id="getContent" resultType="Content">
+		SELECT 
+          id,
+          userid as userId,
+          username as userName,
+          headerPic,
+          title,
+          subTitle,
+          description,
+          content,
+          static_link AS staticLink,
+          is_top AS isTop,
+          is_delete AS isDelete,
+          is_comment AS isComment,
+          status,
+          push,
+          comments,
+          hits,
+          collections,
+          loves,
+          tag,
+          width,
+          height,
+          channel_id AS channelId,
+          category_name AS categoryName,
+          image,
+          thumnail,
+          create_time AS createTime 
+        FROM
+          content 
+        WHERE 
+        	id=#{id}
+	</select>
+	
+	<update id="updateContent" parameterType="Content">
+		update content 
+		<set>
+			<if test="status!=null">status=#{status},</if>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+			<if test="staticLink!=null">static_link=#{staticLink},</if>
+			<if test="isComment!=null">is_comment=#{isComment},</if>
+			<if test="isTop!=null">is_top=#{isTop},</if>
+			<if test="push!=null">push=#{push},</if>
+		</set>
+		where id = #{id}
 	</update>
-	<delete id="delete" parameterType="integer">
-			delete from content where id=#{id}
+	
+	<!-- 删除 -->
+	<delete id="deleteContent" parameterType="ContentParams">
+	<!-- delete from keke_content  where id = #{id} 假删 -->
+		update content set is_delete = 1 where id = #{id}
 	</delete>
 	
-	<!-- 当实体类与字段不一致是使用 -->
-	<resultMap type="com.king.bean.Content" id="contentResultMap">
-	    <id property="id" column="id"/>
-	    <result property="content" column="content"/>
-	    <result property="title" column="title"/>
-	    <result property="pic" column="pic"/>
-	    <result property="createTime" column="create_time"/>
-	    <result property="updateTime" column="update_time"/>
-    </resultMap>
-	
-
+	<!-- 添加 -->
+	<insert id="saveContent" parameterType="Content" useGeneratedKeys="true" keyProperty="id" flushCache="true" >
+	  	INSERT INTO content(
+			userid,
+			username,
+			headerPic,
+			title,
+			subTitle,
+			description,
+			content,
+			static_link,
+			is_top,
+			is_delete,
+			is_comment,
+			status,
+	        push,
+	        comments,
+	        hits,
+	        collections,
+	        loves,
+			tag,
+			width,
+			height,
+			channel_id,
+			category_id,
+			category_name,
+			type,
+			image,
+			thumnail,
+			create_time,
+			keyword
+	  	) VALUES (
+		  	#{userId},
+		  	#{userName},
+		  	#{headerPic},
+		  	#{title},
+		  	#{subTitle},
+		  	#{description},
+		  	#{content},
+		  	#{staticLink},
+		  	#{isTop},
+		  	#{isDelete},
+		  	#{isComment},
+		  	#{status},
+	        #{push},
+	        #{comments},
+	        #{hits},
+	        #{collections},
+	        #{loves},
+		  	#{tag},
+		  	#{width},
+		  	#{height},
+		  	#{channelId},
+		  	#{categoryId},
+		  	#{categoryName},
+		  	#{type},
+		  	#{image},
+		  	#{thumnail},
+		  	#{createTime},
+		  	#{keyword}
+	  	)
+	 </insert>
+	 
+	 		
 </mapper>

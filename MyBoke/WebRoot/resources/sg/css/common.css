@@ -1,5 +1,5 @@
 @charset "UTF-8";
-* {word-wrap: break-word;;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+* {word-wrap:break-word;;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 html {-webkit-text-size-adjust: none; }
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,span{padding:0;margin:0;}
 body{font:normal 13px/24px "微软雅黑","冬青黑体简体中文 w3","宋体"; }
@@ -31,7 +31,7 @@ input:disabled,select:disabled,textarea:disabled{background:#ccc;}
 .fr{float: right;}
 .red{color:red;}
 .green{color:green;}
-
+/* 滚动条兼容 */
 ::-webkit-scrollbar{width:10px;height:10px;background:#333;}
 ::-webkit-scrollbar-button{background-color:#e5e5e5;}
 ::-webkit-scrollbar-track{background:#999;}
@@ -76,6 +76,6 @@ scrollbarbutton:hover{-moz-appearance:none !important;background-color:rgb(255,0
 .pt15{padding-top:15px;}
 .pt20{padding-top:20px;}
 .pl20{padding-left:20px;}
- .tmui-ellipsis{display:inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+ .ellipsis{display:inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
  /*阴影层*/
 .tzui-loading-overlay,.tmui-overlay,.tmui-box-overlay{width:100%;height:100%;background:#141414;position:fixed;top:0;left:0;z-index:101;-moz-opacity:0.4;-khtml-opacity:0.4;opacity:0.4;}

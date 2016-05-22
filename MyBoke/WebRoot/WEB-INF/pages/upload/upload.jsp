@@ -15,7 +15,7 @@
 		ul,li{list-style:none;}
 		a{color:#333;text-decoration: none;}
 		body{font-size:14px;font-family:"微软雅黑";background:#333;overflow:hidden;}
-		#box{width:400px;background:#fff;text-align:center;border:2px solid #ccc;margin:10px auto;color:#fff;padding:0px 5px 5px 5px;position:relative;}
+		#box{width:414px;background:#fff;text-align:center;border:2px solid #ccc;margin:10px auto;color:#fff;padding:0px 5px 5px 5px;position:relative;}
 		#box .uppadbox{margin-top:10px;height:160px;background:#eaeaea;border:2px dashed #c5c5c5;position:relative;z-index: 2}
 		#box .uppadbox h3{line-height:125px;font-size:24px;color:#c5c5c5;text-shadow: 1px 1px 1px #999;}
 		#box .uppadbox p{color:#c5c5c5}

@@ -1,0 +1,54 @@
+/**
+ * [webPackage].[smallBeanName]
+ * [beanName]Controller.java
+ * 创建人:[author]
+ * 时间：[date]
+ */
+package [webPackage].[smallBeanName];
+
+import java.util.List;
+import javax.annotation.Resource;
+import com.king.web.BaseController;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.king.bean.[beanName];
+import com.king.bean.Params;
+import com.king.service.[smallBeanName].I[beanName]Service;
+
+/**
+ * [description]web
+ * [beanName]Controller
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ */
+@Controller
+@RequestMapping("/[smallBeanName]")
+public class [beanName]Controller extends BaseController{
+	
+	@Resource
+	private I[beanName]Service [smallBeanName]Service;
+	
+	/*列表查询*/
+	@RequestMapping("/list")
+	public String list(Params params){
+		return "[smallBeanName]/list";
+	}
+	
+	/*模板页面*/
+	@RequestMapping("/template")
+	public ModelAndView template(Params params){
+		ModelAndView modelAndView = new ModelAndView();
+		List<[beanName]> [smallBeanName]s = [smallBeanName]Service.find[beanName]s(params);
+		int count = [smallBeanName]Service.count(params);
+		modelAndView.setViewName("[smallBeanName]/template");
+		modelAndView.addObject("datas",[smallBeanName]s);
+		modelAndView.addObject("itemCount",count);
+		return modelAndView;
+	}
+}

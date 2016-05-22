@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.dao.log.ILogMapper" >
+	<select id="findLogs" resultType="Log" parameterType="Params">
+		select 
+		 id,
+		 create_time as createTime,
+		 user_id as userId,
+		 classname,
+		 method,
+		 TIME,
+		 ip,
+		 ipaddress as ipAddress,
+		 username,
+		 model,
+		 description
+		FROM
+			log 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and name LIKE '%${keyword}%'
+			</if>
+		</trim>
+		ORDER BY ${order}
+		LIMIT #{pageNo} ,#{pageSize};				
+	</select>
+	
+	<insert id="saveLog" parameterType="Log">
+			INSERT INTO log(
+				 classname,
+				 method,
+				 TIME,
+				 ip,
+				 ipaddress,
+				 user_id,
+				 username,
+				 model,
+				 description
+			)VALUES(
+				#{classname},
+				#{method},
+				#{time},
+				#{ip},
+				#{ipAddress},
+				#{userId},
+				#{username},
+				#{model},
+				#{description}
+			)
+	</insert>
+	
+	<select id="countLog" resultType="int" parameterType="Params">
+		SELECT
+			count(1) 
+		FROM
+			log 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and description LIKE '%${keyword}%'
+			</if>
+		</trim>
+	</select>
+</mapper>

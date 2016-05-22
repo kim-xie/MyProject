@@ -38,9 +38,9 @@
 			<h2><i></i>哎呀…您访问的页面不存在</h2>
 		</div>
 		<div class="sreach">
-			<h3>还有&nbsp;&nbsp;<span id="time">6</span>&nbsp;&nbsp;秒<a href="${basepath}/MyBoke/WEB-INF/pages/index.jsp">&nbsp;返回首页</a>，或者搜索网站相关信息</h3>
+			<h3>还有&nbsp;&nbsp;<span id="time">6</span>&nbsp;&nbsp;秒<a href="${basePath}/index.do">&nbsp;返回首页</a>，或者搜索网站相关信息</h3>
 			<input type="text" placeholder="Search" autofocus="autofocus" maxlength="55">
-			<a href="${basepath}/MyBoke/WEB-INF/pages/index.jsp"><i></i></a>
+			<a href="${basePath}/index.do"><i></i></a>
 		</div>
 	</section>
 	<h4>king提醒您 - 您可能输入了错误的网址，或者该网页已删除或移动</h4>

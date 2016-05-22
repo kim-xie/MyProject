@@ -3,16 +3,11 @@ package com.king.test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.king.bean.Content;
-import com.king.dao.content.ContentMapper;
-import com.king.service.content.ContentService;
 
 public class Test {
 	/**
@@ -81,26 +76,13 @@ public class Test {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		System.out.println(sqlSession);
 		
-		ContentMapper contentMapper = ac.getBean("contentMapper",ContentMapper.class);
-		
-		List<Content> contents = contentMapper.findAll();
-		for(Content content:contents){
-			System.out.println(content.getContent()+"=="+content.getTitle());
-		}
-		
-		ContentService contentService = ac.getBean("contentServiceImpl",ContentService.class);
+		//ContentMapper contentMapper = ac.getBean("contentMapper",ContentMapper.class);
 		
 		
-		Content con = new Content();
-		con.setContent("12345");
-		con.setTitle("12345");
-		boolean flay = contentService.save(con);
-		System.out.println(flay);
-		
-		//List<Content> contents = contentService.findAll();
-		//for(Content content:contents){
-		//	System.out.println(content.getContent()+"=="+content.getTitle());
-		//}
+	}
+	//获取项目路径
+	public static void main(String[] args) {
+		System.out.println(System.getProperty("user.dir"));
 	}
 	
 }

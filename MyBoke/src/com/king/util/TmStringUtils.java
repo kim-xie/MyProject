@@ -61,6 +61,14 @@ public class TmStringUtils {
 		return s;
 	}
 	
+	public static String formatDate(Date date, String pattern) {
+		if (date != null) {
+			String dateString = new SimpleDateFormat(pattern).format(date);
+			return dateString;
+		} else {
+			return "";
+		}
+	}
 	
 	public static String conversionSpecialCharacters(String string) {
 		return string.replaceAll("\\\\", "/");

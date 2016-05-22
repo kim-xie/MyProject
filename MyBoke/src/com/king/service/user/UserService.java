@@ -1,8 +1,9 @@
 package com.king.service.user;
 
-import com.king.bean.Login;
-import com.king.bean.Regist;
+import java.util.List;
+
 import com.king.bean.User;
+import com.king.bean.UserParams;
 
 public interface UserService {
 	/**
@@ -13,7 +14,7 @@ public interface UserService {
 	 * @return boolean  返回类型 
 	 * @throws
 	 */
-	boolean regist(Regist regist);
+	boolean saveUser(UserParams userParams);
 	/**
 	 * @Title: findUserByUserName 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -50,5 +51,14 @@ public interface UserService {
 	 * @return User  返回类型 
 	 * @throws
 	 */
-	User loginIn(Login login);
+	User getUser(UserParams userParams);
+	
+	/**
+	 * @Title: findAllUsers 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return List<User>  返回类型 
+	 * @throws
+	 */
+	List<User> findAllUsers(UserParams userParams);
 }

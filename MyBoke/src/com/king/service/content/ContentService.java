@@ -3,50 +3,60 @@ package com.king.service.content;
 import java.util.List;
 
 import com.king.bean.Content;
+import com.king.bean.ContentParams;
 
 public interface ContentService {
 	/**
-	 * @Title: findAll 
+	 * @Title: findContents 
 	 * @Description: TODO(查询所有内容) 
 	 * @param @return  参数说明 
 	 * @return List<Content>  返回类型 
 	 * @throws
 	 */
-	List<Content> findAll();
+	List<Content> findContents(ContentParams params);
 	/**
-	 * @Title: findById 
+	 * @Title: getContent 
 	 * @Description: TODO(根据id查询内容) 
 	 * @param @param id
 	 * @param @return  参数说明 
 	 * @return Content  返回类型 
 	 * @throws
 	 */
-	Content findById(Integer id);
+	Content getContent(Integer id);
 	/**
-	 * @Title: save 
+	 * @Title: saveContent 
 	 * @Description: TODO(添加内容) 
 	 * @param @param content
 	 * @param @return  参数说明 
 	 * @return Boolean  返回类型 
 	 * @throws
 	 */
-	boolean save(Content content);
+	boolean saveContent(Content content);
 	/**
-	 * @Title: update 
+	 * @Title: updateContent 
 	 * @Description: TODO(修改内容) 
 	 * @param @param content
 	 * @param @return  参数说明 
 	 * @return Boolean  返回类型 
 	 * @throws
 	 */
-	boolean update(Content content);
+	boolean updateContent(Content content);
 	/**
-	 * @Title: delete 
+	 * @Title: deleteContent 
 	 * @Description: TODO(删除内容) 
 	 * @param @param id
 	 * @param @return  参数说明 
 	 * @return Boolean  返回类型 
 	 * @throws
 	 */
-	boolean delete(Integer id);
+	boolean deleteContent(Integer id);
+	/**
+	 * @Title: count 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return int  返回类型 
+	 * @throws
+	 */
+	int count(ContentParams params);
 }

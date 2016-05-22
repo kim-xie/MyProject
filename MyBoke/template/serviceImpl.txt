@@ -1,0 +1,57 @@
+package [servicePackage].[smallBeanName].impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
+
+import com.king.bean.[beanName];
+import com.king.bean.Params;
+import com.king.dao.[smallBeanName].I[beanName]Mapper;
+import [servicePackage].[smallBeanName].I[beanName]Service;
+import com.king.util.TmStringUtils;
+
+/**
+ * [description]serviceImpl
+ * I[beanName]Service
+ * 创建人:[author] 
+ * 时间：[date]
+ * @version 1.0.0
+ */
+@Service
+public class [beanName]ServiceImpl implements I[beanName]Service{
+
+	@Resource
+	private I[beanName]Mapper [smallBeanName]Mapper;
+	
+	@Override
+	public List<[beanName]> find[beanName]s(Params params){
+		if(TmStringUtils.isEmpty(params.getOrder()))params.setOrder("create_time desc");
+		return [smallBeanName]Mapper.find[beanName]s(params);
+	}
+	
+	@Override
+	public int count(Params params){
+		return [smallBeanName]Mapper.count(params);
+	}
+
+	@Override
+	public [beanName] get(Integer id) {
+		return [smallBeanName]Mapper.get(id);
+	}
+
+	@Override
+	public int save([beanName] [smallBeanName]) {
+		return [smallBeanName]Mapper.save([smallBeanName]);
+	}
+
+	@Override
+	public int update([beanName] [smallBeanName]) {
+		return [smallBeanName]Mapper.update([smallBeanName]);
+	}
+
+	@Override
+	public int delete(Params params) {
+		return [smallBeanName]Mapper.delete(params);
+	}
+}

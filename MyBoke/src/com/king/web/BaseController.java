@@ -74,7 +74,6 @@ public class BaseController {
 			contextProvider.setResponse(response);
 			PrintWriter writer = contextProvider.getResponse().getWriter();
 			//PrintWriter writer = response.getWriter();
-			// PrintWriter writer = response.getWriter();
 			writer.print(JSONUtil.serialize(obj));
 			writer.flush();
 			writer.close();

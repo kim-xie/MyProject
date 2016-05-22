@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.king.bean.Content;
+import com.king.bean.ContentParams;
 import com.king.dao.content.ContentMapper;
 import com.king.service.content.ContentService;
 @Service("contentService")
@@ -15,37 +16,51 @@ public class ContentServiceImpl implements ContentService{
 	@Resource(name="contentMapper")
 	private ContentMapper contentMapper;
 	
+	/**
+	 * 可以根据条件查找所有内容
+	 */
 	@Override
-	public List<Content> findAll() {
-		List<Content> contents = contentMapper.findAll();
-		for(Content content:contents){
-			System.out.println(content.getContent()+"=="+content.getTitle());
-		}
+	public List<Content> findContents(ContentParams params) {
+		List<Content> contents = contentMapper.findContents(params);
 		return contents;
 	}
-
+	/**
+	 * 根据id查找详细内容
+	 */
 	@Override
-	public Content findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Content getContent(Integer id) {
+		return contentMapper.getContent(id);
 	}
-
+	/**
+	 * 添加内容
+	 */
 	@Override
-	public boolean save(Content content) {
-		int count = contentMapper.save(content);
+	public boolean saveContent(Content content) {
+		int count = contentMapper.saveContent(content);
 		return count>0?true:false;
 	}
-
+	/**
+	 * 修改内容
+	 */
 	@Override
-	public boolean update(Content content) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateContent(Content content) {
+		int count = contentMapper.updateContent(content);
+		return count>0?true:false;
 	}
-
+	/**
+	 * 删除内容
+	 */
 	@Override
-	public boolean delete(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteContent(Integer id) {
+		int count = contentMapper.deleteContent(id);
+		return count>0?true:false;
+	}
+	/**
+	 * 查询总记录数
+	 */
+	@Override
+	public int count(ContentParams params) {
+		return contentMapper.count(params);
 	}
 
 }

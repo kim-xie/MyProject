@@ -1,10 +1,11 @@
 package com.king.dao.user;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
-import com.king.bean.Login;
-import com.king.bean.Regist;
 import com.king.bean.User;
+import com.king.bean.UserParams;
 /**
  * UserMapper接口
  * 类名: UserMapper.java
@@ -22,7 +23,7 @@ public interface UserMapper {
 	 * @return void  返回类型 
 	 * @throws
 	 */
-	int regist(Regist regist);
+	int saveUser(UserParams userParams);
 	/**
 	 * @Title: findUserByUserName 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -69,5 +70,24 @@ public interface UserMapper {
 	 * @return User  返回类型 
 	 * @throws
 	 */
-	User loginIn(Login login);
+	User getUser(UserParams userParams);
+	
+	/**
+	 * @Title: findAllUsers 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return List<User>  返回类型 
+	 * @throws
+	 */
+	List<User> findAllUsers(UserParams userParams);
+	
+	/**
+	 * @Title: count 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param userParams
+	 * @param @return  参数说明 
+	 * @return int  返回类型 
+	 * @throws
+	 */
+	int count(UserParams userParams);
 }

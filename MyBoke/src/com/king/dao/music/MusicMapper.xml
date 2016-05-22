@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.dao.music.IMusicMapper" >
+	<select id="findMusics" resultType="java.util.HashMap" parameterType="Params">
+		SELECT 
+		  m.id,
+		  m.title,
+		  m.description,
+		  m.category_id AS categoryId,
+		  m.img,
+		  m.create_time AS createTime,
+		  m.update_time AS updateTime,
+		  m.src,
+		  m.singer,
+		  m.size,
+		  m.time,
+		  m.hits,
+		  m.comments,
+		  m.status,
+		  m.is_delete,
+		  m.user_id AS userId,
+		  u.username,
+		  u.header_pic AS headerPic 
+		FROM
+		  music m 
+		  LEFT JOIN category c 
+		    ON c.id = m.category_id 
+		  LEFT JOIN USER u 
+		    ON u.userid = m.user_id 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(filterId)">
+				and m.id != #{filterId}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(status)">
+				and m.status = #{status}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(isDelete)">
+				and m.is_delete = #{isDelete}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(typeId)">
+				and m.category_id = #{typeId}
+			</if>
+		</trim>	
+		ORDER BY c.create_time desc
+		LIMIT #{pageNo},#{pageSize}				
+	</select>
+	
+	<select id="getMusic" resultType="java.util.HashMap">
+		SELECT 
+		  m.id,
+		  m.title,
+		  m.description,
+		  m.category_id AS categoryId,
+		  m.img,
+		  m.create_time AS createTime,
+		  m.update_time AS updateTime,
+		  m.src,
+		  m.singer,
+		  m.size,
+		  m.time,
+		  m.hits,
+		  m.comments,
+		  m.status,
+		  m.is_delete,
+		  m.user_id AS userId,
+		  u.username,
+		  u.header_pic AS headerPic 
+		FROM
+		  music m 
+		  LEFT JOIN category c 
+		    ON c.id = m.category_id 
+		  LEFT JOIN USER u 
+		    ON u.userid = m.user_id 
+		WHERE m.id = #{id}
+	</select>
+	
+	
+	<select id="count" resultType="int" parameterType="Params">
+		SELECT
+			count(1) 
+		FROM
+			keke_music 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and name LIKE '%${keyword}%'
+			</if>
+		</trim>
+	</select>
+</mapper>

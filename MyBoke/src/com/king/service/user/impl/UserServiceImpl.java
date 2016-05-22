@@ -1,13 +1,14 @@
 package com.king.service.user.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.king.bean.Login;
 import com.king.bean.MailInfo;
-import com.king.bean.Regist;
 import com.king.bean.User;
+import com.king.bean.UserParams;
 import com.king.dao.user.UserMapper;
 import com.king.service.user.UserService;
 import com.king.util.SimpleMail;
@@ -23,15 +24,15 @@ public class UserServiceImpl implements UserService{
 	 * 登录方法
 	 */
 	@Override
-	public User loginIn(Login login) {
-		return userMapper.loginIn(login);
+	public User getUser(UserParams userParams) {
+		return userMapper.getUser(userParams);
 	}
 	/**
 	 * 注册方法
 	 */
 	@Override
-	public boolean regist(Regist regist) {
-		int count = userMapper.regist(regist);
+	public boolean saveUser(UserParams userParams) {
+		int count = userMapper.saveUser(userParams);
 		
 		MailInfo mailInfo = new MailInfo();
 		mailInfo.setMailServerHost("smtp.163.com");
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService{
 		mailInfo.setUsername("jy_xdj@163.com");
 		mailInfo.setPassword("xdj123");
 		mailInfo.setFromAddress("jy_xdj@163.com");
-		mailInfo.setToAddress(regist.getUserEmail());
+		mailInfo.setToAddress(userParams.getUserEmail());
 		mailInfo.setSubject("King博客激活邮箱");
 				
 		StringBuffer demo = new StringBuffer();
@@ -96,7 +97,7 @@ public class UserServiceImpl implements UserService{
 				"												</tr>"+
 				"												<tr>"+
 				"													<td>"+
-				"														<p id='dear'>亲爱的 <span style='font-weight: bold;'>"+regist.getUserName()+"</span> ,您好！欢迎加入King的个人博客！</p>"+
+				"														<p id='dear'>亲爱的 <span style='font-weight: bold;'>"+userParams.getUserName()+"</span> ,您好！欢迎加入King的个人博客！</p>"+
 				"													</td>"+
 				"												</tr>"+
 				"												<tr>"+
@@ -106,7 +107,7 @@ public class UserServiceImpl implements UserService{
 				"												</tr>"+
 				"												<tr>"+
 				"													<td>"+
-				"														<a id='active' href = 'http://localhost:8080/MyBoke/user/active.do?activeCode="+regist.getActiveCode()+"' target='_blank'>立即激活</a>"+
+				"														<a id='active' href = 'http://localhost:8080/MyBoke/user/active.do?activeCode="+userParams.getActiveCode()+"' target='_blank'>立即激活</a>"+
 				"													</td>"+
 				"												</tr>"+
 				"												<tr>"+
@@ -180,6 +181,11 @@ public class UserServiceImpl implements UserService{
 			return "error";
 		}
 		
+	}
+	@Override
+	public List<User> findAllUsers(UserParams userParams) {
+		List<User> users = userMapper.findAllUsers(userParams);
+		return users;
 	}
 
 }

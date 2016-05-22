@@ -3,15 +3,96 @@
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.king.dao.user.UserMapper">
 	<!-- 用户登录 -->
-	<select id="loginIn" parameterType="Login" resultType="User">
-			select username,userpassword,active,userid,useremail from user 
-			where username=#{userName} and userpassword=#{password}
+	<select id="getUser" parameterType="UserParams" resultType="User">
+			SELECT 
+			    userid as userId,
+			    role_id as roleId,
+			    ip,
+			    ipaddress as ipAddress,
+			    username as userName,
+			    userpassword as userPassword,
+			    useremail as userEmail,
+			    userage  as userAge,
+			    usertel as userTel,
+			    usersex as userSex,
+			    weixin,
+			    qq,
+			    is_delete as isDelete,
+			    header_pic as headerPic,
+			    forbiden,
+			    description,
+			    create_time as createTime,
+			    birthday,
+			    address,
+			    activeCode,
+			    active,
+			    state 
+			  FROM
+			    USER
+			  where 
+				username=#{userName} and userpassword=#{userPassword}
+	</select>
+	
+	<!-- 查找所有用户 -->
+	<select id="findAllUsers" parameterType="UserParams" resultType="User">
+			SELECT 
+			    userid as userId,
+			    role_id as roleId,
+			    ip,
+			    ipaddress as ipAddress,
+			    username as userName,
+			    userpassword as userPassword,
+			    useremail as userEmail,
+			    userage  as userAge,
+			    usertel as userTel,
+			    usersex as userSex,
+			    weixin,
+			    qq,
+			    is_delete as isDelete,
+			    header_pic as headerPic,
+			    forbiden,
+			    description,
+			    create_time as createTime,
+			    birthday,
+			    address,
+			    activeCode,
+			    active,
+			    state
+			  FROM
+			    USER
+			  order by create_time asc
+			  LIMIT #{pageNo},#{pageSize}
+	</select>
+	
+	<!-- 获取总记录数 -->
+	<select id="count" resultType="int" parameterType="UserParams">
+		SELECT
+			count(1) 
+		FROM
+			USER 
 	</select>
 	
 	<!-- 用户注册 -->
-	<insert id="regist" parameterType="Regist">
-			insert into user(username,userpassword,useremail,activeCode,create_time) 
-			values(#{userName},#{userPassword},#{userEmail},#{activeCode},#{createTime})
+	<insert id="saveUser" parameterType="UserParams">
+			insert into user(
+				username,
+				ip,
+				ipaddress,
+				userpassword,
+				useremail,
+				activeCode,
+				create_time,
+				header_pic 
+			)values(
+				#{userName},
+				#{ip},
+				#{ipAddress},
+				#{userPassword},
+				#{userEmail},
+				#{activeCode},
+				#{createTime},
+				#{headerPic}
+			)
 	</insert>
 	
 	<!-- 用户名注册验证 -->
@@ -32,23 +113,5 @@
 	<update id="updateActive" parameterType="string" >
 		UPDATE USER SET active=1 WHERE activeCode = #{activeCode}
 	</update>
-	
-	
-	<resultMap id="userResultMap" type="User">
-		  <id property="userId" column="userid" />
-		  <result property="userName" column="username"/>
-		  <result property="userPassword" column="userpassword"/>
-		  <result property="userSex" column="usersex"/>
-		  <result property="userAge" column="userage"/>
-		  <result property="userEmail" column="useremail"/>
-		  <result property="userTel" column="usertel"/>
-		  <result property="createTime" column="create_time"/>
-		  <result property="updateTime" column="update_time"/>
-		  <result property="headerPic" column="header_pic"/>
-		  <result property="active" column="active"/>
-		  <result property="isDelete" column="is_delete"/>
-		  <result property="state" column="state"/>
-		  <result property="activeCode" column="activeCode"/>
-	</resultMap>
 	
 </mapper>

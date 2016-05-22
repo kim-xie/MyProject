@@ -116,8 +116,8 @@ public class GatherController extends com.king.web.BaseController{
 //					setContentData(content);
 					content.setTitle(title);
 					content.setContent(desc);
-					content.setPic(img);
-					contentService.save(content);
+					content.setImage(img);
+					contentService.saveContent(content);
 				}
 				
 			} catch (Exception e) {
