@@ -19,6 +19,7 @@ public class ContentParams {
 	private String date;
 	private Integer roleId;
 	private Integer mark;
+	private Integer status;
 	
 	public Integer getId() {
 		return id;
@@ -128,6 +129,11 @@ public class ContentParams {
 	public void setMark(Integer mark) {
 		this.mark = mark;
 	}
-	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	
 }

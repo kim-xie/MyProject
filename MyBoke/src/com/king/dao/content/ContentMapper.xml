@@ -75,7 +75,7 @@
 	</select>
 	
 	<!-- 查询总记录数  -->
-	<select id="count" resultType="int" parameterType="ContentParams">
+	<select id="countContent" resultType="int" parameterType="ContentParams">
 		SELECT
 			count(1) 
 		FROM

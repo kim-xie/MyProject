@@ -5,10 +5,12 @@ public class Params {
 	private Integer pageSize = 12;
 	private Integer status;
 	private Integer isDelete;
+	private Integer musicId;
 	private Integer typeId;
 	private Integer filterId;
 	private Integer blogId;
 	private String order;
+	private String keyword;
 	public Integer getPageNo() {
 		return pageNo;
 	}
@@ -32,6 +34,12 @@ public class Params {
 	}
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
+	}
+	public Integer getMusicId() {
+		return musicId;
+	}
+	public void setMusicId(Integer musicId) {
+		this.musicId = musicId;
 	}
 	public Integer getTypeId() {
 		return typeId;
@@ -57,6 +65,11 @@ public class Params {
 	public void setOrder(String order) {
 		this.order = order;
 	}
-	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	
 }

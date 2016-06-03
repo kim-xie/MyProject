@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.dao.comment.ICommentMapper" >
+	<!-- 查询所有的用户信息 -->
+	<select id="findComments" resultType="java.util.HashMap" parameterType="Params">
+		SELECT 
+	        c.id,
+	        c.description,
+	        c.user_id AS userId,
+	        c.create_time AS createTime,
+	        c.status,
+	        c.music_id AS musicId,
+	        c.reply_userId AS replyUserId,
+	        c.parent_id AS parentId,
+	        u.username,
+	        u.header_pic AS headerPic 
+        FROM
+        	COMMENT c 
+        LEFT JOIN USER u 
+          ON u.userid = c.user_id 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(status)">
+				and c.status = #{status}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(musicId)">
+				and c.music_id = #{musicId}
+			</if>
+		</trim>	
+		ORDER BY c.create_time desc
+		LIMIT #{pageNo},#{pageSize}
+	</select>
+	
+	<insert id="saveComment" parameterType="Comment"  useGeneratedKeys="true" keyProperty="id">
+		INSERT into comment(
+			description,
+			user_id,
+			status,
+			music_id,
+			reply_userId,
+			parent_id
+		) VALUES(
+			#{description},
+			#{userId},
+			#{status},
+			#{musicId},
+			#{replyUserId},
+			#{parentId}
+		)
+	</insert>
+	
+	<!-- 根据id查询Comment -->
+	<select id="getComment" resultType="Comment">
+		SELECT 
+		  	id,
+			name,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			is_delete as isDelete
+		FROM
+		 	comment
+		WHERE 
+			id = #{id}
+	</select>
+	
+	<!-- 查询Comment的总记录数  -->
+	<select id="count" resultType="int" parameterType="Params">
+		SELECT
+			count(1) 
+		FROM
+			comment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and name LIKE '%${keyword}%'
+			</if>
+		</trim>
+	</select>
+	
+</mapper>

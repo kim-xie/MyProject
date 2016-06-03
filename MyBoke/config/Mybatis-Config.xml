@@ -42,5 +42,6 @@
 		<mapper resource="com/king/dao/content/ContentMapper.xml" />
 		<mapper resource="com/king/dao/music/MusicMapper.xml" /> 
 		<mapper resource="com/king/dao/log/LogMapper.xml" />
+		<mapper resource="com/king/dao/comment/CommentMapper.xml" />
 	</mappers>
 </configuration> 

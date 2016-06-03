@@ -19,11 +19,11 @@ public class AutoProject {
 	//dao 
 	//web
 	//pages
-	private static String beanName = "Log";
+	private static String beanName = "Comment";
 	private static String smallBeanName = beanName.toLowerCase();
 	
 	//注释
-	private static String description = "操作日志";
+	private static String description = "评论信息";
 	private static String author = "king";
 	private static String qq = "1134771121";
 	private static String telephone = "18378311282";
@@ -383,9 +383,9 @@ public class AutoProject {
 		createBean();
 		createDao();
 		createSQLXml();
-//		createService();
-//		createServiceImpl();
-//		createWeb();
+		createService();
+		createServiceImpl();
+		createWeb();
 //		createPage();
 //		createTemplate();
 //		createTable();

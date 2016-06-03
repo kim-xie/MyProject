@@ -1,16 +1,13 @@
 package com.king.web;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.king.bean.Content;
 import com.king.bean.ContentParams;
 import com.king.bean.Params;
 import com.king.bean.User;
@@ -40,23 +37,22 @@ public class IndexController {
 	@RequestMapping("/index.do")
 	public ModelAndView index(Params params,UserParams userParams,ContentParams contentparams){
 		ModelAndView model = new ModelAndView();
-		List<HashMap<String, Object>> musics = musicService.findMusics(params);
+		// 音乐
+		//List<HashMap<String, Object>> musics = musicService.findMusics(params);
+		int itemCount = musicService.count(params);
+		// 用户
 		List<User> users = userService.findAllUsers(userParams);
-		List<Content> contents = contentService.findContents(contentparams);
+		// 内容
+		//List<Content> contents = contentService.findContents(contentparams);
+		int count = contentService.countContent(contentparams);
 		model.setViewName("index");
-		model.addObject("musics", musics);
+		//model.addObject("musics", musics);
+		model.addObject("itemCount", itemCount);
+		model.addObject("count", count);
 		model.addObject("users",users);
-		model.addObject("contents",contents);
+		//model.addObject("contents",contents);
 		return model;
 	}
 	
-	@RequestMapping("/userList.do")
-	@ResponseBody
-	public ModelAndView userList(UserParams userParams){
-		ModelAndView model = new ModelAndView();
-		List<User> users = userService.findAllUsers(userParams);
-		model.setViewName("index");
-		model.addObject("users",users);
-		return model;
-	}
+	
 }

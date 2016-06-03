@@ -40,10 +40,9 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int count(Params params);
+	public int count[beanName](Params params);
 	
 	/**
-	 * 
 	 * [servicePackage].[smallBeanName] 
 	 * 方法名：find[beanName]s
 	 * 创建人：[author] 
@@ -55,7 +54,7 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public [beanName] get(Integer id);
+	public [beanName] get[beanName](Params params);
 	
 	/**
 	 * 保存[description]
@@ -70,7 +69,7 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int save([beanName] [smallBeanName]);
+	public int save[beanName]([beanName] [smallBeanName]);
 	
 	/**
 	 * 更新[description]
@@ -85,7 +84,7 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int update([beanName] [smallBeanName]);
+	public int update[beanName]([beanName] [smallBeanName]);
 	
 	/**
 	 * 删除[description]
@@ -100,5 +99,5 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int delete(Params params);
+	public int delete[beanName](Params params);
 }

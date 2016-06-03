@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.king.bean.Params;
 import com.king.service.music.IMusicService;
 import com.king.web.BaseController;
-
 /**
  * 音乐主题web
  * MusicController
@@ -36,21 +35,41 @@ public class MusicController extends BaseController{
 	@Resource(name="musicService")
 	private IMusicService musicService;
 	
-	
-	@RequestMapping("/index.do")
+	/**
+	 * 将数据返回模板页面
+	 * @Title: index 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return ModelAndView  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/template.do")
 	public ModelAndView index(Params params){
 		List<HashMap<String, Object>> musics = musicService.findMusics(params);
+		int itemCount = musicService.count(params);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("musics", musics);
-		modelAndView.setViewName("index");
+		modelAndView.addObject("itemCount", itemCount);
+		modelAndView.setViewName("music/template");
 		return modelAndView;
 	}
 	
+	/**
+	 * 加载数据
+	 * @Title: loadData 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return List<HashMap<String,Object>>  返回类型 
+	 * @throws
+	 */
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST,value="/loadData.do")
 	public List<HashMap<String, Object>> loadData(Params params){
 		params.setStatus(1);
 		params.setIsDelete(0);
+		params.setPageSize(12);
 		List<HashMap<String, Object>> musics = musicService.findMusics(params);
 		return musics;
 	}
@@ -87,8 +106,8 @@ public class MusicController extends BaseController{
 		params.setStatus(1);
 		params.setIsDelete(0);
 		params.setPageSize(4);
-		List<HashMap<String, Object>> blogs = musicService.findMusics(params);
-		return blogs;
+		List<HashMap<String, Object>> musics = musicService.findMusics(params);
+		return musics;
 	}
 	
 }

@@ -31,7 +31,7 @@ import com.king.service.[smallBeanName].I[beanName]Service;
 @RequestMapping("/[smallBeanName]")
 public class [beanName]Controller extends BaseController{
 	
-	@Resource
+	@Resource(name="[smallBeanName]Service")
 	private I[beanName]Service [smallBeanName]Service;
 	
 	/*列表查询*/
@@ -45,7 +45,7 @@ public class [beanName]Controller extends BaseController{
 	public ModelAndView template(Params params){
 		ModelAndView modelAndView = new ModelAndView();
 		List<[beanName]> [smallBeanName]s = [smallBeanName]Service.find[beanName]s(params);
-		int count = [smallBeanName]Service.count(params);
+		int count = [smallBeanName]Service.count[beanName](params);
 		modelAndView.setViewName("[smallBeanName]/template");
 		modelAndView.addObject("datas",[smallBeanName]s);
 		modelAndView.addObject("itemCount",count);

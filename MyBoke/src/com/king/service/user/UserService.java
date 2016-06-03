@@ -14,7 +14,7 @@ public interface UserService {
 	 * @return boolean  返回类型 
 	 * @throws
 	 */
-	boolean saveUser(UserParams userParams);
+	boolean saveUser(User user);
 	/**
 	 * @Title: findUserByUserName 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -61,4 +61,13 @@ public interface UserService {
 	 * @throws
 	 */
 	List<User> findAllUsers(UserParams userParams);
+	/**
+	 * @Title: countUser 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param userParams
+	 * @param @return  参数说明 
+	 * @return int  返回类型 
+	 * @throws
+	 */
+	int countUser(UserParams userParams);
 }

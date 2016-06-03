@@ -80,7 +80,7 @@
 		SELECT
 			count(1) 
 		FROM
-			keke_music 
+			music 
 		<trim prefix="WHERE" prefixOverrides="AND | OR">  
 			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
 				and name LIKE '%${keyword}%'

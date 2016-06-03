@@ -1,36 +1,20 @@
 package com.king.tag;
-///**
-// * tzdesk系统平台
-// * tz_desk
-// * com.tz.dao
-// * ContentDao.java
-// * 创建人:xuchengfei 
-// * 时间：2015年9月8日-下午11:06:52 
-// * 2015潭州教育公司-版权所有
-// */
-//package com.tz.tag;
-//
+
+//package com.king.tag;
+
 //import java.util.Iterator;
 //import java.util.List;
-//
+
 //import javax.servlet.jsp.JspException;
 //import javax.servlet.jsp.tagext.TagSupport;
-//
-//import com.tz.dao.ContentDao;
-//import com.tz.model.Content;
-//import com.tz.util.StringUtils;
-//
-///**
-// * 
-// * contentTag 创建人:xuchengfei 时间：2015年9月8日-下午11:06:52
-// * 
-// * @version 1.0.0
-// * 
-// */
+//import com.king.dao.ContentDao;
+//import com.king.model.Content;
+//import com.king.util.StringUtils;
+
 //public class ContentListTag extends TagSupport {
-//
-//	// List<Content> contents = ContentDao.findContents(3, 0, 7);
-//	// pageContext.setAttribute("contents", contents);
+
+//	List<Content> contents = ContentDao.findContents(3, 0, 7);
+//	pageContext.setAttribute("contents", contents);
 //
 //	// 内容Id
 //	private Integer channelId;

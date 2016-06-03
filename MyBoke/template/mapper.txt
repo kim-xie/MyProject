@@ -12,7 +12,7 @@ import com.king.bean.Params;
  * 时间：[date]
  * @version 1.0.0
  */
-@Repository
+@Repository("[smallBeanName]Mapper")
 public interface I[beanName]Mapper {
 
 	/**
@@ -45,7 +45,6 @@ public interface I[beanName]Mapper {
 	public int count[beanName](Params params);
 	
 	/**
-	 * 
 	 * [daoPackage].[smallBeanName] 
 	 * 方法名：get[beanName]
 	 * 创建人：[author] 
@@ -72,7 +71,7 @@ public interface I[beanName]Mapper {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int save[beanName](Params params);
+	public int save[beanName]([beanName] [smallBeanName]);
 	
 	/**
 	 * 更新[description]
@@ -87,7 +86,7 @@ public interface I[beanName]Mapper {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int update[beanName](Params params);
+	public int update[beanName]([beanName] [smallBeanName]);
 	
 	/**
 	 * 删除[description]

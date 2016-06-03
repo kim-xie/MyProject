@@ -51,16 +51,16 @@ public class ContentServiceImpl implements ContentService{
 	 * 删除内容
 	 */
 	@Override
-	public boolean deleteContent(Integer id) {
-		int count = contentMapper.deleteContent(id);
+	public boolean deleteContent(ContentParams params) {
+		int count = contentMapper.deleteContent(params);
 		return count>0?true:false;
 	}
 	/**
 	 * 查询总记录数
 	 */
 	@Override
-	public int count(ContentParams params) {
-		return contentMapper.count(params);
+	public int countContent(ContentParams params) {
+		return contentMapper.countContent(params);
 	}
 
 }

@@ -2,19 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="[daoPackage].[smallBeanName].I[beanName]Mapper" >
+	
+	<!-- 查询所有[beanName] -->
 	<select id="find[beanName]s" resultType="[beanName]" parameterType="Params">
 		select 
-		id,
-		name,
-		create_time as createTime,
-		update_time as updateTime,
-		user_id as userId,
-		is_delete as isDelete,
-		status 
+			id,
+			name,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			is_delete as isDelete
 		FROM
-			keke_[smallBeanName] 
+			[smallBeanName] 
 		<trim prefix="WHERE" prefixOverrides="AND | OR">  
-			<if test="@com.tz.util.TmStringUtils@isNotEmpty(keyword)">
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
 				and name LIKE '%${keyword}%'
 			</if>
 		</trim>
@@ -22,15 +23,32 @@
 		LIMIT #{pageNo} ,#{pageSize};				
 	</select>
 	
+	<!-- 根据id查询[beanName] -->
+	<select id="get[beanName]" resultType="[beanName]">
+		SELECT 
+		  	id,
+			name,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			is_delete as isDelete
+		FROM
+		 	[smallBeanName]
+		WHERE 
+			id = #{id}
+	</select>
+	
+	<!-- 查询[beanName]的总记录数  -->
 	<select id="count" resultType="int" parameterType="Params">
 		SELECT
 			count(1) 
 		FROM
-			keke_[smallBeanName] 
+			[smallBeanName] 
 		<trim prefix="WHERE" prefixOverrides="AND | OR">  
-			<if test="@com.tz.util.TmStringUtils@isNotEmpty(keyword)">
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
 				and name LIKE '%${keyword}%'
 			</if>
 		</trim>
 	</select>
+	
 </mapper>

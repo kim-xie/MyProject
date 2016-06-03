@@ -1,27 +1,16 @@
-/**
- * tzdesk系统平台
- * tz_desk
- * com.tz.tag
- * TzUpperCase.java
- * 创建人:xuchengfei 
- * 时间：2015年9月17日-下午8:59:47 
- * 2015潭州教育公司-版权所有
- */
 package com.king.tag;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
-
 /**
- * 
- * TzUpperCase
- * 创建人:xuchengfei 
- * 时间：2015年9月17日-下午8:59:47 
+ * 转大写标签
+ * 类名: KingUpperCase.java
+ * 创建人: king 
+ * 创建时间：2016年5月31日 下午12:57:21 
  * @version 1.0.0
- * 
  */
-public class TzUpperCase extends BodyTagSupport{
+public class KingUpperCase extends BodyTagSupport{
 	
 	/*
 	 * 	TagSupport和BodyTagSupport它的区别在于
@@ -32,10 +21,7 @@ public class TzUpperCase extends BodyTagSupport{
 	 *   	1:是将数据放在作用域中，进行返回
 	 *      2:通过输出流 this.getPreviousOut()进行数据的返回
 	 *      3:获取标签体的内容: this.getBodyContent()
-	 *  
-	 *  
-	 *  
-	 * 
+	 *      
 	 * */
 	
 	//次数

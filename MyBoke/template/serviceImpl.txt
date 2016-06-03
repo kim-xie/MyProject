@@ -18,7 +18,7 @@ import com.king.util.TmStringUtils;
  * 时间：[date]
  * @version 1.0.0
  */
-@Service
+@Service("[smallBeanName]Service")
 public class [beanName]ServiceImpl implements I[beanName]Service{
 
 	@Resource
@@ -31,27 +31,27 @@ public class [beanName]ServiceImpl implements I[beanName]Service{
 	}
 	
 	@Override
-	public int count(Params params){
-		return [smallBeanName]Mapper.count(params);
+	public int count[beanName](Params params){
+		return [smallBeanName]Mapper.count[beanName](params);
 	}
 
 	@Override
-	public [beanName] get(Integer id) {
-		return [smallBeanName]Mapper.get(id);
+	public [beanName] get[beanName](Params params) {
+		return [smallBeanName]Mapper.get[beanName](params);
 	}
 
 	@Override
-	public int save([beanName] [smallBeanName]) {
-		return [smallBeanName]Mapper.save([smallBeanName]);
+	public int save[beanName]([beanName] [smallBeanName]) {
+		return [smallBeanName]Mapper.save[beanName]([smallBeanName]);
 	}
 
 	@Override
-	public int update([beanName] [smallBeanName]) {
-		return [smallBeanName]Mapper.update([smallBeanName]);
+	public int update[beanName]([beanName] [smallBeanName]) {
+		return [smallBeanName]Mapper.update[beanName]([smallBeanName]);
 	}
 
 	@Override
-	public int delete(Params params) {
-		return [smallBeanName]Mapper.delete(params);
+	public int delete[beanName](Params params) {
+		return [smallBeanName]Mapper.delete[beanName](params);
 	}
 }

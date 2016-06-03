@@ -49,7 +49,7 @@ public interface ContentMapper {
 	 * @return Boolean  返回类型 
 	 * @throws
 	 */
-	int deleteContent(Integer id);
+	int deleteContent(ContentParams params);
 	/**
 	 * @Title: count 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -58,5 +58,5 @@ public interface ContentMapper {
 	 * @return int  返回类型 
 	 * @throws
 	 */
-	int count(ContentParams params);
+	int countContent(ContentParams params);
 }

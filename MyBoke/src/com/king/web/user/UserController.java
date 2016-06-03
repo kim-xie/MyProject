@@ -1,6 +1,6 @@
 package com.king.web.user;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
 import com.king.bean.User;
@@ -139,24 +140,23 @@ public class UserController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/regist.do", method = RequestMethod.POST)
-	public String regist(UserParams userParams,ModelMap map) {
-		if (userParams != null) {
-			if (TmStringUtils.isNotEmpty(userParams.getUserName())
-					&& TmStringUtils.isNotEmpty(userParams.getUserPassword())
-					&& TmStringUtils.isNotEmpty(userParams.getUserEmail())) {
+	public String regist(User user,ModelMap map) {
+		if (user != null) {
+			if (TmStringUtils.isNotEmpty(user.getUserName())
+					&& TmStringUtils.isNotEmpty(user.getUserPassword())
+					&& TmStringUtils.isNotEmpty(user.getUserEmail())) {
 			
-				if (TmStringUtils.isEmail(userParams.getUserEmail())) {
-					boolean email = userService.checkUserEmail(userParams.getUserEmail());
+				if (TmStringUtils.isEmail(user.getUserEmail())) {
+					boolean email = userService.checkUserEmail(user.getUserEmail());
 					if(email){
 						return "EmailIsAlive";
 					}else{
-						userParams.setUserPassword(TmStringUtils.md5Base64(userParams.getUserPassword()));
-						userParams.setActiveCode(TmStringUtils.uuid());
-						userParams.setCreateTime(TmStringUtils.dateFormat(new Date()));
-						userParams.setHeaderPic("/resources/imgs/header_pic/headerpic.jpg");
-						userParams.setIp(TmIpUtil.getIpAddress(request));
-						userParams.setIpAddress(TmIpUtil.ipLocation(request));
-						if (userService.saveUser(userParams)){
+						user.setUserPassword(TmStringUtils.md5Base64(user.getUserPassword()));
+						user.setActiveCode(TmStringUtils.uuid());
+						user.setHeaderPic("/resources/imgs/header_pic/headerpic.jpg");
+						user.setIp(TmIpUtil.getIpAddress(request));
+						user.setIpAddress(TmIpUtil.ipLocation(request));
+						if (userService.saveUser(user)){
 							return "success";
 						}
 						return "EmailIsCorrect";
@@ -259,5 +259,23 @@ public class UserController extends BaseController {
 		session.invalidate();
 		return "user/login";
 	}
-
+	/**
+	 * @Title: userList 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param userParams
+	 * @param @return  参数说明 
+	 * @return ModelAndView  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/template.do")
+	@ResponseBody
+	public ModelAndView userList(UserParams userParams){
+		ModelAndView model = new ModelAndView();
+		List<User> users = userService.findAllUsers(userParams);
+		int itemCount = userService.countUser(userParams);
+		model.setViewName("user/template");
+		model.addObject("users",users);
+		model.addObject("itemCount",itemCount);
+		return model;
+	}
 }

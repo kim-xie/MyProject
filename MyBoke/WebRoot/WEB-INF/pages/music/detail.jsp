@@ -9,7 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<%@include file="/WEB-INF/pages/common/common.jsp"%>
 		<script type="text/javascript" src="${basePath}/resources/js/king_music.js"></script>
-		<script type="text/javascript" src="${basePath}/resources/js/ke_detail.js"></script>
+		<script type="text/javascript" src="${basePath}/resources/js/king_detail.js"></script>
 	</head>
 	<style>
 		@keyframes move { 
@@ -44,7 +44,7 @@
 		#wrapbox .items{position:absolute;bottom:0px;}
 		
 	</style>
-	<body style="overflow-y:auto;overflow-x:hidden;background:#EDEDEF;padding-top:70px;padding-bottom:70px;">
+	<body data-opid="${music.id}" data-typeid="${music.categoryId}" style="overflow-y:auto;overflow-x:hidden;background:#EDEDEF;padding-top:70px;padding-bottom:70px;">
 	<%@include file="/WEB-INF/pages/common/header.jsp"%>
  	<%@include file="/WEB-INF/pages/common/left.jsp"%>	
 	<!-- 播放器盒子 -->
@@ -86,36 +86,14 @@
 	<!-- 相似主题盒子 -->
 	<div class="container relationBox">
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2" style="margin-top:10px;padding:0;">
+			<div class="col-md-8 col-md-offset-2 relation" style="margin-top:10px;padding:0;">
 				<div class="page-header" style="margin:0 0 10px 0;">
 					<h2>
 						<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>相似主题
 					</h2>
 				</div>
 				<div class="row" style="margin-left:0;margin-right:0;">
-					<div class="col-xs-6 col-md-3 pull-left relationPic">
-						<a href="#" class="thumbnail">
-							<img src="${basePath}/resources/mp3/banner/1.jpg" alt="">
-						</a>
-					</div>
-					<div class="clearfix visible-xs-block"></div>
-					<div class="col-xs-6 col-md-3 pull-left relationPic">
-						<a href="#" class="thumbnail">
-							<img src="${basePath}/resources/mp3/banner/2.jpg" alt="">
-						</a>
-					</div>
-					<div class="clearfix visible-xs-block"></div>
-					<div class="col-xs-6 col-md-3 pull-left relationPic">
-						<a href="#" class="thumbnail">
-							<img src="${basePath}/resources/mp3/banner/3.jpg" alt="">
-						</a>
-					</div>
-					<div class="clearfix visible-xs-block"></div>
-					<div class="col-xs-6 col-md-3 pull-left relationPic">
-						<a href="#" class="thumbnail">
-							<img src="${basePath}/resources/mp3/banner/4.jpg" height="140">
-						</a>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -143,42 +121,19 @@
 		.headerPic img{height:50px;}
 		.name a{font-size: 14px;color: #95a5a6;font-weight: bold;text-decoration:none;}
 		.name:hover a{color: #3498db;}
-		.count{position:absolute;bottom:5px;right:85px;z-index:2;}
+		.count{position:absolute;bottom:5px;right:85px;z-index:2;font-size:20px;font-family:"方正舒体";}
 		</style>
 		<!-- 评论盒子 -->
 		<div class="container commentBox">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2" style="margin-top:10px;padding:0;">
 					<div class="input-group col-md-12" style="margin-top:30px;padding:0;">
-						<input type="text" class="form-control" placeholder="请输入评论的内容(不得超过400字)" id="content" maxlength="400" aria-describedby="basic-addon1" style="position:relative;padding-right:60px;">
-						<span class="input-group-addon" id="basic-addon1" style="cursor:pointer;">发表评论</span>
-						<span class="count"><i class="num">400</i>/400</span>
+						<input type="text" class="form-control" onkeyup="keRealtion.setCacheData(this)" placeholder="请输入评论的内容(不得超过400字)" id="content" maxlength="400" aria-describedby="basic-addon1" style="position:relative;padding-right:60px;">
+						<span class="input-group-addon" onclick="keRealtion.saveComment(this)" id="basic-addon1" style="cursor:pointer;">发表评论</span>
+						<span class="count"><em class="num">400</em>/400</span>
 					</div>
-					<ul class="list-group" style="margin-top:30px;padding:0;">
-						<li class="list-group-item" style="padding:0;border:none;">
-							<div class="col-md-1 headerPic">
-								<a href="#" class="thumbnail pull-left">
-									<img src="${basePath}${music.headerPic}" class="img-responsive img-circle" alt="Responsive image" height="50" width="50">
-								</a>
-							</div>
-							<div class="col-md-11" style="padding-right:0;">
-								<p>
-									<span class="name"><a href="">zhuyuxuan</a></span> 
-									<span class="plTime pull-right" style="color: #bdbdbd;">
-										<span class="glyphicon glyphicon-time fs16" aria-hidden="true">
-										</span>2016-5-20 15:26
-									</span>
-								</p>
-								<p class="text">
-										骗纸！明明说好了的是print“clicked”你却偷偷改成了“clicked!”
-								</p>
-								<p class="replay">
-									<span class="glyphicon glyphicon-comment fs16" aria-hidden="true">
-									</span>回复
-								</p>
-								</div>
-							</div>
-						</li>
+					<ul class="list-group comments" style="margin-top:30px;padding:0;">
+						
 					</ul>
 				</div>
 			</div>
@@ -189,15 +144,15 @@
 		
 			$("#content").keyup(function(){
 				var maxlength = $("#content").attr("maxlength");
-				var textlength = $("#content").val().length+1;
+				var textlength = $("#content").val().length;
 				if(textlength <= maxlength){
-					$("#comments .areabox.count .num").text(maxlength-textlength);
+					$(".count .num").text(maxlength-textlength);
 				}
 			}).keydown(function(){
 				var maxlength = $("#content").attr("maxlength");
-				var textlength = $("#content").val().length+1;
+				var textlength = $("#content").val().length;
 				if(textlength <= maxlength){
-					$("#comments .areabox .count .num").text(maxlength-textlength);
+					$(".count .num").text(maxlength-textlength);
 				}
 			});
 		

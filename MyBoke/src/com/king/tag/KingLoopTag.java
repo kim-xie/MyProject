@@ -1,12 +1,3 @@
-/**
- * tzdesk系统平台
- * tz_desk
- * com.tz.tag
- * TzLoopTag.java
- * 创建人:xuchengfei 
- * 时间：2015年9月16日-上午12:08:41 
- * 2015潭州教育公司-版权所有
- */
 package com.king.tag;
 
 import java.util.Collection;
@@ -14,17 +5,14 @@ import java.util.Iterator;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
-
 /**
- * 
- * TzLoopTag
- * 创建人:xuchengfei 
- * 时间：2015年9月16日-上午12:08:41 
+ * 循环迭代标签
+ * 类名: KingLoopTag.java
+ * 创建人: king 
+ * 创建时间：2016年5月31日 下午12:52:57 
  * @version 1.0.0
- * 
  */
-public class TzLoopTag  extends TagSupport{
-	
+public class KingLoopTag  extends TagSupport{
 	
 	private Object items;
 	private String var;
@@ -37,9 +25,6 @@ public class TzLoopTag  extends TagSupport{
 	 * 3:注册：tld文件中注册标签
 	 * 4:引入：<%@taglib uri="/web-inf/tld/tz.tld" prefix="tz" %>
 	 * 5:调用
-	 * <div></div>
-	 * <br/>
-	 * 
 	 * 
 	 * 后台标签类注意点：
 	 * 1:定义标签属性，只需要生成set方法即可,必须和tld文件中的属性名保持一致
@@ -49,7 +34,7 @@ public class TzLoopTag  extends TagSupport{
 	 * EVAL_BODY_INCLUDE:要求JSP容器记性执行标签体内容并将结果返回给页面
 	 * */
 	
-	//标签开始 <tz:loop> 
+	//标签开始 <king:loop> 
 	@Override
 	public int doStartTag() throws JspException {
 		System.out.println("2======================>dostarttag-start");
@@ -81,13 +66,12 @@ public class TzLoopTag  extends TagSupport{
 		}
 	}
 	
-	//标签结束</tz:loop>
+	//标签结束</king:loop>
 	@Override
 	public int doEndTag() throws JspException {
 		System.out.println("4======================>doEndTag");
 		return SKIP_PAGE;
 	}
-	
 	
 	//jvm GC垃圾回收
 	@Override

@@ -43,7 +43,7 @@
 	.person .user #cale{position:absolute;left:20%;top:2px;font-size:14px;font-weight:700;color:#4c4c4c;}
  	/* fansbox */
  	.person .user .fansbox{float:left;}
- 	.person .user .fansbox h3{padding:0 15px;line-height:39px;border-bottom:1px solid #eee;}
+ 	.person .user .fansbox h3{padding:0 15px;line-height:39px;border-bottom:1px solid #eee;margin:0;}
  	.person .user .fansbox h3 span{font-size:14px;color:#414141;}
  	.person .user .fansbox h3 .fans-change{float:right;position:relative;padding-left:10px;color:#8a8880;font-size:12px;transition:1s;}
  	.person .user .fansbox h3 .fans-change i{margin-right:6px;}
@@ -58,44 +58,59 @@
 	.person .user .fansbox ul li .fans-r .fans-add:hover{border-color:#414141;}
 	/*个人信息栏目  end*/
 	
+	/* 公告栏   start */
+    .soupBox{height:110px;width:670px;overflow:hidden;margin:30px auto;}
+	.soupBox .soup{position:relative;float:right;width:auto;height:40px;padding:0 120px 0 20px;background-color:#fff7e7;border-radius:20px;box-shadow:1px 1px 2px rgba(0,0,0,.2);margin-top:36px;}
+	.soupBox .soup li i{position:absolute;font-size:28px;color:#eae1d0;cursor:pointer;}
+	.soupBox .soup li .txt{display:none;line-height:40px;font-size:14px;color:#6b3612;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:550px;}
+	.soupBox .soup li.open .txt{display:block;}
+	.soupBox .soup li.open i{color:#e67e22;}
+	.soupBox .soup li i.icon-warn{right:80px;top:0;font-size:31px;margin-left:10px;}
+	.soupBox .soup li i.icon-iconfontaixin{right:46px;top:0;}
+	.soupBox .soup li i.icon-gonggao{right:10px;top:2px;}
+	.soupBox span{display:block;background:#fff7e7;float:left;border-radius:10px;line-height:30px;cursor:pointer;font-size:20px;font-weight:600;color:#6b3612;margin-top:5px;padding:5px 8px;}
+	.soupBox span .icon-add{font-size:24px;font-weight:600;color:#6b3612;margin-right:5px;}
+ 	/* 公告栏   end */
+	
 	/* 发表文章栏目   start */
-    .fb_box{height:50px;overflow:hidden;margin:30px auto;}
-	.fb_box .soup{position:relative;float:right;width:auto;height:40px;padding:0 120px 0 20px;background-color:#fff7e7;border-radius:20px;box-shadow:1px 1px 2px rgba(0,0,0,.2);margin-top:5px;}
+    .fb_box{height:110px;width:670px;overflow:hidden;margin:30px auto;}
+	.fb_box .soup{position:relative;float:right;width:auto;height:40px;padding:0 120px 0 20px;background-color:#fff7e7;border-radius:20px;box-shadow:1px 1px 2px rgba(0,0,0,.2);margin-top:36px;}
 	.fb_box .soup li i{position:absolute;font-size:28px;color:#eae1d0;cursor:pointer;}
 	.fb_box .soup li .txt{display:none;line-height:40px;font-size:14px;color:#6b3612;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:550px;}
 	.fb_box .soup li.open .txt{display:block;}
 	.fb_box .soup li.open i{color:#e67e22;}
-	.fb_box .soup li i.icon-warn{right:80px;top:5px;font-size:31px;margin-left:10px;}
-	.fb_box .soup li i.icon-iconfontaixin{right:46px;top:3px;}
-	.fb_box .soup li i.icon-gonggao{right:10px;top:5px;}
+	.fb_box .soup li i.icon-warn{right:80px;top:0;font-size:31px;margin-left:10px;}
+	.fb_box .soup li i.icon-iconfontaixin{right:46px;top:0;}
+	.fb_box .soup li i.icon-gonggao{right:10px;top:2px;}
 	.fb_box span{display:block;background:#fff7e7;float:left;border-radius:10px;line-height:30px;cursor:pointer;font-size:20px;font-weight:600;color:#6b3612;margin-top:5px;padding:5px 8px;}
 	.fb_box span .icon-add{font-size:24px;font-weight:600;color:#6b3612;margin-right:5px;}
  	/* 发表文章栏目   end */
 
 	
 	/*文本编辑器 start*/
-	.editerBox{width:100%;margin:30px 0;display:none;}
+	.editerBox{width:570px;margin:30px auto;display:none;}
 	.input{width:400px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
-	.editerBox .editer{width:1000px;height:100%;margin:0 auto;background:#fff;overflow:hidden;}
-	.editerBox .editer .title{width:600px;height:30px;margin:10px auto;display:block;font-size:18px;font-weight:600;}
-	.editerBox .editer .title input{width:500px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
-	.editerBox .editer .edui-container{width:800px;margin:10px auto;overflow-x:hidden;overflow-y:auto;height:400px;}
-	.editerBox .editer p{width:800px;font-size:14px;font-weight:600;margin:20px auto;}
-	.editerBox .editer p .fabiao{float:right;height:30px;line-height:30px;margin-right:.1%;}
-	.editerBox .editer p .fabiao .tip{padding-right:10px;font-size:14px;font-weight:600;color:#999;}
-	.editerBox .editer p .fabiao .submit{padding:9px;outline:none;border:none;background:#0033ff;transition:1s;border-radius:5px;cursor:pointer;font-size:14px;font-weight:600;color:#fff;}
+	.editerBox .editer{width:570px;height:100%;background:#fff;overflow:hidden;padding:10px;}
+	.editerBox .editer .title{width:550px;width:600px;height:30px;margin:10px 0;display:block;font-size:18px;font-weight:600;}
+	.editerBox .editer .title input{width:502px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
+	.editerBox .editer .upload_pic{width:550px;height:320px;border:1px dashed #ccc;text-align:center;margin:20px 0;}
+	.editerBox .editer .upload_pic .txt-tip{line-height:320px;font-size:20px;color:#999;font-weight:600;}
+	.editerBox .editer p{float:left;font-size:14px;font-weight:600;margin:20px 0;}
+	.editerBox .editer p .fabiao{height:30px;line-height:30px;}
+	.editerBox .editer p .fabiao .submit{padding:0 10px;margin-left:22px;outline:none;border:none;background:#0033ff;transition:1s;border-radius:5px;cursor:pointer;font-size:14px;font-weight:600;color:#fff;}
 	.editerBox .editer p .fabiao .submit:hover{background:#0033cc;transition:1s;}
 	/*文本编辑器 end*/
 	
   </style>
   <link rel="stylesheet" type="text/css" href="${basePath}/resources/js/umeditor/themes/default/css/umeditor.css">
   <script type="text/javascript" src="${basePath}/resources/js/wnl/wnl.js"></script>
+  <script type="text/javascript" src="${basePath}/resources/sg/tz_page.js"></script>
   <script type="text/javascript" charset="utf-8" src="${basePath}/resources/js/umeditor/umeditor.config.js"></script>
   <script type="text/javascript" charset="utf-8" src="${basePath}/resources/js/umeditor/umeditor.min.js"></script>
   <script type="text/javascript" charset="utf-8" src="${basePath}/resources/js/umeditor/umeditor.js"></script>
  </head>
  
- <body style="overflow-y:auto;overflow-x:hidden;background:#EDEDEF;padding-top:70px;padding-bottom:70px;">
+ <body data-count="${itemCount}" data-content="${count}" style="overflow-y:auto;overflow-x:hidden;background:#EDEDEF;padding-top:70px;padding-bottom:70px;">
  <%@include file="/WEB-INF/pages/common/header.jsp"%>
  <%@include file="/WEB-INF/pages/common/left.jsp"%>
 
@@ -199,22 +214,54 @@
 			</div>
 		 </div>
 		 <!--个人信息 end-->
-		 
-		 <!-- 发表文章栏目   start -->
-		 <div class="fb_box">
-		 	<span class="fb_aritcle"><i class="iconfont icon-add"></i>发表文章</span>
-		 	<ul class="soup">
+		
+		 <!-- 公告栏  start -->
+		 <div class="soupBox">
+			<ul class="soup">
 			 	<li class="">
 				 	<i class="iconfont icon-warn" title="更新"></i>
 				 	<a class="txt" href="" target="_blank"> 更新：上传作品明细增添字体设计一栏！欢迎大家上传~ </a>
 			 	</li>
-			 	<li class="open">
+			 	<li class="">
 				 	<i class="iconfont icon-iconfontaixin" title="鸡汤"></i>
 				 	<a class="txt" href="" target="_blank"> 鸡汤：将来的你一定会感谢现在努力拼命的自己~ </a>
 			 	</li>
-			 	<li class="">
+			 	<li class="open">
 				 	<i class="iconfont icon-gonggao" title="公告"></i>
 				 	<a class="txt" href="" target="_blank"> 公告：king将从0点至明早7点进行数据库优化，平台将无法访问，造成不便敬请谅解！ </a>
+			 	</li>
+		 	</ul> 
+		</div>
+		 <!-- 公告栏  end -->
+		 <style>
+		 	.fb_box .publicBar{background:url("${basePath}/resources/imgs/share/nav224.png")no-repeat;height:110px;}
+		 	.fb_box .publicBar li{float:left;width:140px;height:100%;}
+		 	.fb_box .publicBar li a{width:100%;height:100%;display:block;}
+		 	.fb_box .publicBar li:hover{background:#e5e5e5;opacity:0.3}
+		 	.fb_box .publicBar li.user{width:110px;height:100%;position:relative;}
+		 	.fb_box .publicBar li.user img{width:110px;height:100%;position:absolute;}
+		 	.fb_box .publicBar li.user a:hover{background:transparent;opacity:1;}
+		 </style>
+		
+		 <!-- 发表文章栏目   start -->
+		 <div class="fb_box">
+		 	<ul class="publicBar">
+			 	<li class="user">
+				 	<a href="javascript:void(0);" target="_blank" onclick="window.open(basePath+'/user/toPerson.do')">
+				 		<img src="${basePath}${sessionScope.userHeaderPic}" alt="头像">
+				 	</a>
+			 	</li>
+			 	<li>
+				 	<a href="javascript:void(0);" target="_blank" class="fb_aritcle"></a>
+			 	</li>
+			 	<li>
+				 	<a href="javascript:void(0);" target="_blank" class="fb_pic"></a>
+			 	</li>
+			 	<li>
+				 	<a href="javascript:void(0);" target="_blank" class="fb_music"></a>
+			 	</li>
+			 	<li>
+				 	<a href="javascript:void(0);" target="_blank" class="fb_video"></a>
 			 	</li>
 		 	</ul>
 		 </div>
@@ -227,14 +274,23 @@
 		 			标题:
 		 			<input type="text" placeholder="请输入标题不得超过50个字" maxlength="50" class="txt_title">
 		 		</span>
-			<!-- 	<div class="edui-container" id="myEditor" maxlength="200"></div> -->
-				<script id="myEditor" type="text/plain" style="width:800px;height:400px;overflow-x:hidden;"></script>
+		 		<span class="description title">
+		 			描述:
+		 			<input type="text" placeholder="描述不得超过200个字" maxlength="200" class="txt_description">
+		 		</span>
+		 		<div class="upload_pic">
+		 			<input type="file" style="display:none;">
+		 			<span class="txt-tip" onclick="">
+		 				<a>请添加封面图片</a>
+		 				<img id="preview" src="" width="550" height="320">
+		 			</span>
+		 		</div>
+				<script id="myEditor" type="text/plain" style="width:550px;height:300px;margin:10px 0;overflow-X:hidden;overflow-Y:auto;"></script>
 		 		<p>
 					标签：
 					<input type="text" class="input" placeholder="请输入标签" maxlength="40">	
 					<span class="fabiao">
-						<span class="tip">还可以输入<label id="count">200</label>字</span>
-						<input type="button" class="submit" value="发表文章">
+						<input type="button" class="submit" value="发表文章" onclick="saveContent(this);">
 					</span>
 		 		</p>
 		 	</div>
@@ -262,10 +318,11 @@
 			vertical-align: middle;}
 			.mubox .row .list .info .user a .headerPic{float:left;width:20px;height:20px;border-radius:50%;}
 			.mubox .row .list .info .user a .name{float:left;margin-left:10px;font-size:12px;}
+			.tzPage{font-size:14px;margin-top:0px;float:right;margin-left: 0px;}
 		</style>
 
 
-		<!-- 音乐 list -->
+		<!-- list start-->
 		<div class="container mubox">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs tab" role="tablist">
@@ -277,10 +334,11 @@
 				</li>
 			</ul>
 			<!-- Tab panes -->
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane fade in active" id="music">
-					<div class="row musicRow">
-						<c:forEach items="${musics}" var="music">
+			<div class="tab-content contBox">
+				<div role="tabpanel" class="tab-pane fade active" id="music">
+					<!-- 音乐列表 -->
+					<div class="row musicRow" id="listBox" data-model="music">
+						<%-- <c:forEach items="${musics}" var="music">
 							<div class="col-md-3 col-xs-6 col-sm-3 list">
 								<!-- shade -->
 								<div class="shade"></div>
@@ -294,7 +352,7 @@
 								<div class="info">
 									<h4 class="title ellipsis">${music.title}</h4>
 									<div class="msg">
-										<span class="time"><i class="iconfont icon-time"></i>
+										<span class="time tmui-tips" tip="${king:formatDate(music.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="iconfont icon-time"></i>
 											<em><fmt:formatDate value="${music.createTime}" dateStyle="medium"/></em>
 										</span>
 										<span><i class="iconfont icon-music" title="收听数"></i><em>${music.hits}</em></span>
@@ -309,10 +367,165 @@
 									</p>
 								</div>
 							</div>
-						</c:forEach>
+						</c:forEach> --%>
 					</div>
-					<!-- musicRow end-->
+					<!-- 分页 -->
+					<div class="col-md-4 col-md-offset-4 cpage" style="display:block;"></div>
 				</div>
+				<!-- 文章栏 -->
+				<div role="tabpanel" class="tab-pane fade" id="aritcle">
+					<!-- 文章列表 -->
+					<div class="row aritcleRow"  id="listBox" data-model="content" style="margin-top: 5px;margin-right: 15px;margin-left: -15px;">
+						<%-- <c:forEach items="${contents}" var="content">
+							<div class="panel panel-default col-md-12">
+								<div class="panel-body" style="padding:0;margin-top:0;margin-left: -15px;">
+									<div class="col-md-2 pull-left" style="padding:0;height:120px;">
+										<a href="${basePath}/content/detail/${content.id}.do" target="_blank">
+											<img src="${basePath}${content.image}" class="img-responsive" alt="Responsive image" 
+											style="height:120px"/>
+										</a>
+									</div> 
+									<div class="col-md-10 pull-left" style="padding-right:0;">
+										<h4 style="margin:2px 0 8px 0;">
+											<a class="tag bg-blue" target="_blank" href="">${content.tag}</a>
+											<a class="ellipsis title" href="" title="" target="_blank">${content.title}</a>
+										</h4>
+										<p>
+											${content.description}
+										</p>
+										<div class="pull-left" style="line-height:30px;">
+											<a class="u_headrpic pull-left" href="" title="" target="_blank">
+												<img src="${basePath}${content.headerPic}" class="img-responsive img-circle pull-left" style="width:30px;height:30px;">
+												<strong class="name pull-left" style="line-height:30px;font-size: 12px;color: #394a58;font-weight: bold;padding: 0 15px;">${content.userName}</strong>
+											</a>
+											<div class="msg pull-left">
+												<span><i class="iconfont icon-eye"></i><em>${content.hits}</em></span>
+												<span><i class="iconfont icon-comment"></i><em>${content.comments}</em></span>
+												<span><i class="iconfont icon-zan"></i><em>${content.loves}</em></span>
+											</div>
+										</div>
+										<div class="data">
+											<i class="iconfont icon-time"></i>
+											<fmt:formatDate value="${content.createTime}" dateStyle="medium"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach> --%>
+					</div>
+					<!-- 分页 -->
+					<div class="col-md-4 col-md-offset-4 cpage" style="display:block;"></div>
+				</div>
+			</div>
+		</div>
+		<!--list end-->
+		
+	</div>
+				<script type="text/javascript">
+				function loading2(target,mark){
+					$.loading({target:$(target),mark:1}); 
+				};
+				var indexMusic = {
+					timer :null,
+					ltimer :null,
+					initPage:function(itemCount){
+						$(".cpage").tzPage(itemCount, {
+							num_edge_entries : 1, //边缘页数
+							num_display_entries :4, //主体页数
+							num_edge_entries:5,
+							current_page:0,
+							showGo:true,
+							showSelect:true,
+							items_per_page : 12, //每页显示X项
+							prev_text : "前一页",
+							next_text : "后一页",
+							callback : function(pageNo,psize){//回调函数
+								indexMusic.loadData(pageNo,psize);
+							}
+						});
+					},
+					loadData:function(pageNo,pageSize,callback){
+						//var keyword = $("#keywords").val();
+						//var model = $("#listBox").data("model");
+						var $this = this;
+						clearTimeout(this.ltimer);
+						this.ltimer = setTimeout(function(){
+							$.ajax({
+								type:"post",
+								beforeSend:function(){loading2($(".musicRow"),4);},
+								url:basePath+"/music/template.do",
+								data:{pageNo:pageNo*pageSize,pageSize:pageSize},
+								success:function(data){
+									//模板技术
+									var $data = $(data);
+									$(".musicRow").html($data);//追加元素到dom中
+									$(".tmui-tips").tmTip();
+									var itemCount = $data.find("#itemCount").val();
+									//if(isNotEmpty(keyword))$this.highligter(keyword);
+									if(callback)callback(itemCount);
+								}
+							});
+						},300);
+					}	
+				}
+				var indexContent = {
+						timer :null,
+						ltimer :null,
+						initPage:function(itemCount){
+							$(".cpage").tzPage(itemCount, {
+								num_edge_entries : 1, //边缘页数
+								num_display_entries :4, //主体页数
+								num_edge_entries:5,
+								current_page:0,
+								showGo:true,
+								showSelect:true,
+								items_per_page : 10, //每页显示X项
+								prev_text : "前一页",
+								next_text : "后一页",
+								callback : function(pageNo,psize){//回调函数
+									indexContent.loadData(pageNo,psize);
+								}
+							});
+						},
+						loadData:function(pageNo,pageSize,callback){
+							//var keyword = $("#keywords").val();
+							//var model = $("#listBox").data("model");
+							var $this = this;
+							clearTimeout(this.ltimer);
+							this.ltimer = setTimeout(function(){
+								$.ajax({
+									type:"post",
+									beforeSend:function(){loading2($(".aritcleRow"),4);},
+									url:basePath+"/content/template.do",
+									data:{pageNo:pageNo*pageSize,pageSize:pageSize},
+									success:function(data){
+										//模板技术
+										var $data = $(data);
+										$(".aritcleRow").html($data);//追加元素到dom中
+										$(".tmui-tips").tmTip();
+										var itemCount = $data.find("#itemCount").val();
+										//if(isNotEmpty(keyword))$this.highligter(keyword);
+										if(callback)callback(itemCount);
+									}
+								});
+							},300);
+						}	
+					}
+				$(function(){
+					$(".tmui-tips").tmTip();
+					var count = $("body").data("count");
+					indexMusic.initPage(count);
+					indexMusic.loadData(0,12,function(count){
+						indexMusic.initPage(count);
+					});
+					
+					var itemCount = $("body").data("content");
+					indexContent.initPage(itemCount);
+					indexContent.loadData(0,10,function(itemCount){
+						indexContent.initPage(itemCount);
+					});
+				});
+				</script>
 				<!-- 文章 -->
 				<style>
 					.iconfont{margin-right:6px;}
@@ -329,53 +542,7 @@
 					.msg span em {font-size:14px;color:#9aabb8;}
 					.tab-pane{margin-top: 60px;}
 				</style>
-				<div role="tabpanel" class="tab-pane fade" id="aritcle">
-					<c:forEach items="${contents}" var="content">
-						<div class="row aritcleRow" style="margin-top: 5px;margin-right: 15px;margin-left: -15px;">
-							<div class="panel panel-default col-md-12">
-								<div class="panel-body" style="padding:0;margin-top:0;">
-									<div class="col-md-2 pull-left" style="padding:0;height:120px;">
-										<a href="${basePath}/content/detail/${content.id}.do" target="_blank">
-											<img src="${basePath}${content.image}" class="img-responsive" alt="Responsive image" 
-											style="height:120px">
-										</a>
-									</div> 
-									<div class="col-md-10 pull-left" style="padding-right:0;">
-										<h4 style="margin:2px 0 8px 0;">
-											<a class="tag bg-blue" target="_blank" href="">${content.tag}</a>
-											<a class="ellipsis title" href="" title="" target="_blank">${content.title}</a>
-										</h4>
-										<p>
-											${content.description}
-										</p>
-										
-										<div class="pull-left" style="line-height:30px;">
-											<a class="u_headrpic pull-left" href="" title="" target="_blank">
-												<img src="${basePath}${content.headerPic}" class="img-responsive img-circle pull-left" style="width:30px;height:30px;">
-												<strong class="name pull-left" style="line-height:30px;font-size: 12px;color: #394a58;font-weight: bold;padding: 0 15px;">${content.userName}</strong>
-											</a>
-											<div class="msg pull-left">
-												<span><i class="iconfont icon-eye"></i><em>${content.hits}</em></span>
-												<span><i class="iconfont icon-comment"></i><em>${content.comments}</em></span>
-												<span><i class="iconfont icon-zan"></i><em>${content.loves}</em></span>
-											</div>
-										</div>
-										<div class="data">
-											<i class="iconfont icon-time">${content.createTime}</i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-					<!-- aritcleRow end-->
-				</div>
-			
 				
-			</div>
-		</div>
-		<!--list end-->
-	</div>
  
  <%@include file="/WEB-INF/pages/common/footer.jsp"%>
  <script type="text/javascript">
@@ -386,31 +553,35 @@
 		return time<10 ? "0" + time:time;
 	};
 	
-	//关注列表
-	var pageNo = 0;
+	//关注列表分页
 	function hyb(obj){
-		pageNo++;
+		var pageNo = 0;
 		var pageSize = 2;
-		var params={pageNo:pageNo*pageSize,pageSize:pageSize};
-		$.ajax({
-			type:"post",
-			url:basePath+"/userList.do",
-			beforeSend:function(){loading2($(".f-list"),4);},
-			data:params,
-			success:function(data){
-				$(".f-list").html("<c:forEach items='${users}' var='user'>"+
-						"<li style='display: list-item;'>"+
-							"<a class='fans-ava' target='_blank'>"+
-							"	<img src='${basePath}${user.headerPic}'>"+
-							"</a>"+
-							"<div class='fans-r'>"+
-							"	<a class='fans-name' target='_blank'>${user.userName}</a>"+
-							"	<a class='fans-add'>+ 关注</a>"+
-							"</div>"+
-						"</li>"+
-			   			"</c:forEach>");
-			}
-		});
+		var mark = true;
+		var timer = null;
+		clearTimeout(timer);
+		timer = setTimeout(function(){
+			if(!mark)return;
+			pageNo++;
+			var params={pageNo:pageNo*pageSize,pageSize:pageSize};
+			$.ajax({
+				type:"post",
+				url:basePath+"/user/template.do",
+				beforeSend:function(){loading2($(".f-list"),4);},
+				data:params,
+				success:function(data){
+					if(data && data.length>0){
+						var $data = $(data);
+						$(".f-list").html($data);
+					}else{
+						loading("数据加载完毕",4);
+						mark = false;
+						hyb(obj).removeAttr("onclick");
+					}
+					
+				}
+			});
+		},300);
 	}
 	
 	//实例化编辑器
@@ -439,12 +610,13 @@
 	 $(".fb_box .fb_aritcle").click(function(){
 		 $(".editerBox").slideToggle();
 	 });
-	 $(".fb_box .soup li").click(function(){
+	 $(".soup li").click(function(){
 		 $(this).addClass("open").siblings().removeClass("open");
 	 });
 	
 	/*发表文章*/
-	$(".editerBox .editer p .fabiao .submit").click(function(){
+	function saveContent(obj){
+		alert(1);
 		var titleVal = $(".editer .txt_title").val();
 		var contentVal = getPlainTxt("myEditor");
 		var tagval = $(".editer p .input").val();
@@ -471,51 +643,9 @@
 				}
 			}
 		}); 
-	});
-	
+	};
 	/*文本编辑器 end*/
-	/*发表评论*/
-	function fbpinglun(obj){
-		var conVal = $(obj).parents(".contents").find(".pl .pl_txt").val();
-		$(obj).parents(".contents").find(".pl .pl_txt").val("");
-		$(obj).parents(".contents").find(".pl .pl_txt").focus();
 	
-		var html = "<p class='c_info animated bounceInUp'> "+
-		"	<a href='javascript:void(0)' class='header_pic'>"+
-		"		<img src='${basePath}/resources/imgs/header_pic/header_pic.jpg' alt='头像'>"+
-		"	</a>"+
-		"	<a href='javascript:void(0)' class='name'>"+<%=request.getSession().getAttribute("userName")%>+" <b>:</b> </a>"+
-		"	<span class='con'>"+conVal+"</span>"+
-		"	<span class='time'>"+
-		"		<span class='hours'>"+timeFormate(new Date().getHours())+"</span>"+
-		"		<b>:</b>"+
-		"		<span class='mins'>"+timeFormate(new Date().getMinutes())+"</span>"+
-		"	</span>"+
-		"</p>";
-		
-		$(obj).parents(".contents").find(".main .coment").append(html);
-		
-		/*滚动条滚动*/
-		var scrollTop = $(document.body).scrollTop();
-		$(document.body).stop(true,true).animate({"scrollTop":scrollTop+50},500);
-		
-		/*评论框*/
-		var pilunVal = $(obj).parents(".contents").find(".link .pilun").text();
-		$(obj).parents(".contents").find(".link .pilun").html(pilunVal*1+1);
-	};
-	
-	/*评论框触发键盘事件*/
-	function enter(e,obj){
-		var e = e || window.event;
-		if(e.keyCode == 13){
-			fbpinglun(obj);
-		}
-	};
-	/*zan*/
-	function zan(obj){
-		var textVal = $(obj).parents(".contents").find(".link .zan").text();
-		$(obj).parents(".contents").find(".link .zan").html(textVal*1+1);
-	};
 	
  </script>
  </body>

@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService{
 	 * 注册方法
 	 */
 	@Override
-	public boolean saveUser(UserParams userParams) {
-		int count = userMapper.saveUser(userParams);
+	public boolean saveUser(User user) {
+		int count = userMapper.saveUser(user);
 		
 		MailInfo mailInfo = new MailInfo();
 		mailInfo.setMailServerHost("smtp.163.com");
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
 		mailInfo.setUsername("jy_xdj@163.com");
 		mailInfo.setPassword("xdj123");
 		mailInfo.setFromAddress("jy_xdj@163.com");
-		mailInfo.setToAddress(userParams.getUserEmail());
+		mailInfo.setToAddress(user.getUserEmail());
 		mailInfo.setSubject("King博客激活邮箱");
 				
 		StringBuffer demo = new StringBuffer();
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService{
 				"												</tr>"+
 				"												<tr>"+
 				"													<td>"+
-				"														<p id='dear'>亲爱的 <span style='font-weight: bold;'>"+userParams.getUserName()+"</span> ,您好！欢迎加入King的个人博客！</p>"+
+				"														<p id='dear'>亲爱的 <span style='font-weight: bold;'>"+user.getUserName()+"</span> ,您好！欢迎加入King的个人博客！</p>"+
 				"													</td>"+
 				"												</tr>"+
 				"												<tr>"+
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService{
 				"												</tr>"+
 				"												<tr>"+
 				"													<td>"+
-				"														<a id='active' href = 'http://localhost:8080/MyBoke/user/active.do?activeCode="+userParams.getActiveCode()+"' target='_blank'>立即激活</a>"+
+				"														<a id='active' href = 'http://localhost:8080/MyBoke/user/active.do?activeCode="+user.getActiveCode()+"' target='_blank'>立即激活</a>"+
 				"													</td>"+
 				"												</tr>"+
 				"												<tr>"+
@@ -186,6 +186,10 @@ public class UserServiceImpl implements UserService{
 	public List<User> findAllUsers(UserParams userParams) {
 		List<User> users = userMapper.findAllUsers(userParams);
 		return users;
+	}
+	@Override
+	public int countUser(UserParams userParams) {
+		return userMapper.countUser(userParams);
 	}
 
 }

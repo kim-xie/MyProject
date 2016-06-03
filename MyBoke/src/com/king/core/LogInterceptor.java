@@ -41,7 +41,9 @@ public class LogInterceptor implements ServletContextAware {
 			content = "music";
 		}else if(TmStringUtils.isNotEmpty(methodName) && methodName.indexOf("Content")!=-1){
 			content = "content";
-		}
+		}else if(TmStringUtils.isNotEmpty(methodName) && methodName.indexOf("Comment")!=-1){
+			content = "comment";
+		}else{content = "other";}
 		System.out.println(content);
 		// 判断是否是登录过滤登录操作
 		if(TmStringUtils.isNotEmpty(methodName) && methodName.equals("getUser||findUserByUserName||checkUserEmail")){

@@ -23,7 +23,7 @@ public interface UserMapper {
 	 * @return void  返回类型 
 	 * @throws
 	 */
-	int saveUser(UserParams userParams);
+	int saveUser(User user);
 	/**
 	 * @Title: findUserByUserName 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -89,5 +89,5 @@ public interface UserMapper {
 	 * @return int  返回类型 
 	 * @throws
 	 */
-	int count(UserParams userParams);
+	int countUser(UserParams userParams);
 }

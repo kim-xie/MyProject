@@ -1,12 +1,3 @@
-/**
- * tzdesk系统平台
- * tz_desk
- * com.tz.tld
- * TzFunctions.java
- * 创建人:xuchengfei 
- * 时间：2015年9月10日-下午11:17:02 
- * 2015潭州教育公司-版权所有
- */
 package com.king.tag;
 
 import java.util.Collection;
@@ -15,48 +6,35 @@ import java.util.HashMap;
 
 import com.king.util.TmStringUtils;
 import com.king.util.ip.TmIpUtil;
-
 /**
- * 
- * TzFunctions
- * 创建人:xuchengfei 
- * 时间：2015年9月10日-下午11:17:02 
+ * 自定义函数标签
+ * 类名: KingFunctions.java
+ * 创建人: king 
+ * 创建时间：2016年5月31日 下午12:46:45 
  * @version 1.0.0
- * 
  */
-public class TzFunctions {
-
-	
+public class KingFunctions {
 	/**
-	 * 格式化日期
-	 * com.tz.tld 
-	 * 方法名：formatDate
-	 * 创建人：xuchengfei 
-	 * 手机号码:15074816437
-	 * 时间：2015年9月10日-下午11:17:34 
-	 * @param date
-	 * @param pattern
-	 * @return 
-	 * 返回类型：String
-	 * @exception 
-	 * @since  1.0.0
+	 * 日期格式化
+	 * @Title: formatDate 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param date
+	 * @param @param pattern
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
 	 */
 	public static String formatDate(Date date,String pattern){
 		return TmStringUtils.formatDate(date, pattern);
 	}
-	
 	/**
-	 * 获取一个集合的长度
-	 * com.tz.tld 
-	 * 方法名：getLenght
-	 * 创建人：xuchengfei 
-	 * 手机号码:15074816437
-	 * 时间：2015年9月10日-下午11:21:14 
-	 * @param collection
-	 * @return 
-	 * 返回类型：int
-	 * @exception 
-	 * @since  1.0.0
+	 * 集合数组长度
+	 * @Title: getLength 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param collection
+	 * @param @return  参数说明 
+	 * @return int  返回类型 
+	 * @throws
 	 */
 	public static int getLength(Collection collection){
 		if(collection!=null){
@@ -65,19 +43,14 @@ public class TzFunctions {
 			return 0;
 		}
 	}
-	
 	/**
-	 * 
-	 * com.tz.tld 
-	 * 方法名：getTimeFormat
-	 * 创建人：xuchengfei 
-	 * 手机号码:15074816437
-	 * 时间：2015年9月11日-上午12:40:19 
-	 * @param startTime
-	 * @return 
-	 * 返回类型：String
-	 * @exception 
-	 * @since  1.0.0
+	 * 时间格式化
+	 * @Title: getTimeFormat 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param startTime
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
 	 */
 	public static String getTimeFormat(Date startTime){
 		try{
@@ -119,32 +92,26 @@ public class TzFunctions {
 			return "";
 		}
 	}
-	
 	/**
-	 * 根据数字获取索引
-	 * com.tz.tld 
-	 * 方法名：getCharacter
-	 * 创建人：xuchengfei 
-	 * 手机号码:15074816437
-	 * 时间：2015年9月15日-下午10:46:36 
-	 * @return 
-	 * 返回类型：String
-	 * @exception 
-	 * @since  1.0.0
+	 * 根据数字查出索引
+	 * @Title: getCharacter 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param num
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
 	 */
 	public static String getCharacter(int num){
 		return String.valueOf((char)(64+num));
 	}
-	
-	
 	/**
-	 * 将数字转换成对应的中文
-	 * 方法名：intToChnNumConverter<BR>
-	 * 时间：2014年11月11日-下午10:33:30 <BR>
-	 * @param num
-	 * @return String<BR>
-	 * @exception <BR>
-	 * @since  1.0.0
+	 * 数字转为中文数字
+	 * @Title: chinesCharacter 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param num
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
 	 */
 	public static String chinesCharacter(int num){
 	    String resultNumber = null;
@@ -198,16 +165,12 @@ public class TzFunctions {
 	}
 	
 	/**
-	 * 
-	 * com.tz.tld 
-	 * 方法名：getMoney
-	 * 手机号码:15074816437
-	 * 时间：2015年9月15日-下午11:03:07 
-	 * @param money
-	 * @return 
-	 * 返回类型：String
-	 * @exception 
-	 * @since  1.0.0
+	 * @Title: getMoney 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param money
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
 	 */
 	public static String getMoney(Double money){
 		Trans2RMB t2r = new Trans2RMB();
@@ -216,16 +179,13 @@ public class TzFunctions {
 	}
 	
 	/**
-	 * 获取IP对应的城市信息
-	 * com.tz.tld 
-	 * 方法名：ipLocation
-	 * 手机号码:15074816437
-	 * 时间：2015年9月15日-下午11:24:05 
-	 * @param ip
-	 * @return 
-	 * 返回类型：String
-	 * @exception 
-	 * @since  1.0.0
+	 * 查找ip对应的城市信息
+	 * @Title: ipLocation 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param ip
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
 	 */
 	public static String ipLocation(String ip){
 		if(TmStringUtils.isEmpty(ip)){
@@ -233,37 +193,36 @@ public class TzFunctions {
 		}
 		return TmIpUtil.ipLocation(ip);
 	}
-	
-	
 	/**
-	 * indexOf
-	 * com.tz.tag 
-	 * 方法名：indexOf
-	 * 创建人：xuchengfei 
-	 * 手机号码:15074816437
-	 * 时间：2015年12月2日-下午11:24:41 
-	 * @param content
-	 * @param content
-	 * @return 
-	 * 返回类型：int
-	 * @exception 
-	 * @since  1.0.0
+	 * 查找内容索引
+	 * @Title: indexOf 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param content
+	 * @param @param search
+	 * @param @return  参数说明 
+	 * @return int  返回类型 
+	 * @throws
 	 */
 	public static int indexOf(String content,String search){
 		return content.indexOf(search);
 	}
 	
-	
+	/**
+	 * 方法测试
+	 * @Title: main 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param args  参数说明 
+	 * @return void  返回类型 
+	 * @throws
+	 */
 	public static void main(String[] args) {
 		//char A 65
 		//B 66
 		//C 67
 		//D 68
-		
 //		for(int i=1;i<=26;i++){
 //			System.out.println(getCharacter(i));
 //		}
-		
 //		System.out.println(getMoney(1275.48787d));
 		
 		System.out.println(ipLocation("127.0.0.1"));

@@ -1,6 +1,6 @@
 package com.king.web.content;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.king.bean.Content;
+import com.king.bean.ContentParams;
 import com.king.bean.User;
 import com.king.service.content.ContentService;
-import com.king.util.TmStringUtils;
 import com.king.web.BaseController;
 
 @Controller
@@ -23,6 +23,45 @@ public class ContentController extends BaseController{
 	
 	@Resource(name="contentService")
 	private ContentService contentService;
+	
+	/**
+	 * 将数据返回模板页面
+	 * @Title: index 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return ModelAndView  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/template.do")
+	public ModelAndView index(ContentParams Params){
+		List<Content> contents = contentService.findContents(Params);
+		int itemCount = contentService.countContent(Params);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("contents", contents);
+		modelAndView.addObject("itemCount", itemCount);
+		modelAndView.setViewName("content/template");
+		return modelAndView;
+	}
+	
+	/**
+	 * 加载数据
+	 * @Title: loadData 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return List<HashMap<String,Object>>  返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(method=RequestMethod.POST,value="/loadData.do")
+	public List<Content> loadData(ContentParams Params){
+		Params.setStatus(1);
+		Params.setIsDelete(0);
+		Params.setPageSize(12);
+		List<Content> contents = contentService.findContents(Params);
+		return contents;
+	}
 	
 	/**
 	 * 添加内容
@@ -38,7 +77,6 @@ public class ContentController extends BaseController{
 	public String saveContent(Content content){
 		if(content != null){
 			User user = (User) request.getSession().getAttribute("user");
-			content.setCreateTime(TmStringUtils.dateFormat(new Date()));
 			content.setUserId(user.getUserId());
 			content.setUserName(user.getUserName());
 			content.setHeaderPic(user.getHeaderPic());
@@ -106,8 +144,8 @@ public class ContentController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete.do",method=RequestMethod.POST)
-	public String delete(Integer id){
-		contentService.deleteContent(id);
+	public String delete(ContentParams Params){
+		contentService.deleteContent(Params);
 		return "success";
 	}
 }

@@ -25,7 +25,6 @@ public class ImageUtil {
 	public static boolean IS_DEBUG = true;
 
 	/**
-	 * 
 	 * @param srcImg
 	 *            ԭͼƬ·��
 	 * @param destImg

@@ -5,9 +5,9 @@
   version="2.0">
     
   <description>jsp自定义函数标签</description>
-  <display-name>tz functions</display-name>
+  <display-name>king functions</display-name>
   <tlib-version>1.0</tlib-version>
-  <short-name>tz</short-name><!-- prefix="tz" -->
+  <short-name>king</short-name><!-- prefix="king" -->
   <uri></uri>
   	
   <!-- ****************************************************Tag自定义标签开始************************************** -->	
@@ -17,10 +17,10 @@
   	<!-- 标签的名称 -->
   	<name>loop</name>
   	<!-- 对应标签的类 -->
-  	<tag-class>com.tz.tag.TzLoopTag </tag-class>
+  	<tag-class>com.king.tag.KingLoopTag </tag-class>
   	<!-- 
   		它决定标签的格式，（就是决定是否有标签体 ）
-  		empty:没有标签体<tz:loop />
+  		empty:没有标签体<king:loop />
   		scriptless:你的标签体可以用EL表达式或者JSP的动作元素，但是不能用JSP脚本<%%>
   		JSP:可以支持JSP动作代表 解析El表达和JSP所有的动作部分
   		tagdependent:它忽略动作部分，打印纯文本
@@ -44,12 +44,10 @@
   	</attribute>
   </tag>	
   
-  
-  
   <tag>
   	<description>内存单标签</description>
   	<name>contentBean</name>
-  	<tag-class>com.tz.tag.ContentBeanTag</tag-class>
+  	<tag-class>com.king.tag.ContentBeanTag</tag-class>
   	<body-content>empty</body-content>
   	<attribute>
   		<name>var</name>
@@ -62,12 +60,11 @@
   		<rtexprvalue>true</rtexprvalue>
   	</attribute>
   </tag>
-  
   	
   <tag>
-  	<description>内存标签</description>
+  	<description>内容标签</description>
   	<name>contentList</name>
-  	<tag-class>com.tz.tag.ContentListTag</tag-class>
+  	<tag-class>com.king.tag.ContentListTag</tag-class>
   	<body-content>JSP</body-content>
   	<attribute>
   		<name>var</name>
@@ -105,14 +102,11 @@
   		<rtexprvalue>true</rtexprvalue>
   	</attribute>
   </tag>
-  
-  
-  
-  
+
   <tag>
   	<description>字母转大写</description>
   	<name>upperCase</name>
-  	<tag-class>com.tz.tag.TzUpperCase</tag-class>
+  	<tag-class>com.king.tag.KingUpperCase</tag-class>
   	<body-content>JSP</body-content>
   	<attribute>
   		<name>count</name>
@@ -120,14 +114,11 @@
   		<rtexprvalue>true</rtexprvalue>
   	</attribute>
   </tag>
-  
-  
-  
  
  <tag>
- 	<description>tzIf标签</description>
+ 	<description>kingIf标签</description>
  	<name>if</name>
- 	<tag-class>com.tz.tag.TzIFTag</tag-class>
+ 	<tag-class>com.king.tag.KingIFTag</tag-class>
  	<body-content>JSP</body-content>
  	<attribute>
  		<name>test</name>
@@ -136,16 +127,16 @@
  	</attribute>
  </tag>
  <tag>
- 	<description>tzthen标签</description>
+ 	<description>kingthen标签</description>
  	<name>then</name>
- 	<tag-class>com.tz.tag.TzThenTag</tag-class>
+ 	<tag-class>com.king.tag.KingThenTag</tag-class>
  	<body-content>JSP</body-content>
  </tag>
  
   <tag>
- 	<description>tzelse标签</description>
+ 	<description>kingelse标签</description>
  	<name>else</name>
- 	<tag-class>com.tz.tag.TzElseTag</tag-class>
+ 	<tag-class>com.king.tag.KingElseTag</tag-class>
  	<body-content>JSP</body-content><!--  -->
  </tag>
   		
@@ -156,84 +147,66 @@
     <!--标签的名称，最好和方法名称同名-->
     <name>formatDate</name>
     <!--代表标签类-->
-    <function-class>com.tz.tag.TzFunctions</function-class>
+    <function-class>com.king.tag.KingFunctions</function-class>
     <!--对应执行的方法的名称，和返回值-->
     <function-signature>java.lang.String formatDate(java.util.Date,java.lang.String)</function-signature>
-    <example>举例: ${tz:formatDate(new Date(),'yyyy-MM-dd HH:mm:ss')}</example>  
+    <example>举例: ${king:formatDate(new Date(),'yyyy-MM-dd HH:mm:ss')}</example>  
  </function>
  
  <function>
  	<description>获取集合的长度</description>
  	<name>size</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>int getLength(java.util.Collection)</function-signature>
- 	<example>${tz:size(users)}==3</example>
+ 	<example>${king:size(users)}==3</example>
  </function>
  
   <function>
  	<description>转换日期为中文</description>
  	<name>timeFormat</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>java.lang.String getTimeFormat(java.util.Date)</function-signature>
- 	<example>${tz:timeFormat(new Date)}==几年前</example>
+ 	<example>${king:timeFormat(new Date)}==几年前</example>
  </function>
- 
- 
- 
  
  <function>
  	<description>转换字母</description>
  	<name>character</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>java.lang.String getCharacter(int)</function-signature>
- 	<example>${tz:character(1)}==A</example>
+ 	<example>${king:character(1)}==A</example>
  </function>
- 
- 
- 
  
   <function>
  	<description>数字转中文</description>
  	<name>chineseCharacter</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>java.lang.String chinesCharacter(int)</function-signature>
- 	<example>${tz:chineseCharacter(100)}==一百</example>
+ 	<example>${king:chineseCharacter(100)}==一百</example>
  </function>
- 
- 
- 
  
  <function>
  	<description>数字转中文</description>
  	<name>getMoney</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>java.lang.String getMoney(java.lang.Double)</function-signature>
- 	<example>${tz:getMoney(100)}==壹百圆</example>
+ 	<example>${king:getMoney(100)}==壹百圆</example>
  </function>
- 
- 
- 
- 
+
  <function>
  	<description>根据IP地址定位城市信息</description>
  	<name>ipLocation</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>java.lang.String ipLocation(java.lang.String)</function-signature>
- 	<example>${tz:ipLocation(127.0.0.1)}===本地</example>
+ 	<example>${king:ipLocation(127.0.0.1)}===本地</example>
  </function>
  
   <function>
  	<description>indexOf</description>
  	<name>indexOf</name>
- 	<function-class>com.tz.tag.TzFunctions</function-class>
+ 	<function-class>com.king.tag.KingFunctions</function-class>
  	<function-signature>int indexOf(java.lang.String,java.lang.String)</function-signature>
- 	<example>${tz:indexOf('aaa','b')}===-1</example>
+ 	<example>${king:indexOf('aaa','b')}===-1</example>
  </function>
- 
- 
- 
- 	
- 
- 
  
 </taglib>
