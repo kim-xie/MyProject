@@ -56,7 +56,7 @@ public interface I[beanName]Mapper {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public [beanName] get[beanName](Params params);
+	public [beanName] get[beanName](Integer id);
 	
 	/**
 	 * 保存[description]

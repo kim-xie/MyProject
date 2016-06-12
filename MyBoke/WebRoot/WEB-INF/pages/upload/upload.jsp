@@ -50,9 +50,7 @@
   <body>
 
   	<div id="box">
-		
 		 <img src="" data-bgsrc="" width="400" height="400" id="target" style="background:#fff;"/>
-		 
 		 <div id="preview-pane">
 		    <div class="preview-container">
 		    	<img src="" class="jcrop-preview" id="preview"/>
@@ -202,7 +200,6 @@
 		  				alert("请选择图片....");
 		  				return;
 		  			}
-		  			
 		  			//没错通过ajax
 		  			var xhr = new XMLHttpRequest();
 		  			xhr.open("post",basePath+"/upload/upload.do",true);

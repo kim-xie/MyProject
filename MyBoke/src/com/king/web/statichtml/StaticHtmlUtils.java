@@ -33,7 +33,7 @@ public class StaticHtmlUtils {
 	public static void main(String[] args) {
 		try {
 			for (int i=71;i<80;i++) {
-				Document document = Jsoup.connect("http://localhost:8080/moonvip_admin/static/content/"+i).get();
+				Document document = Jsoup.connect("http://localhost:8080/MyBoke/static/content/"+i).get();
 				FileOutputStream outputStream = new FileOutputStream("d://"+getRandomString(20)+".html");
 				PrintWriter writer = new PrintWriter(outputStream);
 				writer.write(document.html());

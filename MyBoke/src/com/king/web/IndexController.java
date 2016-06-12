@@ -3,9 +3,11 @@ package com.king.web;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.king.bean.ContentParams;
@@ -16,7 +18,14 @@ import com.king.service.content.ContentService;
 import com.king.service.music.IMusicService;
 import com.king.service.user.UserService;
 @Controller
-public class IndexController {
+public class IndexController extends BaseController implements ServletContextAware{
+	// 注入上下文应用拿到ip和username
+	private ServletContext application;
+	
+	@Override
+	public void setServletContext(ServletContext application) {
+		this.application = application;
+	}
 	/**
 	 * 注入userService
 	 */
@@ -38,19 +47,18 @@ public class IndexController {
 	public ModelAndView index(Params params,UserParams userParams,ContentParams contentparams){
 		ModelAndView model = new ModelAndView();
 		// 音乐
-		//List<HashMap<String, Object>> musics = musicService.findMusics(params);
 		int itemCount = musicService.count(params);
 		// 用户
+		User user = (User) application.getAttribute("user_log");
+		System.out.println(user.getUserId());
+		userParams.setFilterId(user.getUserId());
 		List<User> users = userService.findAllUsers(userParams);
 		// 内容
-		//List<Content> contents = contentService.findContents(contentparams);
 		int count = contentService.countContent(contentparams);
 		model.setViewName("index");
-		//model.addObject("musics", musics);
 		model.addObject("itemCount", itemCount);
 		model.addObject("count", count);
 		model.addObject("users",users);
-		//model.addObject("contents",contents);
 		return model;
 	}
 	

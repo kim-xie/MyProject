@@ -43,6 +43,8 @@ public class LogInterceptor implements ServletContextAware {
 			content = "content";
 		}else if(TmStringUtils.isNotEmpty(methodName) && methodName.indexOf("Comment")!=-1){
 			content = "comment";
+		}else if(TmStringUtils.isNotEmpty(methodName) && methodName.indexOf("Fan")!=-1){
+			content = "fan";
 		}else{content = "other";}
 		System.out.println(content);
 		// 判断是否是登录过滤登录操作

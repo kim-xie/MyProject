@@ -25,7 +25,7 @@ public class [beanName] implements Serializable {
 	// 发布状态
 	private Integer status;
 	
-	public Comment(){
+	public [beanName](){
 		super();
 	}
 

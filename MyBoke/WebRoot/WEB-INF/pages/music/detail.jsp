@@ -12,93 +12,19 @@
 		<script type="text/javascript" src="${basePath}/resources/js/king_detail.js"></script>
 	</head>
 	<style>
-		@keyframes move { 
-			0%{	transform: rotate(0deg);}
-			100%{transform:rotate(360deg);}
-		}
+		@keyframes move {0%{transform: rotate(0deg);} 100%{transform:rotate(360deg);}}
 		.r {animation: move 1s linear infinite;}
-		@keyframes sc {
-			0%{	transform: scale(1) opacity:1}
-			100%{transform:scale(10);opacity:0;}
-		}
-		.sc {
-			animation: sc 1s infinite linear;
-		}
-		
-		.sstime {
-			display: inline-block;
-			transform: translateX(-120px)
-		}
 		.iconfont{margin-right:6px;}
 		.iconfont.fz32{font-size:32px;}
 		.iconfont.fz64{font-size:64px;}
 		.musicBox{height:350px;}
 		.musicBox .m_box{position:relative;}
-		.musicBox .p_over{position:absolute;z-index:1;width:0;height:100%;left:0;top:0;
-		background:rgba(243,125,125,0.3);}
-		.musicBox .txt_over{position:absolute;z-index:3;width:100%;height:100%;left:0;top:0;
-		color:#fff;background:rgba(0,0,0,0.4);}
+		.musicBox .m_box .ke_op{margin-top:-15px;display:inline-block;}
+		.musicBox .p_over{position:absolute;z-index:1;width:0;height:100%;left:0;top:0;	background:rgba(243,125,125,0.3);}
+		.musicBox .txt_over{position:absolute;z-index:3;width:100%;height:100%;left:0;top:0;color:#fff;background:rgba(0,0,0,0.4);}
 		.musicBox .txt_over a{text-decoration:none;}
 		.musicBox .txt_over a i{color:#fff;margin:0;}
-		#wrapbox{position:relative;bottom:-90px;}
 		#wrapbox .items{position:absolute;bottom:0px;}
-		
-	</style>
-	<body data-opid="${music.id}" data-typeid="${music.categoryId}" style="overflow-y:auto;overflow-x:hidden;background:#EDEDEF;padding-top:70px;padding-bottom:70px;">
-	<%@include file="/WEB-INF/pages/common/header.jsp"%>
- 	<%@include file="/WEB-INF/pages/common/left.jsp"%>	
-	<!-- 播放器盒子 -->
-	<div class="container musicBox">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 text-center m_box" style="padding:0;">
-				<img src="${basePath}${music.img}" class="img-responsive center-block" alt="Responsive image">
-				<div class="p_over"></div>
-				<div class="txt_over">
-					<h1>
-						<i class="iconfont icon-music fz32"></i>${music.title}
-					</h1>
-					<p class="lead"><fmt:formatDate value="${music.createTime}" dateStyle="medium"/> @${music.username} 
-						<span id="time">00:00</span>/<span id="ptime">00:00</span>
-						<span id="percent">0%</span>
-					</p>
-					<a href="javascript:void(0);" class="ke_op">
-						<i class="iconfont icon-play fz64"></i>
-					</a>
-					<!--音轨盒子-->
-					<div id="wrapbox"></div>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-	<!-- 内容盒子 -->
-	<div class="container contentBox">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2" style="margin-top:10px;padding:0;">
-				<p style="line-height:26px;">一首歌唱到最后还会剩下什么？<br/><br/>
-					无非相遇别离、无非是找到自己的位置，并安然地待下去。除此之外，别无其他。值得庆幸的是，我们依然能够剔除掉表面的玩意，内敛而踏实地活着。在灿烂的夜晚里，依然能够笑着流出了泪。<br/><br/>
-					本期音乐为华语摇滚乐专题。<br/>
-					<audio src="${basePath}${music.src}" id="audio" loop="loop"></audio>
-				</p>
-			</div>
-		</div>
-	</div>
-	<!-- 相似主题盒子 -->
-	<div class="container relationBox">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 relation" style="margin-top:10px;padding:0;">
-				<div class="page-header" style="margin:0 0 10px 0;">
-					<h2>
-						<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>相似主题
-					</h2>
-				</div>
-				<div class="row" style="margin-left:0;margin-right:0;">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-		<style>
 		.glyphicon{margin-left:6px;margin-right:6px;vertical-align:middle;}
 		.replay:hover .glyphicon{color: #3498db;border-color: #3498db;}
 		.text{font-size: 16px;color: #34495e;line-height: 26px;}
@@ -114,15 +40,66 @@
 		.glyphicon.fs30{font-size:30px;}
 		.glyphicon.fs36{font-size:36px;}
 		#basic-addon1:hover{background:#00ff66;}
-		.relationPic{padding:0;height:140px;}
-		.thumbnail{border:none;outline:none;}
-		.relationPic img{height:140px;}
-		.headerPic{padding:0;height:40px;}
-		.headerPic img{height:50px;}
+		.thumbnail{border:none;outline:none;padding:0;}
+		.headerPic{padding:0;}
 		.name a{font-size: 14px;color: #95a5a6;font-weight: bold;text-decoration:none;}
 		.name:hover a{color: #3498db;}
 		.count{position:absolute;bottom:5px;right:85px;z-index:2;font-size:20px;font-family:"方正舒体";}
-		</style>
+	</style>
+	
+	<body data-opid="${music.id}" data-typeid="${music.categoryId}">
+	<%@include file="/WEB-INF/pages/common/header.jsp"%>
+		<!-- 播放器盒子 -->
+		<div class="container musicBox">
+			<input type="hidden" id="userName" value="<%=request.getSession().getAttribute("userName")%>">
+			<input type="hidden" id="headerPic" value="<%=request.getSession().getAttribute("userHeaderPic")%>">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center m_box" style="padding:0;">
+					<img src="${basePath}${music.img}" class="img-responsive center-block" alt="Responsive image">
+					<div class="p_over"></div>
+					<div class="txt_over">
+						<h1>
+							<i class="iconfont icon-music fz32"></i>${music.title}
+						</h1>
+						<p class="lead"><fmt:formatDate value="${music.createTime}" dateStyle="medium"/> @${music.username} 
+							<span id="time">00:00</span>/<span id="ptime">00:00</span>
+							<span id="percent">0%</span>
+						</p>
+						<a href="javascript:void(0);" class="ke_op">
+							<i class="iconfont icon-play fz64"></i>
+						</a>
+						<!--音轨盒子-->
+						<div id="wrapbox"></div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- 内容盒子 -->
+		<div class="container contentBox">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2" style="margin-top:10px;padding:0;">
+					<p style="line-height:26px;">一首歌唱到最后还会剩下什么？<br/><br/>
+						无非相遇别离、无非是找到自己的位置，并安然地待下去。除此之外，别无其他。值得庆幸的是，我们依然能够剔除掉表面的玩意，内敛而踏实地活着。在灿烂的夜晚里，依然能够笑着流出了泪。<br/><br/>
+						本期音乐为华语摇滚乐专题。<br/>
+						<audio src="${basePath}${music.src}" id="audio" loop="loop"></audio>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- 相似主题盒子 -->
+		<div class="container relationBox">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 relation" style="margin-top:10px;padding:0;">
+					<div class="page-header" style="margin:0 0 10px 0;">
+						<h2>
+							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>相似主题
+						</h2>
+					</div>
+					<div class="row" style="margin-left:0;margin-right:0;"></div>
+				</div>
+			</div>
+		</div>
 		<!-- 评论盒子 -->
 		<div class="container commentBox">
 			<div class="row">
@@ -132,31 +109,13 @@
 						<span class="input-group-addon" onclick="keRealtion.saveComment(this)" id="basic-addon1" style="cursor:pointer;">发表评论</span>
 						<span class="count"><em class="num">400</em>/400</span>
 					</div>
-					<ul class="list-group comments" style="margin-top:30px;padding:0;">
-						
-					</ul>
+					<ul class="list-group comments" style="margin-top:30px;padding:0;"></ul>
+					<a href="javascript:void(0)" onclick="loadMore(this);">
+						<p class="loadData text-center" style="display:none;">加载更多数据</p>
+					</a>
 				</div>
 			</div>
 		</div>
 		<%@include file="/WEB-INF/pages/common/footer.jsp"%>
-		
-		<script>
-		
-			$("#content").keyup(function(){
-				var maxlength = $("#content").attr("maxlength");
-				var textlength = $("#content").val().length;
-				if(textlength <= maxlength){
-					$(".count .num").text(maxlength-textlength);
-				}
-			}).keydown(function(){
-				var maxlength = $("#content").attr("maxlength");
-				var textlength = $("#content").val().length;
-				if(textlength <= maxlength){
-					$(".count .num").text(maxlength-textlength);
-				}
-			});
-		
-		</script>
-		
 	</body>
 </html>

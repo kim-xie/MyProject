@@ -1,9 +1,3 @@
-/**
- * com.king.web.music
- * MusicController.java
- * 创建人:king
- * 时间：2016年05月19日 19:45:34
- */
 package com.king.web.music;
 
 import java.util.HashMap;
@@ -18,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.king.bean.Music;
 import com.king.bean.Params;
 import com.king.service.music.IMusicService;
 import com.king.web.BaseController;
@@ -69,7 +64,6 @@ public class MusicController extends BaseController{
 	public List<HashMap<String, Object>> loadData(Params params){
 		params.setStatus(1);
 		params.setIsDelete(0);
-		params.setPageSize(12);
 		List<HashMap<String, Object>> musics = musicService.findMusics(params);
 		return musics;
 	}
@@ -83,9 +77,11 @@ public class MusicController extends BaseController{
 	 * @throws
 	 */
 	@RequestMapping("/detail/{id}")
-	public ModelAndView detail(@PathVariable("id")Integer id){
+	public ModelAndView detail(@PathVariable("id")Integer id,Params params){
 		HashMap<String,Object> music = musicService.getMusic(id);
+		int itemCount = musicService.count(params);
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("itemCount", itemCount);
 		modelAndView.addObject("music", music);
 		modelAndView.setViewName("music/detail");
 		return modelAndView;
@@ -108,6 +104,36 @@ public class MusicController extends BaseController{
 		params.setPageSize(4);
 		List<HashMap<String, Object>> musics = musicService.findMusics(params);
 		return musics;
+	}
+	
+	/**
+	 * @Title: update 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param content
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public String updateMusic(Music music){
+		musicService.update(music);
+		return "success";
+	}
+	
+	/**
+	 * @Title: delete 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param id
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(value="/delete.do",method=RequestMethod.POST)
+	public String delete(Params Params){
+		musicService.delete(Params);
+		return "success";
 	}
 	
 }

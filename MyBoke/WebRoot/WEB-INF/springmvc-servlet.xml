@@ -91,7 +91,9 @@
 		<mvc:interceptor>
 			<!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller  -->
 			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/user/**"/>
+			<mvc:exclude-mapping path="/user/*"/>
+			<mvc:exclude-mapping path="/content/template.do"/>
+			<mvc:exclude-mapping path="/music/template.do"/>
 			<bean class="com.king.core.LoginIntercetor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

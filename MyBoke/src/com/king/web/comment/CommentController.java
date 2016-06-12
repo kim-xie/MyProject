@@ -1,20 +1,16 @@
-/**
- * com.king.web.comment
- * CommentController.java
- * 创建人:king
- * 时间：2016年05月29日 21:24:05
- */
 package com.king.web.comment;
 
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletContextAware;
 
 import com.king.bean.Comment;
 import com.king.bean.Params;
@@ -31,15 +27,21 @@ import com.king.web.BaseController;
  */
 @Controller
 @RequestMapping("/comment")
-public class CommentController extends BaseController{
+public class CommentController extends BaseController implements ServletContextAware{
+	// 注入上下文应用拿到ip和username
+	private ServletContext application;
 	
+	@Override
+	public void setServletContext(ServletContext application) {
+		this.application = application;
+	}
 	@Resource(name="commentService")
 	private ICommentService commentService;
 	
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST,value="/save")
 	public Comment saveComment(Comment comment){
-		User user = (User) request.getSession().getAttribute("user");
+		User user = (User) application.getAttribute("user_log");
 		Integer userId = user.getUserId();
 		comment.setStatus(1);
 		comment.setUserId(userId);

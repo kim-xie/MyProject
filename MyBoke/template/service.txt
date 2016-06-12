@@ -54,7 +54,7 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public [beanName] get[beanName](Params params);
+	public [beanName] get[beanName](Integer id);
 	
 	/**
 	 * 保存[description]
@@ -69,7 +69,7 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int save[beanName]([beanName] [smallBeanName]);
+	public boolean save[beanName]([beanName] [smallBeanName]);
 	
 	/**
 	 * 更新[description]
@@ -84,7 +84,7 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int update[beanName]([beanName] [smallBeanName]);
+	public boolean update[beanName]([beanName] [smallBeanName]);
 	
 	/**
 	 * 删除[description]
@@ -99,5 +99,5 @@ public interface I[beanName]Service {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int delete[beanName](Params params);
+	public boolean delete[beanName](Params params);
 }

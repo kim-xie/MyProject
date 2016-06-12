@@ -1,9 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
 <!doctype html>
 <html>
  <head>
-  <title>king的博客</title>
+  <title>king的博客首页</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,13 +27,13 @@
  	.person .user .userbox .info_list li span{color:#8a8880;line-height:22px;display:block;}
  	/* calebox */
 	.person .user .calebox{float:left;}
-	.person .user .calebox .caleheader{height:35px;background:#fafafa;line-height:35px;color:#4c4c4c;border-bottom:1px solid #eee;position:relative;}
+	.person .user .calebox .caleheader{height:35px;width:100%;background:#fafafa;line-height:35px;color:#4c4c4c;border-bottom:1px solid #eee;position:relative;}
 	.person .user .calebox .caleheader #prev,#next{position:absolute;top:0;font-size:30px;cursor:pointer;}
 	.person .user .calebox .caleheader #prev:hover{color:#00f;}
 	.person .user .calebox .caleheader #next:hover{color:#00f;}
 	.person .user .calebox .caleheader #prev{left:2px;}
 	.person .user .calebox .caleheader #next{right:2px;}
-	.person .user .calebox .caletab{width:100%;border-collapse:collapse}
+	.person .user .calebox .caletab{width:100%;border-collapse:collapse;width:100%;}
 	.person .user .calebox .caletab thead th{background:#fafafa;color:#4c4c4c}
 	.person .user .calebox .caletab th,td{border:1px solid #eee;text-align:center;padding:6px 4px;transition:all 0.3s ease-in-out;}
 	.person .user .calebox .caletab td:hover{background:#999;color:#00f;cursor:pointer;transition:all 0.3s ease-in-out;}
@@ -59,7 +59,7 @@
 	/*个人信息栏目  end*/
 	
 	/* 公告栏   start */
-    .soupBox{height:110px;width:670px;overflow:hidden;margin:30px auto;}
+    .soupBox{height:80px;width:670px;overflow:hidden;margin:30px auto;}
 	.soupBox .soup{position:relative;float:right;width:auto;height:40px;padding:0 120px 0 20px;background-color:#fff7e7;border-radius:20px;box-shadow:1px 1px 2px rgba(0,0,0,.2);margin-top:36px;}
 	.soupBox .soup li i{position:absolute;font-size:28px;color:#eae1d0;cursor:pointer;}
 	.soupBox .soup li .txt{display:none;line-height:40px;font-size:14px;color:#6b3612;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:550px;}
@@ -72,34 +72,72 @@
 	.soupBox span .icon-add{font-size:24px;font-weight:600;color:#6b3612;margin-right:5px;}
  	/* 公告栏   end */
 	
-	/* 发表文章栏目   start */
-    .fb_box{height:110px;width:670px;overflow:hidden;margin:30px auto;}
-	.fb_box .soup{position:relative;float:right;width:auto;height:40px;padding:0 120px 0 20px;background-color:#fff7e7;border-radius:20px;box-shadow:1px 1px 2px rgba(0,0,0,.2);margin-top:36px;}
-	.fb_box .soup li i{position:absolute;font-size:28px;color:#eae1d0;cursor:pointer;}
-	.fb_box .soup li .txt{display:none;line-height:40px;font-size:14px;color:#6b3612;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;max-width:550px;}
-	.fb_box .soup li.open .txt{display:block;}
-	.fb_box .soup li.open i{color:#e67e22;}
-	.fb_box .soup li i.icon-warn{right:80px;top:0;font-size:31px;margin-left:10px;}
-	.fb_box .soup li i.icon-iconfontaixin{right:46px;top:0;}
-	.fb_box .soup li i.icon-gonggao{right:10px;top:2px;}
-	.fb_box span{display:block;background:#fff7e7;float:left;border-radius:10px;line-height:30px;cursor:pointer;font-size:20px;font-weight:600;color:#6b3612;margin-top:5px;padding:5px 8px;}
-	.fb_box span .icon-add{font-size:24px;font-weight:600;color:#6b3612;margin-right:5px;}
- 	/* 发表文章栏目   end */
-
-	
 	/*文本编辑器 start*/
 	.editerBox{width:570px;margin:30px auto;display:none;}
 	.input{width:400px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
 	.editerBox .editer{width:570px;height:100%;background:#fff;overflow:hidden;padding:10px;}
 	.editerBox .editer .title{width:550px;width:600px;height:30px;margin:10px 0;display:block;font-size:18px;font-weight:600;}
 	.editerBox .editer .title input{width:502px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
-	.editerBox .editer .upload_pic{width:550px;height:320px;border:1px dashed #ccc;text-align:center;margin:20px 0;}
-	.editerBox .editer .upload_pic .txt-tip{line-height:320px;font-size:20px;color:#999;font-weight:600;}
+	.editerBox .editer .upload_pic{position:relative;width:550px;height:320px;border:1px dashed #ccc;text-align:center;margin:20px 0;}
+	.editerBox .editer .upload_pic .txt-pic{line-height:320px;font-size:20px;color:#999;font-weight:600;}
+	.editerBox .editer .upload_pic .txt-pic #preview{position:absolute;top:0;left:0;}
+	.editerBox .editer .upload_pic .txt-pic a{text-decoration: none;}
 	.editerBox .editer p{float:left;font-size:14px;font-weight:600;margin:20px 0;}
 	.editerBox .editer p .fabiao{height:30px;line-height:30px;}
 	.editerBox .editer p .fabiao .submit{padding:0 10px;margin-left:22px;outline:none;border:none;background:#0033ff;transition:1s;border-radius:5px;cursor:pointer;font-size:14px;font-weight:600;color:#fff;}
 	.editerBox .editer p .fabiao .submit:hover{background:#0033cc;transition:1s;}
 	/*文本编辑器 end*/
+	
+	/* 文章发表栏  start */
+	.fb_box{width:670px;height:110px;overflow:hidden;margin:30px auto;}
+ 	.fb_box .publicBar{height:100%;background:url("${basePath}/resources/imgs/share/nav224.png")no-repeat;}
+ 	.fb_box .publicBar li{float:left;width:140px;height:100%;}
+ 	.fb_box .publicBar li a{width:100%;height:100%;display:block;}
+ 	.fb_box .publicBar li:hover{background:#e5e5e5;opacity:0.3}
+ 	.fb_box .publicBar li.user{width:110px;height:100%;position:relative;}
+ 	.fb_box .publicBar li.user img{width:112px;height:100%;position:absolute;}
+ 	.fb_box .publicBar li.user:hover{background:transparent;opacity:1;}
+	/* 文章发表栏  end */
+	
+	/* tab切换栏  start */
+	.tabBox{padding-left:0;padding-right:30px;}
+	.tabBox .tab{position:relative;top:30px;color:#7c7c7c;font-size:16px;font-weight:600;}
+	.tabBox .tab .active a{background:url(${basePath}/resources/imgs/share/bg2.jpg);}
+	.tabBox .row .panel{padding:0;}
+	.tabBox .row .panel .panel-body{padding:0;}
+	.tabBox .row .panel .pic{padding:0;height:120px;}
+	.tabBox .row .panel .pic img{height:120px;width:100%;}
+	.tabBox .list:nth-child(4n+1){position:relative;}
+	.tabBox .list:hover .shade{opacity:1;}
+	.tabBox .list:hover .cover .img{transform:scale(1.1)}
+	.tabBox .list .shade{box-shadow:0 0 12px rgba(0, 0, 0, 0.1);position:absolute;left:0;top:0;width:100%;height:100%;background:#fff;z-index:1;opacity:0;}
+	.tabBox .list .cover{overflow:hidden;position:relative;z-index:2;margin-top:15px;}
+	.tabBox .list .info{position:relative;z-index:2;border-bottom:1px solid #e2e8eb;padding:5px 0 20px 0;}
+	.tabBox .list .info .msg{overflow: hidden;}
+	.tabBox .list .info .msg span{margin-right:10px;}
+	.tabBox .list .info .msg span i{margin-right:3px;color:#9aabb8;font-weight:600;}
+	.tabBox .list .info .user{margin-top:7px;}
+	.tabBox .list .info .user a{display:block;height:20px;line-height: 20px;color:#2c3e50;}
+	.tabBox .list .info .title{font-weight:bold;color:#34495e;margin-bottom:5px;}
+	.tabBox .list .info .msg span em {font-size:14px;color:#9aabb8;display:inline-block;line-height:21px;vertical-align: middle;}
+	.tabBox .list .info .user a .headerPic{float:left;width:20px;height:20px;border-radius:50%;}
+	.tabBox .list .info .user a .name{float:left;margin-left:10px;font-size:12px;}
+	.tzPage{font-size:14px;margin-top:0px;float:right;margin-left: 0px;}
+	.ellipsis{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+	.row{margin:0;}
+	.iconfont{margin-right:6px;color:#9aabb8;font-weight:600;font-size: 18px;}
+	.data{position:absolute;right:10px;top:5px;color: #bdbdbd;}
+	h4 .tag{float:left;height:25px;margin:1px 5px 1px 0;	padding: 0 10px;font-size: 12px;color: #fff;border-radius: 2px;line-height: 25px;}
+	h4 a{text-decoration:none;}
+	h4 .title{line-height:28px;display: block;max-width: 450px;font-size: 18px;color: #2c3e50;font-weight: normal;}
+	.bg-blue {background-color: #3498db!important;color: #fff !important;}
+	.ellipsis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+	.mt10{margin-top: 10px !important;}
+	.container .panel .row p{max-height:44px;overflow: hidden;margin-top:10px;color: #7f8c8d;}
+	.msg span{margin-right:10px;}
+	.msg span em {font-size:14px;color:#9aabb8;}
+	.tab-pane{margin-top: 60px;}
+	/* tab切换栏 end */
 	
   </style>
   <link rel="stylesheet" type="text/css" href="${basePath}/resources/js/umeditor/themes/default/css/umeditor.css">
@@ -110,11 +148,11 @@
   <script type="text/javascript" charset="utf-8" src="${basePath}/resources/js/umeditor/umeditor.js"></script>
  </head>
  
- <body data-count="${itemCount}" data-content="${count}" style="overflow-y:auto;overflow-x:hidden;background:#EDEDEF;padding-top:70px;padding-bottom:70px;">
+ <body data-count="${itemCount}">
  <%@include file="/WEB-INF/pages/common/header.jsp"%>
  <%@include file="/WEB-INF/pages/common/left.jsp"%>
 
- <div class="container">
+ 	<div class="container">
 		<!--start Carousel -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
@@ -127,16 +165,16 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
 				<div class="item">
-					<img src="${basePath}/resources/mp3/banner/1.jpg" alt="First slide">
+					<img src="${basePath}/resources/imgs/banner/banner1.jpeg" alt="First slide" width="1200">
 				</div>
 				<div class="item active">
-					<img src="${basePath}/resources/mp3/banner/2.jpg" alt="Second slide">
+					<img src="${basePath}/resources/imgs/banner/banner2.jpeg" alt="Second slide" width="1200">
 				</div>
 				<div class="item">
-					<img src="${basePath}/resources/mp3/banner/3.jpg" alt="Third slide">
+					<img src="${basePath}/resources/imgs/banner/banner3.jpeg" alt="Third slide" width="1200">
 				</div>
 				<div class="item">
-					<img src="${basePath}/resources/mp3/banner/4.jpg" alt="Third slide">
+					<img src="${basePath}/resources/imgs/banner/banner4.png" alt="Third slide" width="1200">
 				</div>
 			</div>
 			<!-- Controls -->
@@ -155,23 +193,29 @@
 		 		<!-- userbox -->
 		 		<div class="userbox col-md-3">
 					<span class="u_info">
-						<a href="javascript:void(0)">
-							<img src=${basePath}${sessionScope.userHeaderPic} alt="头像" onclick="window.open(basePath+'/user/toPerson.do')">
+						<a href="${basePath}/user/toPerson.do">
+							<img src=${basePath}${sessionScope.userHeaderPic} alt="头像">
 						</a>
 					</span>
-					<a href="javascript:void(0)" onclick="window.open(basePath+'/user/toPerson.do')" class="name"><%=request.getSession().getAttribute("userName") %></a>
+					<a href="${basePath}/user/toPerson.do" class="name"><%=request.getSession().getAttribute("userName") %></a>
 					<ul class="info_list">
 						<li>
-							<strong class="dynamic_count">1</strong>
-							<span>动态</span>
+							<a href="javascript:void(0);">
+								<strong class="dynamic_count">1</strong>
+								<span>作品</span>
+							</a>
 						</li>
 						<li style="border-left:1px solid #d8d6d0;border-right: 1px solid #d8d6d0;">
-							<strong class="follow_count">4</strong>
-							<span>关注</span>
+							<a href="${basePath}/fan/list.do">
+								<strong class="follow_count">4</strong>
+								<span>关注</span>
+							</a>
 						</li>
 						<li>
-							<strong class="fans_count">10</strong>
-							<span>粉丝</span>
+							<a href="${basePath}/fan/list.do">
+								<strong class="fans_count">10</strong>
+								<span>粉丝</span>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -204,10 +248,10 @@
 									<img src="${basePath}${user.headerPic}">
 								</a>
 								<div class="fans-r">
-									<a class="fans-name" target="_blank">${user.userName}</a>
-									<a class="fans-add" data="">+ 关注</a>
+									<a class="fans-name" data-uname="${user.userName}">${user.userName}</a>
+									<a class="fans-add" onclick="saveFan(this);" data-uid="${user.userId}">+ 关注</a>
 								</div>
-							</li>
+							 </li>
 					    </c:forEach>
 					</ul>
 				</div>
@@ -233,21 +277,12 @@
 		 	</ul> 
 		</div>
 		 <!-- 公告栏  end -->
-		 <style>
-		 	.fb_box .publicBar{background:url("${basePath}/resources/imgs/share/nav224.png")no-repeat;height:110px;}
-		 	.fb_box .publicBar li{float:left;width:140px;height:100%;}
-		 	.fb_box .publicBar li a{width:100%;height:100%;display:block;}
-		 	.fb_box .publicBar li:hover{background:#e5e5e5;opacity:0.3}
-		 	.fb_box .publicBar li.user{width:110px;height:100%;position:relative;}
-		 	.fb_box .publicBar li.user img{width:110px;height:100%;position:absolute;}
-		 	.fb_box .publicBar li.user a:hover{background:transparent;opacity:1;}
-		 </style>
 		
 		 <!-- 发表文章栏目   start -->
 		 <div class="fb_box">
 		 	<ul class="publicBar">
 			 	<li class="user">
-				 	<a href="javascript:void(0);" target="_blank" onclick="window.open(basePath+'/user/toPerson.do')">
+				 	<a href="${basePath}/user/toPerson.do" target="_blank">
 				 		<img src="${basePath}${sessionScope.userHeaderPic}" alt="头像">
 				 	</a>
 			 	</li>
@@ -279,10 +314,10 @@
 		 			<input type="text" placeholder="描述不得超过200个字" maxlength="200" class="txt_description">
 		 		</span>
 		 		<div class="upload_pic">
-		 			<input type="file" style="display:none;">
-		 			<span class="txt-tip" onclick="">
-		 				<a>请添加封面图片</a>
-		 				<img id="preview" src="" width="550" height="320">
+		 			<input type="file" id="file" onchange="uploadFile(this)" style="display:none;">
+		 			<span class="txt-pic">
+		 				<a href="javascript:void(0);" onclick="openBrowse(this)">请添加封面图片</a>
+		 				<img id="preview" src="" width="548" height="318" style="display:none;">
 		 			</span>
 		 		</div>
 				<script id="myEditor" type="text/plain" style="width:550px;height:300px;margin:10px 0;overflow-X:hidden;overflow-Y:auto;"></script>
@@ -297,292 +332,249 @@
 		 </div>
 		 <!--文本编辑器 end-->
 
-		<style>
-			.mubox .tab{position:relative;left:-15px;top:30px;color:#7c7c7c;font-size:16px;font-weight:600;}
-			.mubox .musicRow{margin-top:40px;position:relative;margin-left:-15px;}
-			.ellipsis{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-			.mubox .list:nth-child(4n+1){position:relative;margin-left:-15px;}
-			.mubox .list:hover .shade{opacity:1;}
-			.mubox .list:hover .cover .img{transform:scale(1.1)}
-			.mubox .list .shade{box-shadow:0 0 12px rgba(0, 0, 0, 0.1);position:absolute;left:0;top:0;
-			width:100%;height:100%;background:#fff;z-index:1;opacity:0;}
-			.mubox .list .cover{overflow:hidden;position:relative;z-index:2;margin-top:15px;}
-			.mubox .list .info{position:relative;z-index:2;border-bottom:1px solid #e2e8eb;padding:5px 0 20px 0;}
-			.mubox .list .info .msg{height: 21px;overflow: hidden;margin-top:5px;}
-			.mubox .list .info .msg span{margin-right:10px;}
-			.mubox .list .info .msg span i{margin-right:3px;}
-			.mubox .list .info .user{margin-top: 7px;}
-			.mubox .list .info .user a{display: block;height:20px;line-height: 20px;color:#2c3e50;}
-			.mubox .list .info .title{font-weight: bold;color: #34495e;}
-			.mubox .list .info .msg span em {font-size:14px;color:#9aabb8;display:inline-block;line-height:21px;
-			vertical-align: middle;}
-			.mubox .row .list .info .user a .headerPic{float:left;width:20px;height:20px;border-radius:50%;}
-			.mubox .row .list .info .user a .name{float:left;margin-left:10px;font-size:12px;}
-			.tzPage{font-size:14px;margin-top:0px;float:right;margin-left: 0px;}
-		</style>
-
-
 		<!-- list start-->
-		<div class="container mubox">
+		<div class="container tabBox">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs tab" role="tablist">
-				<li role="presentation" class="active">
+				<li role="presentation" id="music" class="active" onclick="changeTab(this);" data-model="music" data-count="${itemCount}">
 					<a href="#music" aria-controls="music" role="tab" data-toggle="tab">音乐</a>
 				</li>
-				<li role="presentation">
+				<li role="presentation" id="content" onclick="changeTab(this);" data-model="content" data-count="${count}">
 					<a href="#aritcle" aria-controls="aritcle" role="tab" data-toggle="tab">文章</a>
 				</li>
 			</ul>
 			<!-- Tab panes -->
-			<div class="tab-content contBox">
-				<div role="tabpanel" class="tab-pane fade active" id="music">
+			<div class="tab-content">
+				<!-- 音乐栏 -->
+				<div role="tabpanel" class="tab-pane fade in active" id="music">
 					<!-- 音乐列表 -->
-					<div class="row musicRow" id="listBox" data-model="music">
-						<%-- <c:forEach items="${musics}" var="music">
-							<div class="col-md-3 col-xs-6 col-sm-3 list">
-								<!-- shade -->
-								<div class="shade"></div>
-								<!-- pic -->
-								<div class="cover">
-									<a href="${basePath}/music/detail/${music.id}.do" target="_blank">
-										<img src="${basePath}${music.img}" title="${music.title}" class="img-responsive img" alt="Responsive image">
-									</a>
-								</div>
-								<!-- info -->
-								<div class="info">
-									<h4 class="title ellipsis">${music.title}</h4>
-									<div class="msg">
-										<span class="time tmui-tips" tip="${king:formatDate(music.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="iconfont icon-time"></i>
-											<em><fmt:formatDate value="${music.createTime}" dateStyle="medium"/></em>
-										</span>
-										<span><i class="iconfont icon-music" title="收听数"></i><em>${music.hits}</em></span>
-										<span><i class="iconfont icon-comment" title="评论数"></i><em>${music.comments}</em></span>
-										<span><i class="iconfont icon-zan" title="点赞数"></i><em>${music.loves}</em></span>
-									</div>
-									<p class="user">
-										<a href="#" target="_blank">
-											<img src="${basePath}${music.headerPic}" class="img-circle headerPic">
-											<strong class="name">${music.username}</strong>
-										</a>
-									</p>
-								</div>
-							</div>
-						</c:forEach> --%>
-					</div>
-					<!-- 分页 -->
-					<div class="col-md-4 col-md-offset-4 cpage" style="display:block;"></div>
+					<div class="row musicRow contList"></div>
 				</div>
 				<!-- 文章栏 -->
 				<div role="tabpanel" class="tab-pane fade" id="aritcle">
 					<!-- 文章列表 -->
-					<div class="row aritcleRow"  id="listBox" data-model="content" style="margin-top: 5px;margin-right: 15px;margin-left: -15px;">
-						<%-- <c:forEach items="${contents}" var="content">
-							<div class="panel panel-default col-md-12">
-								<div class="panel-body" style="padding:0;margin-top:0;margin-left: -15px;">
-									<div class="col-md-2 pull-left" style="padding:0;height:120px;">
-										<a href="${basePath}/content/detail/${content.id}.do" target="_blank">
-											<img src="${basePath}${content.image}" class="img-responsive" alt="Responsive image" 
-											style="height:120px"/>
-										</a>
-									</div> 
-									<div class="col-md-10 pull-left" style="padding-right:0;">
-										<h4 style="margin:2px 0 8px 0;">
-											<a class="tag bg-blue" target="_blank" href="">${content.tag}</a>
-											<a class="ellipsis title" href="" title="" target="_blank">${content.title}</a>
-										</h4>
-										<p>
-											${content.description}
-										</p>
-										<div class="pull-left" style="line-height:30px;">
-											<a class="u_headrpic pull-left" href="" title="" target="_blank">
-												<img src="${basePath}${content.headerPic}" class="img-responsive img-circle pull-left" style="width:30px;height:30px;">
-												<strong class="name pull-left" style="line-height:30px;font-size: 12px;color: #394a58;font-weight: bold;padding: 0 15px;">${content.userName}</strong>
-											</a>
-											<div class="msg pull-left">
-												<span><i class="iconfont icon-eye"></i><em>${content.hits}</em></span>
-												<span><i class="iconfont icon-comment"></i><em>${content.comments}</em></span>
-												<span><i class="iconfont icon-zan"></i><em>${content.loves}</em></span>
-											</div>
-										</div>
-										<div class="data">
-											<i class="iconfont icon-time"></i>
-											<fmt:formatDate value="${content.createTime}" dateStyle="medium"/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</c:forEach> --%>
-					</div>
-					<!-- 分页 -->
-					<div class="col-md-4 col-md-offset-4 cpage" style="display:block;"></div>
+					<div class="row aritcleRow contList"></div>
 				</div>
 			</div>
+			<!-- 分页 -->
+			<div class="col-md-8 cpage" style="margin-top:30px;"></div>
 		</div>
 		<!--list end-->
-		
+		<%@include file="/WEB-INF/pages/common/footer.jsp"%>
 	</div>
-				<script type="text/javascript">
-				function loading2(target,mark){
-					$.loading({target:$(target),mark:1}); 
-				};
-				var indexMusic = {
-					timer :null,
-					ltimer :null,
-					initPage:function(itemCount){
-						$(".cpage").tzPage(itemCount, {
-							num_edge_entries : 1, //边缘页数
-							num_display_entries :4, //主体页数
-							num_edge_entries:5,
-							current_page:0,
-							showGo:true,
-							showSelect:true,
-							items_per_page : 12, //每页显示X项
-							prev_text : "前一页",
-							next_text : "后一页",
-							callback : function(pageNo,psize){//回调函数
-								indexMusic.loadData(pageNo,psize);
-							}
-						});
-					},
-					loadData:function(pageNo,pageSize,callback){
-						//var keyword = $("#keywords").val();
-						//var model = $("#listBox").data("model");
-						var $this = this;
-						clearTimeout(this.ltimer);
-						this.ltimer = setTimeout(function(){
-							$.ajax({
-								type:"post",
-								beforeSend:function(){loading2($(".musicRow"),4);},
-								url:basePath+"/music/template.do",
-								data:{pageNo:pageNo*pageSize,pageSize:pageSize},
-								success:function(data){
-									//模板技术
-									var $data = $(data);
-									$(".musicRow").html($data);//追加元素到dom中
-									$(".tmui-tips").tmTip();
-									var itemCount = $data.find("#itemCount").val();
-									//if(isNotEmpty(keyword))$this.highligter(keyword);
-									if(callback)callback(itemCount);
-								}
-							});
-						},300);
-					}	
-				}
-				var indexContent = {
-						timer :null,
-						ltimer :null,
-						initPage:function(itemCount){
-							$(".cpage").tzPage(itemCount, {
-								num_edge_entries : 1, //边缘页数
-								num_display_entries :4, //主体页数
-								num_edge_entries:5,
-								current_page:0,
-								showGo:true,
-								showSelect:true,
-								items_per_page : 10, //每页显示X项
-								prev_text : "前一页",
-								next_text : "后一页",
-								callback : function(pageNo,psize){//回调函数
-									indexContent.loadData(pageNo,psize);
-								}
-							});
-						},
-						loadData:function(pageNo,pageSize,callback){
-							//var keyword = $("#keywords").val();
-							//var model = $("#listBox").data("model");
-							var $this = this;
-							clearTimeout(this.ltimer);
-							this.ltimer = setTimeout(function(){
-								$.ajax({
-									type:"post",
-									beforeSend:function(){loading2($(".aritcleRow"),4);},
-									url:basePath+"/content/template.do",
-									data:{pageNo:pageNo*pageSize,pageSize:pageSize},
-									success:function(data){
-										//模板技术
-										var $data = $(data);
-										$(".aritcleRow").html($data);//追加元素到dom中
-										$(".tmui-tips").tmTip();
-										var itemCount = $data.find("#itemCount").val();
-										//if(isNotEmpty(keyword))$this.highligter(keyword);
-										if(callback)callback(itemCount);
-									}
-								});
-							},300);
-						}	
+	<script type="text/javascript">
+		$(function(){
+			$(".tmui-tips").tmTip();
+			/* 初始化音乐列表栏 */
+			var itemCount = $("body").data("count");
+			kingIndex.initPage(itemCount);
+			kingIndex.loadData(0,12);
+			/*初始化万年历 */
+			initWnl();
+		});
+		
+		//粉丝关注列表分页
+		function hyb(obj){
+			var pageNo = 0;
+			var pageSize = 2;
+			pageNo++;
+			var mark = true;
+			var timer = null;
+			clearTimeout(timer);
+			timer = setTimeout(function(){
+				if(!mark)return;
+				var params={pageNo:pageNo*pageSize,pageSize:pageSize};
+				$.ajax({
+					type:"post",
+					url:basePath+"/user/template.do",
+					beforeSend:function(){loading2($(".f-list"),4);},
+					data:params,
+					success:function(data){
+						var count = $(data).find("#itemCount").val()-1;
+						if(data && count%2 > 0){
+							var $data = $(data);
+							$(".f-list").html($data);
+						}else{
+							loading("数据加载完毕",4);
+							$(obj).removeAttr("onclick");
+							$(".f-list").html("");
+							mark = false;
+						}
 					}
-				$(function(){
-					$(".tmui-tips").tmTip();
-					var count = $("body").data("count");
-					indexMusic.initPage(count);
-					indexMusic.loadData(0,12,function(count){
-						indexMusic.initPage(count);
-					});
-					
-					var itemCount = $("body").data("content");
-					indexContent.initPage(itemCount);
-					indexContent.loadData(0,10,function(itemCount){
-						indexContent.initPage(itemCount);
-					});
 				});
-				</script>
-				<!-- 文章 -->
-				<style>
-					.iconfont{margin-right:6px;}
-					.data{position:absolute;right:10px;top:5px;color: #bdbdbd;}
-					h4 .tag{float: left;height: 25px;margin: 1px 5px 1px 0;
-					padding: 0 10px;font-size: 12px;color: #fff;border-radius: 2px;line-height: 25px;}
-					h4 a{text-decoration:none;}
-					h4 .title{line-height:28px;display: block;max-width: 450px;font-size: 18px;color: #2c3e50;font-weight: normal;}
-					.bg-blue {background-color: #3498db!important;color: #fff !important;}
-					.ellipsis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-					.mt10{margin-top: 10px !important;}
-					.container .panel .row p{max-height:44px;overflow: hidden;margin-top:10px;color: #7f8c8d;}
-					.msg span{margin-right:10px;}
-					.msg span em {font-size:14px;color:#9aabb8;}
-					.tab-pane{margin-top: 60px;}
-				</style>
-				
- 
- <%@include file="/WEB-INF/pages/common/footer.jsp"%>
- <script type="text/javascript">
-    /*初始化万年历 */
-	initWnl();
+			},300);
+		};
+	 	// 粉丝保存关注
+	 	function saveFan(obj){
+	 		var $obj = $(obj);
+	 		var userName = $obj.prev().data("uname");
+	 		var userId = $obj.data("uid");
+	 		if(!userName || !userId)return;
+	 		var params = {userName:userName,userId:userId};
+	 		alert(JSON.stringify(params));
+	 		$.ajax({
+	 			type:"post",
+	 			url:basePath+"/fan/save.do",
+	 			data:params,
+	 			success:function(data){
+	 				var data = data.trim();
+	 				if(data=="success"){
+	 					loading("关注成功...",4);
+	 					$obj.parent().parent().fadeOut("slow",function(){$obj.remove();})
+	 				}else if(data=="fail" || data=="error"){
+	 					loading("关注失败...",4);
+	 				}
+	 			}
+	 		});
+	 	}
+		
+		// 音乐文章菜单切换
+		function changeTab(obj){
+			//$.tzConfirm({title:"友情提示",content:"您确定删除吗?"});
+			var $obj = $(obj);
+			var model = $obj.data("model");
+			var itemCount = $obj.data("count");
+			if(isNotEmpty(model)){
+				if(window.localStorage){
+					localStorage.setItem("model", model);
+				}
+			}
+			kingIndex.initPage(itemCount);
+			kingIndex.loadData(0,12,function(itemCount){
+				kingIndex.initPage(itemCount);
+			});
+		};
+		function loading2(target,mark){
+			$.loading({target:$(target),mark:1}); 
+		};
+		var kingIndex = {
+			timer :null,
+			initPage:function(itemCount){
+				$(".cpage").tzPage(itemCount, {
+					num_edge_entries : 1, //边缘页数
+					num_display_entries :4, //主体页数
+					num_edge_entries:5,
+					current_page:0,
+					showGo:true,
+					showSelect:false,
+					items_per_page : 12, //每页显示X项
+					prev_text : "前一页",
+					next_text : "后一页",
+					callback : function(pageNo,psize){//回调函数
+						kingIndex.loadData(pageNo,psize);
+					}
+				});
+			},
+			loadData:function(pageNo,pageSize,callback){
+				if(window.localStorage){
+					var model = localStorage.getItem("model");
+				}
+				clearTimeout(this.timer);
+				this.timer = setTimeout(function(){
+					$.ajax({
+						type:"post",
+						beforeSend:function(){loading2($(".contList"),4);},
+						url:basePath+"/"+model+"/template.do",
+						data:{pageNo:pageNo*pageSize,pageSize:pageSize},
+						success:function(data){
+							var $data = $(data);
+							$(".contList").html($data);
+							$(".tmui-tips").tmTip();
+							var itemCount = $data.find("#itemCount").val();
+							if(callback)callback(itemCount);
+						}
+					});
+				},300);
+			}	
+		}
+		
+		/*点击按钮的时候--触发文件上传*/
+		function openBrowse(obj){ 
+			//判断浏览器的兼容性问题
+			var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false; 
+			if(ie){ //如果是ie浏览器
+				document.getElementById("file").click(); 
+				document.getElementById("filename").value=document.getElementById("file").value;
+			}else{
+				var a=document.createEvent("MouseEvents");//FF的处理 
+				a.initEvent("click", true, true);  
+				document.getElementById("file").dispatchEvent(a); 
+			} 
+		};
+		function uploadFile() {
+			//获取文件上传的js列表对象
+		    var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+ 		    //alert(fileObj.type);
+ 		    //alert(fileObj.name);
+ 		    //alert(fileObj.size);
+		    // 创建一个ajax对象
+		    var xhr = new XMLHttpRequest();
+		    //开始和后台的upload.jsp页面进行交换
+		    xhr.open("post", basePath+"/upload/PicUpload.do",true);
+		    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		    //创建一个FormData 对象
+		    var fd = new FormData();
+		    //设置文件上传的文件对象
+		    fd.append("doc", fileObj);
+		    //发送文件上传的进度
+		    xhr.send(fd);
+		    //上传成功进入的回调函数
+		    xhr.onreadystatechange = function(){
+  				if(xhr.readyState==4 && xhr.status == 200){
+  					var data = $.trim(xhr.responseText);
+  					if(data){
+						var json = JSON.parse(data);
+						var src = json.url;
+						$("#preview").css("display","block").attr("src",basePath+src);
+					}
+  				}
+  			};
+			//监听文件上传的进度
+		    //xhr.upload.addEventListener("progress", progressFunction, false);
+		};
+		//上传进度的回调函数
+// 		function progressFunction(evt) {
+// 		     var percentageDiv = document.getElementById("percentage");
+// 		     var percentDom = document.getElementById("percent");
+// 		     if (evt.lengthComputable) {
+// 		    	// 获取文件上传的数据和文件的总大小计算百分比
+// 		         var p = Math.round(evt.loaded / evt.total * 100) + "%";
+// 		    	// 设定给页面的进度条，显示百分比
+// 		         percentageDiv.innerHTML = p;
+// 		         percentDom.style.width = p;
+// 		     }
+// 		} ;
+						
     /*格式化时间*/
 	function timeFormate(time){
 		return time<10 ? "0" + time:time;
 	};
-	
-	//关注列表分页
-	function hyb(obj){
-		var pageNo = 0;
-		var pageSize = 2;
-		var mark = true;
+	//保存点击数
+	function changeHits(obj){
+		var $obj = $(obj);
 		var timer = null;
 		clearTimeout(timer);
 		timer = setTimeout(function(){
-			if(!mark)return;
-			pageNo++;
-			var params={pageNo:pageNo*pageSize,pageSize:pageSize};
+			var model = $obj.data("model");
+			var hits = $obj.data("hits");
+			var id = $obj.data("opid");
+			hits++;
+			var params={hits:hits,id:id};
 			$.ajax({
 				type:"post",
-				url:basePath+"/user/template.do",
-				beforeSend:function(){loading2($(".f-list"),4);},
+				url:basePath+"/"+model+"/update.do",
 				data:params,
 				success:function(data){
-					if(data && data.length>0){
-						var $data = $(data);
-						$(".f-list").html($data);
+					if(data == "success"){
+						loading("数据加载中请稍等。。。",4);
+						window.open(basePath+"/"+model+"/detail/"+id+".do");
 					}else{
-						loading("数据加载完毕",4);
-						mark = false;
-						hyb(obj).removeAttr("onclick");
+						loading("操作失败。。。",4);
 					}
-					
 				}
 			});
 		},300);
-	}
+	};
 	
 	//实例化编辑器
 	var um = UM.getEditor("myEditor");
@@ -616,37 +608,41 @@
 	
 	/*发表文章*/
 	function saveContent(obj){
-		alert(1);
 		var titleVal = $(".editer .txt_title").val();
+		var description = $(".editer .txt_description").val();
+		var img = $(".editer .txt-pic img").attr("src");
 		var contentVal = getPlainTxt("myEditor");
 		var tagval = $(".editer p .input").val();
-		if(!titleVal || !contentVal)return;
-		var params = {title:titleVal,content:contentVal,tag:tagval};
+		
+		if(!titleVal || !description || !img || !contentVal || !tagval){
+			loading("请填写完整内容",4);
+			return false;
+		}
+		var params = {title:titleVal,description:description,image:img,content:contentVal,tag:tagval};
 		$.ajax({
 			type:"post",
 			url:basePath+"/content/save.do",
 			data:params,
-			beforeSend:function(){loading("文章发表中...",5);},
+			beforeSend:function(){loading("文章发表中请等待...",5);},
 			success:function(data){
-				loading("发表成功...",5);
 				var data = data.trim();
 				if(data == "fail" || data=="error"){
-					alert("发表失败");
+					loading("文章发表失败...",5);
 				}
 				if(data == "success"){
-					
+					loading("文章发表成功...",5);
 					$(".editer .txt_title").val("");
+					$(".editer .txt_description").val("");
+					$(".editer .txt-pic img").attr("src","");
 					setEditorText("","myEditor");
 					$(".editer p .input").val("");
-					
 					$(".editerBox").slideUp();
+					$("#content").addClass("active");
 				}
 			}
 		}); 
 	};
 	/*文本编辑器 end*/
-	
-	
  </script>
  </body>
 </html>

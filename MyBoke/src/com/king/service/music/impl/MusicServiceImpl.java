@@ -11,6 +11,7 @@ import com.king.bean.Music;
 import com.king.bean.Params;
 import com.king.dao.music.IMusicMapper;
 import com.king.service.music.IMusicService;
+import com.king.util.TmStringUtils;
 /**
  * 音乐主题serviceImpl
  * IMusicService
@@ -26,6 +27,7 @@ public class MusicServiceImpl implements IMusicService{
 	
 	@Override
 	public List<HashMap<String, Object>> findMusics(Params params){
+		if(TmStringUtils.isEmpty(params.getOrder()))params.setOrder("create_time desc");
 		return musicMapper.findMusics(params);
 	}
 	

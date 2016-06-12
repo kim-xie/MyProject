@@ -44,7 +44,7 @@
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 指定数据源 -->
 		<property name="dataSource" ref="dataSource"/>
-		 <!-- 注册mybatisbean别名 -->
+		<!-- 注册mybatisbean别名 -->
         <property name="typeAliasesPackage" value="com.king.bean"></property>
 		<!-- 指定mybatis配置文件 -->
 		<property name="configLocation" value="classpath:Mybatis-Config.xml"/>
@@ -68,7 +68,7 @@
 	
 	<!-- 配置事务转播特性 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-			<!-- <tx:attributes>
+		   <!-- <tx:attributes>
 				<tx:method name="find*" read-only="true"/>
 				<tx:method name="get*" read-only="true"/>
 				<tx:method name="query*" read-only="true"/>
@@ -93,7 +93,7 @@
 	<!-- 配置aop切入事务 -->
 	<aop:config>
 		<!-- 切点 -->
-		<aop:pointcut expression="execution(* com.king.service..*.*(..))" id="pointcut"/>
+		<aop:pointcut expression="execution(* com.king.service..*.*(..)) || execution(* com.king.util.GatherUtils.*(..))" id="pointcut"/>
 		<!-- 顾问 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
 	</aop:config>

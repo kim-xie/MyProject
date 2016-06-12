@@ -1,9 +1,3 @@
-/**
- * [webPackage].[smallBeanName]
- * [beanName]Controller.java
- * 创建人:[author]
- * 时间：[date]
- */
 package [webPackage].[smallBeanName];
 
 import java.util.List;
@@ -34,21 +28,110 @@ public class [beanName]Controller extends BaseController{
 	@Resource(name="[smallBeanName]Service")
 	private I[beanName]Service [smallBeanName]Service;
 	
-	/*列表查询*/
+	/**
+	 * 跳转到列表页面
+	 * @Title: list 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
 	@RequestMapping("/list")
 	public String list(Params params){
 		return "[smallBeanName]/list";
 	}
 	
-	/*模板页面*/
+	/**
+	 * 查询所有[beanName]返回模板页面
+	 * @Title: template 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return ModelAndView  返回类型 
+	 * @throws
+	 */
 	@RequestMapping("/template")
 	public ModelAndView template(Params params){
 		ModelAndView modelAndView = new ModelAndView();
 		List<[beanName]> [smallBeanName]s = [smallBeanName]Service.find[beanName]s(params);
 		int count = [smallBeanName]Service.count[beanName](params);
 		modelAndView.setViewName("[smallBeanName]/template");
-		modelAndView.addObject("datas",[smallBeanName]s);
+		modelAndView.addObject("[smallBeanName]s",[smallBeanName]s);
 		modelAndView.addObject("itemCount",count);
 		return modelAndView;
+	}
+	/**
+	 * 添加保存[beanName]
+	 * @Title: save[beanName] 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param [smallBeanName]
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("/save")
+	public String save[beanName]([beanName] [smallBeanName]){
+		if([smallBeanName] != null){
+			User user = (User) request.getSession().getAttribute("user");
+			[smallBeanName].setUserId(user.getUserId());
+			[smallBeanName].setUserName(user.getUserName());
+			[smallBeanName].setIsDelete(0);
+			boolean faly = [smallBeanName]Service.save[beanName]([smallBeanName]);
+			if(faly){
+				return "success";
+			}else{
+				return "fail";
+			}
+		}else{
+			return "error";
+		}
+	}
+	/**
+	 * 查询[beanName]详情
+	 * @Title: get[beanName] 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return ModelAndView  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/detail/{id}")
+	public ModelAndView get[beanName](@PathVariable("id")Integer id){
+		ModelAndView modelAndView = new ModelAndView();
+		[beanName] [smallBeanName] = [smallBeanName]Service.get[beanName](id);
+		modelAndView.setViewName("[smallBeanName]/detail");
+		modelAndView.addObject("[smallBeanName]",[smallBeanName]);
+		return modelAndView;
+	}
+	/**
+	 * 更新[beanName]
+	 * @Title: update[beanName] 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param content
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public String update[beanName]([beanName] [smallBeanName]){
+		return [smallBeanName]Service.update[beanName]([smallBeanName])?"success":"fail";
+	}
+	
+	/**
+	 * 删除[beanName]
+	 * @Title: delete[beanName] 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param id
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	public String delete[beanName](Params Params){
+		return [smallBeanName]Service.delete[beanName](Params)?"success":"fail";
 	}
 }

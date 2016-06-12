@@ -20,7 +20,7 @@
 	 <span class="gotop">
 	 	<i class="iconfont icon-top"></i>
 	 	<span class="shart">分享</span>
-	 	<span class="shart">反馈</span>
+	 	<span class="shart" onclick="window.open(basePath+'/content/response.do')">反馈</span>
 	 </span>
 	 <!--gotop end-->
 	 

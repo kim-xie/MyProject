@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.king.dao.content.ContentMapper">
+	<!-- 查询所有 -->
 	<select id="findContents" parameterType="ContentParams" resultType="Content">
 			SELECT 
 				id,
@@ -80,44 +81,6 @@
 			count(1) 
 		FROM
 			content 
-		<trim prefix="WHERE" prefixOverrides="AND | OR">  
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(channelId)">
-				and  channel_id = #{channelId}
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
-				and   title LIKE '%${keyword}%'
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(isDelete)">
-				and  is_delete = #{isDelete}
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==1"><!-- 今天 -->
-				AND TO_DAYS(create_time) = to_days(now())
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==2"><!-- 昨天-->
-				AND <![CDATA[AND TO_DAYS(NOW())-TO_DAYS(create_time)=1]]>
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==3"><!-- 近五天-->
-				AND <![CDATA[AND DATE_SUB(NOW(), INTERVAL 5 DAY) <= date(create_time)]]>
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==4"><!-- 本周 -->
-				AND  WEEKOFYEAR(create_time)=WEEKOFYEAR(NOW())
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==5"><!-- 上周 -->
-				AND YEARWEEK(date_format(create_time,'%Y-%m-%d')) = YEARWEEK(now())-1
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==6"><!-- 本月 -->
-				AND date_format(create_time,'%Y-%m')=date_format(now(),'%Y-%m')
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==7"><!-- 上月 -->
-				AND date_format(create_time,'%Y-%m')=date_format(DATE_SUB(NOW(), INTERVAL 1 MONTH),'%Y-%m')
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==8"><!-- 上季度 -->
-				AND  QUARTER(create_time)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
-			</if>
-			<if test="@com.king.util.TmStringUtils@isNotEmpty(mark) and mark==9"><!-- 本季度 -->
-				AND  QUARTER(create_time)=QUARTER(now())
-			</if>
-		</trim>
 	</select>
 	
 	<!-- 根据id查询内容  -->
@@ -158,9 +121,12 @@
 	<update id="updateContent" parameterType="Content">
 		update content 
 		<set>
+			<if test="hits!=null">hits=#{hits},</if>
+			<if test="collections!=null">collections=#{collections},</if>
+			<if test="loves!=null">loves=#{loves},</if>
+			<if test="comments!=null">comments=#{comments},</if>
 			<if test="status!=null">status=#{status},</if>
 			<if test="isDelete!=null">is_delete=#{isDelete},</if>
-			<if test="staticLink!=null">static_link=#{staticLink},</if>
 			<if test="isComment!=null">is_comment=#{isComment},</if>
 			<if test="isTop!=null">is_top=#{isTop},</if>
 			<if test="push!=null">push=#{push},</if>

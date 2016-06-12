@@ -2,11 +2,12 @@
 <%@include file="/WEB-INF/pages/common/taglib.jsp"%>
 <c:forEach items="${musics}" var="music">
 	<div class="col-md-3 col-xs-6 col-sm-3 list" >
+	<input type="hidden" id="itemCount" value="${itemCount}"/>
 		<!-- shade -->
 		<div class="shade"></div>
 		<!-- pic -->
 		<div class="cover">
-			<a href="${basePath}/music/detail/${music.id}.do" target="_blank">
+			<a href="javascript:void(0);" onclick="changeHits(this);" data-opid="${music.id}" data-hits="${music.hits}" data-model="music">
 				<img src="${basePath}${music.img}" title="${music.title}" class="img-responsive img" alt="Responsive image">
 			</a>
 		</div>

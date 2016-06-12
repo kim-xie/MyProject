@@ -17,6 +17,7 @@
 		  m.time,
 		  m.hits,
 		  m.comments,
+		  m.loves,
 		  m.status,
 		  m.is_delete,
 		  m.user_id AS userId,
@@ -42,7 +43,7 @@
 				and m.category_id = #{typeId}
 			</if>
 		</trim>	
-		ORDER BY c.create_time desc
+		ORDER BY m.${order}
 		LIMIT #{pageNo},#{pageSize}				
 	</select>
 	
@@ -75,7 +76,6 @@
 		WHERE m.id = #{id}
 	</select>
 	
-	
 	<select id="count" resultType="int" parameterType="Params">
 		SELECT
 			count(1) 
@@ -87,4 +87,58 @@
 			</if>
 		</trim>
 	</select>
+	
+	<!-- 添加 -->
+	<insert id="save" parameterType="Music" useGeneratedKeys="true" keyProperty="id" flushCache="true" >
+	  	INSERT INTO music(
+			  title,
+			  description,
+			  category_id,
+			  img,
+			  src,
+			  singer,
+			  hits,
+			  comments,
+			  loves,
+			  status,
+			  is_delete,
+			  user_id,
+			  username,
+			  header_pic 
+	  	) VALUES (
+			  	#{title},
+			  	#{description},
+			  	#{categoryId},
+			  	#{img},
+			  	#{src},
+			  	#{singer},
+			  	#{hits},
+			  	#{comments},
+			  	#{loves},
+			  	#{status},
+			  	#{isDelete},
+			  	#{userId},
+			  	#{userName},
+			  	#{headerPic}
+	  	)
+	</insert>
+	
+	<update id="update" parameterType="Music">
+		update music 
+		<set>
+			<if test="hits!=null">hits=#{hits},</if>
+			<if test="collections!=null">collections=#{collections},</if>
+			<if test="loves!=null">loves=#{loves},</if>
+			<if test="comments!=null">comments=#{comments},</if>
+			<if test="status!=null">status=#{status},</if>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Params">
+	<!-- delete from keke_content  where id = #{id} 假删 -->
+		update music set is_delete = 1 where id = #{id}
+	</delete>
 </mapper>

@@ -10,6 +10,7 @@ import com.king.bean.Content;
 import com.king.bean.ContentParams;
 import com.king.dao.content.ContentMapper;
 import com.king.service.content.ContentService;
+import com.king.util.TmStringUtils;
 @Service("contentService")
 public class ContentServiceImpl implements ContentService{
 	
@@ -21,6 +22,7 @@ public class ContentServiceImpl implements ContentService{
 	 */
 	@Override
 	public List<Content> findContents(ContentParams params) {
+		if(TmStringUtils.isEmpty(params.getOrder()))params.setOrder("create_time desc");
 		List<Content> contents = contentMapper.findContents(params);
 		return contents;
 	}

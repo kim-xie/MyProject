@@ -4,7 +4,9 @@
 	<tr>
 		<td>
 			${[smallBeanName].id}
-			<c:if test="${[smallBeanName]index.index==0}"><input type="hidden" id="itemCount" value="${itemCount}"/></c:if>
+			<c:if test="${[smallBeanName]index.index==0}">
+				<input type="hidden" id="itemCount" value="${itemCount}"/>
+			</c:if>
 		</td>	
 		<td>${[smallBeanName].name}</td>	
 		<td>${[smallBeanName].userId}</td>	

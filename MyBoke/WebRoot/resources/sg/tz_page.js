@@ -28,9 +28,7 @@
 		}
 	});
 	
-	
 	$.tzPageRenderers = {}
-	
 	
 	$.tzPageRenderers.defaultRenderer = function(maxentries, opts) {
 		this.maxentries = maxentries;

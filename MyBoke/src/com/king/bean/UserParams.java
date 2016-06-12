@@ -30,6 +30,8 @@ public class UserParams {
 	private String ip;
 	//用户ip地址
 	private String ipAddress;
+	//过滤id
+	private Integer filterId;
 
 	public Integer getId() {
 		return id;
@@ -150,6 +152,13 @@ public class UserParams {
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-	
+
+	public Integer getFilterId() {
+		return filterId;
+	}
+
+	public void setFilterId(Integer filterId) {
+		this.filterId = filterId;
+	}
 	
 }

@@ -2,18 +2,8 @@ package com.king.web.upload;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.struts2.json.JSONException;
 import org.apache.struts2.json.JSONUtil;
 import org.springframework.stereotype.Controller;
@@ -44,85 +34,53 @@ public class UploadController extends BaseController{
 	 * @return List<HashMap<String,Object>>  返回类型 
 	 * @throws
 	 */
-	@RequestMapping("/PicUpload")
-	public List<HashMap<String, Object>> uploadFile(@RequestParam("doc") MultipartFile file)
+	@ResponseBody 
+	@RequestMapping(method=RequestMethod.POST,value="/PicUpload.do")
+	public String uploadFile(@RequestParam("doc") MultipartFile fileObj)
 			throws IllegalStateException, IOException, JSONException {
-		//定义获取服务器的目录c盘
-		String path = request.getRealPath("upload");
-		String relativePath = "upload";
-		String dpath = new SimpleDateFormat("/yyyy/MM/dd/").format(new Date());
-		path+=dpath;
-		relativePath+=dpath;
-		File uploadPath = new File(path);
-		//如果uplaod目录在服务器不存在，创建一下
-		if(!uploadPath.exists())uploadPath.mkdirs();
-		//1:获取客户端上传的工厂类
-		FileItemFactory factory = new DiskFileItemFactory();
-		//2:创建容器的文件上传类
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		List<HashMap<String, Object>> maps = new ArrayList<>();
-		//3：解析上传对象
-		try {
-			List<FileItem> fileItems = upload.parseRequest(request);
-			//4:讲文件写入服务器目录
-			for (FileItem fileItem : fileItems) {
-				String newName = getFileName(fileItem.getName());
-				fileItem.write(new File(uploadPath,newName));
-				HashMap<String, Object> map = new HashMap<>();
-				map.put("name", fileItem.getName());
-				map.put("url", relativePath+newName);
-				map.put("size", fileItem.getSize());
-				maps.add(map);
-			}
-			return maps;
-			//5:循环判断，开始写入服务器
-		} catch (FileUploadException e) {
-			e.printStackTrace();
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(!fileObj.isEmpty()){
+			
+			@SuppressWarnings("deprecation")
+			String path = request.getRealPath("/resources/imgs/contentImg");
+			File parent = new File(path);
+			if(!parent.exists())parent.mkdirs();
+			
+			System.out.println("获取文件数据================="+fileObj.getBytes());
+			System.out.println("获取文件的MINE类型================="+fileObj.getContentType());
+			System.out.println("获取文件的名称================="+fileObj.getName());
+			System.out.println("获取上传文件的原名================="+fileObj.getOriginalFilename());
+			System.out.println("获取文件的大小================="+fileObj.getSize());
+			System.out.println("判断是否有文件上传================="+fileObj.isEmpty());
+			
+			// 装载要返回的数据
+			HashMap<String, Object> map = new HashMap<String,Object>();
+			// 上传时的文件名
+			String oldName = fileObj.getOriginalFilename();
+			// 文件大小
+			long size = fileObj.getSize();
+			// 文件大小单位为KB
+			String sizeString = TmFileUtil.countFileSize(size);
+			// 文件后缀名
+			String ext = TmFileUtil.getExtNoPoint(oldName);
+			// 生成的新的文件名
+			String newFileName = TmFileUtil.generateFileName(oldName, 10, "yyyyMMddHHmmss");
+			// 保存路径
+			String url = "/resources/imgs/contentImg/"+newFileName;
+			// 转存文件
+			fileObj.transferTo(new File(parent, newFileName));
+			
+			map.put("oldname",oldName);
+			map.put("ext",ext);
+			map.put("sizeString",sizeString);
+			map.put("size",size);
+			map.put("name",newFileName);
+			map.put("url",url);
+			
+			return JSONUtil.serialize(map);
+		}else{
 			return null;
 		}
-	}
-	/**
-	 * 重命名文件名
-	 * @Title: getFileName 
-	 * @Description: TODO(这里用一句话描述这个方法的作用) 
-	 * @param @param name
-	 * @param @return  参数说明 
-	 * @return String  返回类型 
-	 * @throws
-	 */
-	public static String getFileName(String name){
-		String filename = getRandomString(8);
-		String ext = name.substring(name.lastIndexOf("."));
-		return filename+ext;
-	}
-	/**
-	 * 随机数
-	 * @Title: getRandomString 
-	 * @Description: TODO(这里用一句话描述这个方法的作用) 
-	 * @param @param length
-	 * @param @return  参数说明 
-	 * @return String  返回类型 
-	 * @throws
-	 */
-	private static String getRandomString(int length) {
-		StringBuffer bu = new StringBuffer();
-		String[] arr = { "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c",
-				"d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "p", "q",
-				"r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C",
-				"D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P",
-				"Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-		Random random = new Random();
-		while (bu.length() < length) {
-			String temp = arr[random.nextInt(57)];
-			if (bu.indexOf(temp) == -1) {
-				bu.append(temp);
-			}
-		}
-		return bu.toString();
-	}
+	};
 	
 	/**
 	 * @Title: upload 
@@ -136,7 +94,7 @@ public class UploadController extends BaseController{
 	 * @throws
 	 */
 	@ResponseBody 
-	@RequestMapping("/upload.do")
+	@RequestMapping(method=RequestMethod.POST,value="/upload.do")
 	public String upload(@RequestParam("doc") MultipartFile file)
 			throws IllegalStateException, IOException, JSONException {
 		
@@ -154,13 +112,21 @@ public class UploadController extends BaseController{
 			System.out.println("获取文件的大小================="+file.getSize());
 			System.out.println("判断是否有文件上传================="+file.isEmpty());
 			
+			// 装载要返回的数据
 			HashMap<String, Object> map = new HashMap<String,Object>();
+			// 上传时的文件名
 			String oldName = file.getOriginalFilename();
+			// 文件大小
 			long size = file.getSize();
+			// 文件大小单位为KB
 			String sizeString = TmFileUtil.countFileSize(size);
+			// 文件后缀名
 			String ext = TmFileUtil.getExtNoPoint(oldName);
+			// 生成的新的文件名
 			String newFileName = TmFileUtil.generateFileName(oldName, 10, "yyyyMMddHHmmss");
+			// 保存路径
 			String url = "/resources/imgs/header_pic/"+newFileName;
+			// 转存文件
 			file.transferTo(new File(parent, newFileName));
 			
 			map.put("oldname",oldName);

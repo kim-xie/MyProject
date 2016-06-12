@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.dao.fan.IFanMapper" >
+	
+	<!-- 查询所有Fan -->
+	<select id="findFans" resultType="Fan" parameterType="Params">
+		select 
+			id,
+			username as userName,
+			fanname as fanName,
+			fanHeaderPic,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			fan_id as fanId,
+			is_delete as isDelete
+		FROM
+			fan 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(filterId)">
+				and fan_id != #{filterId}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and fanname LIKE '%${keyword}%'
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(userId)">
+				and user_id = #{userId}
+			</if>
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(userId)">
+				and fan_id = #{fanId}
+			</if>
+		</trim>
+		ORDER BY ${order}
+		LIMIT #{pageNo} ,#{pageSize};				
+	</select>
+	
+	<!-- 根据id查询Fan -->
+	<select id="getFan" resultType="Fan">
+		SELECT 
+		  	id,
+			username as userName,
+			fanname as fanName,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			fan_id as fanId,
+			is_delete as isDelete
+		FROM
+		 	fan
+		WHERE 
+			id = #{id}
+	</select>
+	
+	<!-- 查询Fan的总记录数  -->
+	<select id="countFan" resultType="int" parameterType="Params">
+		SELECT
+			count(1) 
+		FROM
+			fan 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="@com.king.util.TmStringUtils@isNotEmpty(keyword)">
+				and fanname LIKE '%${keyword}%'
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 添加Fan -->
+	<insert id="saveFan" parameterType="Fan" useGeneratedKeys="true" keyProperty="id" flushCache="true" >
+	  	INSERT INTO fan(
+			username,
+			fanname,
+			user_id,
+			fan_id,
+			is_delete
+	  	) VALUES (
+		  	#{userName},
+		  	#{fanName},
+		  	#{userId},
+		  	#{fanId},
+		  	#{isDelete}
+	  	)
+	 </insert>
+	 
+	<!-- 更新Fan -->
+	<update id="updateFan" parameterType="Fan">
+		update fan
+		<set>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除Fan -->
+	<delete id="deleteFan" parameterType="Params">
+		<!-- delete from fan  where id = #{id} 真删 -->
+		update fan set is_delete = 1 where id = #{id}
+	</delete>
+	
+</mapper>

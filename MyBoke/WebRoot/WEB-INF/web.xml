@@ -3,7 +3,7 @@
   <display-name>MyBoke</display-name>
   <!-- 欢迎页面 -->
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>user/main.do</welcome-file>
   </welcome-file-list>
   
    <!-- springmvc 核心控制器 -->
@@ -52,7 +52,7 @@
   	<error-code>error/error.html</error-code>
   </error-page>
   
-  <!-- 统一编码过滤器 -->
+  <!-- post请求统一编码过滤器 -->
   <filter>
 	  <filter-name>characterEncodingFilter</filter-name>
 	  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -28,6 +28,19 @@ public class UserController extends BaseController {
 	@Resource(name = "userService")
 	private UserService userService;
 	/**
+	 * 前往主页
+	 * @Title: toMain 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/main.do")
+	public String toMain() {
+		return "main";
+	}
+	
+	/**
 	 * 前往登录页面
 	 * @Title: toLogin
 	 * @Description: TODO(这里用一句话描述这个方法的作用)
@@ -153,7 +166,7 @@ public class UserController extends BaseController {
 					}else{
 						user.setUserPassword(TmStringUtils.md5Base64(user.getUserPassword()));
 						user.setActiveCode(TmStringUtils.uuid());
-						user.setHeaderPic("/resources/imgs/header_pic/headerpic.jpg");
+						user.setHeaderPic("/resources/imgs/header_pic/header_pic.png");
 						user.setIp(TmIpUtil.getIpAddress(request));
 						user.setIpAddress(TmIpUtil.ipLocation(request));
 						if (userService.saveUser(user)){

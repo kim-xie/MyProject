@@ -29,6 +29,11 @@
 			    state
 			  FROM
 			    USER
+			    <trim prefix="WHERE" prefixOverrides="AND | OR">  
+					<if test="@com.king.util.TmStringUtils@isNotEmpty(filterId)">
+						and userid != #{filterId}
+					</if>
+				</trim>
 			  order by create_time asc
 			  LIMIT #{pageNo},#{pageSize}
 	</select>

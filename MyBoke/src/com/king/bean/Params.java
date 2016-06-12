@@ -8,9 +8,11 @@ public class Params {
 	private Integer musicId;
 	private Integer typeId;
 	private Integer filterId;
-	private Integer blogId;
+	private Integer userId;
+	private Integer fanId;
 	private String order;
 	private String keyword;
+	
 	public Integer getPageNo() {
 		return pageNo;
 	}
@@ -53,11 +55,17 @@ public class Params {
 	public void setFilterId(Integer filterId) {
 		this.filterId = filterId;
 	}
-	public Integer getBlogId() {
-		return blogId;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setBlogId(Integer blogId) {
-		this.blogId = blogId;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public Integer getFanId() {
+		return fanId;
+	}
+	public void setFanId(Integer fanId) {
+		this.fanId = fanId;
 	}
 	public String getOrder() {
 		return order;

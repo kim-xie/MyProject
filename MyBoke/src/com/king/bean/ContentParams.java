@@ -20,6 +20,9 @@ public class ContentParams {
 	private Integer roleId;
 	private Integer mark;
 	private Integer status;
+	private Integer hits;
+	private Integer collections;
+	private Integer loves;
 	
 	public Integer getId() {
 		return id;
@@ -135,5 +138,22 @@ public class ContentParams {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+	public Integer getHits() {
+		return hits;
+	}
+	public void setHits(Integer hits) {
+		this.hits = hits;
+	}
+	public Integer getCollections() {
+		return collections;
+	}
+	public void setCollections(Integer collections) {
+		this.collections = collections;
+	}
+	public Integer getLoves() {
+		return loves;
+	}
+	public void setLoves(Integer loves) {
+		this.loves = loves;
+	}
 }

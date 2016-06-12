@@ -25,6 +25,18 @@ public class ContentController extends BaseController{
 	private ContentService contentService;
 	
 	/**
+	 * 前往留言板页面
+	 * @Title: toResponse 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/response.do")
+	public String toResponse() {
+		return "common/response";
+	}
+	/**
 	 * 将数据返回模板页面
 	 * @Title: index 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
