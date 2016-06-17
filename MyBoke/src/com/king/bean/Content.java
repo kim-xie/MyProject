@@ -1,6 +1,7 @@
 package com.king.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 /**
  * Content实体类
  * 类名: Content.java
@@ -66,7 +67,7 @@ public class Content implements Serializable{
 	//缩略图
 	private String thumnail;
 	//创建时间
-	private String createTime;
+	private Date createTime;
 	//更新时间
 	private String updateTime;
 	//关键字
@@ -241,10 +242,10 @@ public class Content implements Serializable{
 	public void setThumnail(String thumnail) {
 		this.thumnail = thumnail;
 	}
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	public String getUpdateTime() {

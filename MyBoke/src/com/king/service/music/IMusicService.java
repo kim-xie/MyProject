@@ -71,7 +71,7 @@ public interface IMusicService {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public int save(Music music);
+	public boolean save(Music music);
 	
 	/**
 	 * 更新音乐主题

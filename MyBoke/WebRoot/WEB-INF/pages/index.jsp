@@ -74,7 +74,7 @@
 	
 	/*文本编辑器 start*/
 	.editerBox{width:570px;margin:30px auto;display:none;}
-	.input{width:400px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
+	.editerBox .input{width:400px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
 	.editerBox .editer{width:570px;height:100%;background:#fff;overflow:hidden;padding:10px;}
 	.editerBox .editer .title{width:550px;width:600px;height:30px;margin:10px 0;display:block;font-size:18px;font-weight:600;}
 	.editerBox .editer .title input{width:502px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
@@ -87,6 +87,20 @@
 	.editerBox .editer p .fabiao .submit{padding:0 10px;margin-left:22px;outline:none;border:none;background:#0033ff;transition:1s;border-radius:5px;cursor:pointer;font-size:14px;font-weight:600;color:#fff;}
 	.editerBox .editer p .fabiao .submit:hover{background:#0033cc;transition:1s;}
 	/*文本编辑器 end*/
+	
+	/* 音乐上传 start */
+	.musicUploadBox{width:570px;margin:30px auto;display:none;}
+	.musicUploadBox .input{width:474px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
+	.musicUploadBox .editer{width:570px;height:100%;background:#fff;overflow:hidden;padding:10px;}
+	.musicUploadBox .editer .upload_pic,.upload_music{position:relative;width:550px;height:320px;border:1px dashed #ccc;text-align:center;margin:20px 0;}
+	.musicUploadBox .editer .upload_pic,.upload_music .m-pic,.m-src{line-height:320px;font-size:20px;color:#999;font-weight:600;}
+	.musicUploadBox .editer .upload_pic .m-pic #preview{position:absolute;top:0;left:0;}
+	.musicUploadBox .editer .upload_pic .m-pic,.m-src a{text-decoration: none;}
+	.musicUploadBox .editer p{float:left;font-size:14px;font-weight:600;margin:20px 0;}
+	.musicUploadBox .editer p .fabiao{height:30px;line-height:30px;}
+	.musicUploadBox .editer p .fabiao .submit{padding:0 10px;outline:none;border:none;background:#0033ff;transition:1s;border-radius:5px;cursor:pointer;font-size:14px;font-weight:600;color:#fff;}
+	.musicUploadBox .editer p .fabiao .submit:hover{background:#0033cc;transition:1s;}
+	/* 音乐上传 end */
 	
 	/* 文章发表栏  start */
 	.fb_box{width:670px;height:110px;overflow:hidden;margin:30px auto;}
@@ -164,7 +178,7 @@
 			</ol>
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
-				<div class="item">
+				<div class="item ">
 					<img src="${basePath}/resources/imgs/banner/banner1.jpeg" alt="First slide" width="1200">
 				</div>
 				<div class="item active">
@@ -174,7 +188,7 @@
 					<img src="${basePath}/resources/imgs/banner/banner3.jpeg" alt="Third slide" width="1200">
 				</div>
 				<div class="item">
-					<img src="${basePath}/resources/imgs/banner/banner4.png" alt="Third slide" width="1200">
+					<img src="${basePath}/resources/imgs/banner/banner4.png" alt="Four slide" width="1200">
 				</div>
 			</div>
 			<!-- Controls -->
@@ -331,6 +345,79 @@
 		 	</div>
 		 </div>
 		 <!--文本编辑器 end-->
+		 
+		 <!--音乐上传 -->
+		 <div class="musicUploadBox">
+		 	<div class="editer">
+		 		<div class="upload_pic">
+		 			<input type="file" id="file" onchange="uploadFile(this)" style="display:none;">
+		 			<span class="m-pic">
+		 				<a href="javascript:void(0);" onclick="openBrowse(this)">请添加封面图片</a>
+		 				<img id="preview" src="" width="548" height="318" style="display:none;">
+		 			</span>
+		 		</div>
+		 		
+		 		<div class="upload_music">
+		 			<input type="file" id="file" onchange="uploadFile(this)" style="display:none;">
+		 			<span class="m-src">
+		 				<a href="javascript:void(0);" onclick="openBrowse(this)">请添加音乐</a>
+		 				<audio id="audio" src=""></audio>
+		 			</span>
+		 		</div>
+		 		
+		 		<p>
+		 			音乐描述：
+		 			<input type="text" class="input m_description" placeholder="描述不得超过500个字" maxlength="500">
+		 		</p>
+		 		
+		 		<p>
+					音乐标题：
+					<input type="text" class="input m_title" placeholder="音乐标题" maxlength="40">	
+		 		</p>
+		 		
+		 		<p>
+					演唱歌手：
+					<input type="text" class="input m_singer" placeholder="演唱歌手" maxlength="40">	
+		 		</p>
+		 		
+		 		<p>
+					音乐大小：
+					<input type="text" class="input m_size" placeholder="音乐文件大小" maxlength="40">	
+		 		</p>
+		 		
+		 		<p>
+					播放时长：
+					<input type="text" class="input m_time" placeholder="音乐播放时长" maxlength="40">	
+		 		</p>
+		 		
+		 		<p>
+					音乐类型：
+					<select class="input m_category">
+						<option>--请选择--</option>
+						<option value="1">流行</option>
+						<option value="2">摇滚</option>
+						<option value="3">民谣</option>
+						<option value="4">名族风</option>
+						<option value="5">重金属</option>
+						<option value="6">轻音乐</option>
+						<option value="7">黑暗</option>
+						<option value="8">爵士</option>
+						<option value="9">乡村</option>
+						<option value="10">古典</option>
+						<option value="11">拉丁</option>
+						<option value="12">儿童</option>
+						<option value="13">迷幻</option>
+					</select>	
+		 		</p>
+		 		
+		 		<p style="text-align:center;float: none;">
+		 			<span class="fabiao">
+						<input type="button" class="submit" value="保存音乐" onclick="saveMusic(this);">
+					</span>
+		 		</p>
+		 	</div>
+		 </div>
+		 <!--音乐上传 end-->
 
 		<!-- list start-->
 		<div class="container tabBox">
@@ -351,7 +438,7 @@
 					<div class="row musicRow contList"></div>
 				</div>
 				<!-- 文章栏 -->
-				<div role="tabpanel" class="tab-pane fade" id="aritcle">
+				<div role="tabpanel" class="tab-pane fade in" id="aritcle">
 					<!-- 文章列表 -->
 					<div class="row aritcleRow contList"></div>
 				</div>
@@ -364,6 +451,8 @@
 	</div>
 	<script type="text/javascript">
 		$(function(){
+			//加载banner
+			//loadBanner();
 			$(".tmui-tips").tmTip();
 			/* 初始化音乐列表栏 */
 			var itemCount = $("body").data("count");
@@ -372,6 +461,23 @@
 			/*初始化万年历 */
 			initWnl();
 		});
+		
+		//加载banner
+		/* function loadBanner(){
+			var timer = null;
+			clearTimeout(timer);
+			timer = setTimeout(function(){
+				$.ajax({
+					type:"post",
+					url:basePath+"/banner/template.do",
+					success:function(data){
+						alert(data);
+						var $data = $(data);
+						$(".carousel-inner").html($data);
+					}
+				});
+			},300);
+		} */
 		
 		//粉丝关注列表分页
 		function hyb(obj){
@@ -599,20 +705,29 @@
 	}
 	
 	 /* 发表文章栏目  */
-	 $(".fb_box .fb_aritcle").click(function(){
+	 $(".fb_aritcle").click(function(){
+		 $(".musicUploadBox").slideUp();
 		 $(".editerBox").slideToggle();
 	 });
+	 /* 发表音乐栏目  */
+	 $(".fb_music").click(function(){
+		 $(".editerBox").slideUp();
+		 $(".musicUploadBox").slideToggle();
+	 });
+	 /* 公告栏触发事件  */
 	 $(".soup li").click(function(){
 		 $(this).addClass("open").siblings().removeClass("open");
 	 });
+	 
+	 
 	
 	/*发表文章*/
 	function saveContent(obj){
-		var titleVal = $(".editer .txt_title").val();
-		var description = $(".editer .txt_description").val();
-		var img = $(".editer .txt-pic img").attr("src");
+		var titleVal = $(".txt_title").val();
+		var description = $(".txt_description").val();
+		var img = $(".txt-pic img").attr("src");
 		var contentVal = getPlainTxt("myEditor");
-		var tagval = $(".editer p .input").val();
+		var tagval = $("p .input").val();
 		
 		if(!titleVal || !description || !img || !contentVal || !tagval){
 			loading("请填写完整内容",4);
@@ -642,7 +757,42 @@
 			}
 		}); 
 	};
-	/*文本编辑器 end*/
+	
+	/*发表音乐*/
+	function saveMusic(obj){
+		var img = $("").attr("src");
+		var src = $("").attr("src");
+		var title = $(".m_title").val();
+		var description = $(".m_description").val();
+		var singer = $(".m_singer").val();
+		var size = $(".m_size").val();
+		var time = $(".m_time").val();
+		var category_id = $(".m_category").val();
+		
+		if(!title || !description || !img || !category_id || !src || !singer || !size || !time){
+			loading("请填写完整内容",4);
+			return false;
+		}
+		var params = {title:title,description:description,img:img,category_id:category_id,src:src,singer:singer,size:size,time:time};
+		$.ajax({
+			type:"post",
+			url:basePath+"/music/save.do",
+			data:params,
+			beforeSend:function(){loading("音乐发表中请等待...",5);},
+			success:function(data){
+				var data = data.trim();
+				if(data == "fail" || data=="error"){
+					loading("音乐发表失败...",5);
+				}
+				if(data == "success"){
+					loading("音乐发表成功...",5);
+					$(".input").val("");
+					$("").attr("src","");
+					$(".musicUploadBox").slideUp();
+				}
+			}
+		}); 
+	};
  </script>
  </body>
 </html>

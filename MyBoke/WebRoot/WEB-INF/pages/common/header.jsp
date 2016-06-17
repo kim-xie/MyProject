@@ -54,7 +54,7 @@
 								<a href="#"><i class="iconfont icon-star iconf"></i>我的收藏</a>
 							</li>
 							<li>
-								<a href="#"><i class="iconfont icon-iconfontres iconf"></i>我的简历</a>
+								<a href="${basePath}/resources/html/resume/resume.html" target="_blank"><i class="iconfont icon-iconfontres iconf"></i>我的简历</a>
 							</li>
 							<li>
 								<a href="${basePath}/user/toPerson.do"><i class="iconfont icon-info iconf"></i>修改资料</a>

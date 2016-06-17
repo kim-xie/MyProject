@@ -19,11 +19,11 @@ public class AutoProject {
 	//dao 
 	//web
 	//pages
-	private static String beanName = "Fan";
+	private static String beanName = "Banner";
 	private static String smallBeanName = beanName.toLowerCase();
 	
 	//注释
-	private static String description = "粉丝信息";
+	private static String description = "banner轮播图";
 	private static String author = "king";
 	private static String qq = "1134771121";
 	private static String telephone = "18378311282";
@@ -380,12 +380,12 @@ public class AutoProject {
 	
 
 	public static void main(String[] args) throws IOException {
-		createBean();
-		createDao();
-		createSQLXml();
-		createService();
-		createServiceImpl();
-		createWeb();
+//		createBean();
+//		createDao();
+//		createSQLXml();
+//		createService();
+//		createServiceImpl();
+//		createWeb();
 		createPage();
 		createTemplate();
 //		createTable();

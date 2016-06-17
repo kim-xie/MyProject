@@ -55,36 +55,35 @@
 	.userInfo a{width:100%;height:100%;font-size:16px;font-weight:600;color:#7a8e9d;}
 	.userInfo:hover a span{color:#3498db;}
 	.userInfo:hover a i{color:#3498db;}
-	/*列表*/
+	/* tab切换栏  start */
 	.tabBox{padding-left:0;padding-right:30px;}
 	.tabBox .tab{position:relative;top:30px;color:#7c7c7c;font-size:16px;font-weight:600;}
 	.tabBox .tab .active a{background:url(${basePath}/resources/imgs/share/bg2.jpg);}
 	.tabBox .row .panel{padding:0;}
 	.tabBox .row .panel .panel-body{padding:0;}
 	.tabBox .row .panel .pic{padding:0;height:120px;}
-	.tabBox .row .panel .pic img{height:120px;}
+	.tabBox .row .panel .pic img{height:120px;width:100%;}
 	.tabBox .list:nth-child(4n+1){position:relative;}
 	.tabBox .list:hover .shade{opacity:1;}
 	.tabBox .list:hover .cover .img{transform:scale(1.1)}
 	.tabBox .list .shade{box-shadow:0 0 12px rgba(0, 0, 0, 0.1);position:absolute;left:0;top:0;width:100%;height:100%;background:#fff;z-index:1;opacity:0;}
 	.tabBox .list .cover{overflow:hidden;position:relative;z-index:2;margin-top:15px;}
 	.tabBox .list .info{position:relative;z-index:2;border-bottom:1px solid #e2e8eb;padding:5px 0 20px 0;}
-	.tabBox .list .info .msg{height: 21px;overflow: hidden;margin-top:5px;}
+	.tabBox .list .info .msg{overflow: hidden;}
 	.tabBox .list .info .msg span{margin-right:10px;}
 	.tabBox .list .info .msg span i{margin-right:3px;color:#9aabb8;font-weight:600;}
 	.tabBox .list .info .user{margin-top:7px;}
 	.tabBox .list .info .user a{display:block;height:20px;line-height: 20px;color:#2c3e50;}
-	.tabBox .list .info .title{font-weight:bold;color: #34495e;}
+	.tabBox .list .info .title{font-weight:bold;color:#34495e;margin-bottom:5px;}
 	.tabBox .list .info .msg span em {font-size:14px;color:#9aabb8;display:inline-block;line-height:21px;vertical-align: middle;}
 	.tabBox .list .info .user a .headerPic{float:left;width:20px;height:20px;border-radius:50%;}
 	.tabBox .list .info .user a .name{float:left;margin-left:10px;font-size:12px;}
 	.tzPage{font-size:14px;margin-top:0px;float:right;margin-left: 0px;}
 	.ellipsis{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 	.row{margin:0;}
-	.iconfont{margin-right:6px;color:#9aabb8;font-weight:600;font-size:18px;}
+	.iconfont{margin-right:6px;color:#9aabb8;font-weight:600;font-size: 18px;}
 	.data{position:absolute;right:10px;top:5px;color: #bdbdbd;}
-	h4 .tag{float: left;height: 25px;margin: 1px 5px 1px 0;
-	padding: 0 10px;font-size: 12px;color: #fff;border-radius: 2px;line-height: 25px;}
+	h4 .tag{float:left;height:25px;margin:1px 5px 1px 0;	padding: 0 10px;font-size: 12px;color: #fff;border-radius: 2px;line-height: 25px;}
 	h4 a{text-decoration:none;}
 	h4 .title{line-height:28px;display: block;max-width: 450px;font-size: 18px;color: #2c3e50;font-weight: normal;}
 	.bg-blue {background-color: #3498db!important;color: #fff !important;}
@@ -94,6 +93,7 @@
 	.msg span{margin-right:10px;}
 	.msg span em {font-size:14px;color:#9aabb8;}
 	.tab-pane{margin-top: 60px;}
+	/* tab切换栏 end */
 		
   </style>
   <link rel="stylesheet" type="text/css" href="${basePath}/resources/js/umeditor/themes/default/css/umeditor.css">
@@ -147,17 +147,17 @@
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class=""></li>
-				<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1" class=""></li>
 				<li data-target="#myCarousel" data-slide-to="2" class=""></li>
 				<li data-target="#myCarousel" data-slide-to="3" class=""></li>
 			</ol>
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
-				<div class="item">
+				<div class="item active">
 					<img src="${basePath}/resources/imgs/banner/banner1.jpeg" alt="First slide" width="1200">
 				</div>
-				<div class="item active">
+				<div class="item">
 					<img src="${basePath}/resources/imgs/banner/banner2.jpeg" alt="Second slide" width="1200">
 				</div>
 				<div class="item">
@@ -238,7 +238,7 @@
 					<div class="row musicRow contList"></div>
 				</div>
 				<!-- 文章栏 -->
-				<div role="tabpanel" class="tab-pane fade" id="aritcle">
+				<div role="tabpanel" class="tab-pane fade in" id="aritcle">
 					<!-- 文章列表 -->
 					<div class="row aritcleRow contList"></div>
 				</div>

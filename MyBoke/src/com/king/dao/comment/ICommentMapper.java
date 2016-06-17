@@ -31,7 +31,16 @@ public interface ICommentMapper {
 	 * @since  1.0.0
 	 */
 	public List<HashMap<String, Object>> findComments(Params params);
-	
+	/**
+	 * 查询所有内容评论
+	 * @Title: findContentComments 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param params
+	 * @param @return  参数说明 
+	 * @return List<HashMap<String,Object>>  返回类型 
+	 * @throws
+	 */
+	public List<HashMap<String, Object>> findContentComments(Params params);
 	/**
 	 * 求总数
 	 * com.king.dao.comment 

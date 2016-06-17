@@ -56,4 +56,9 @@ public class CommentServiceImpl implements ICommentService{
 	public int deleteComment(Params params) {
 		return commentMapper.deleteComment(params);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> findContentComments(Params params) {
+		return commentMapper.findContentComments(params);
+	}
 }

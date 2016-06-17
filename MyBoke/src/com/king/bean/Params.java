@@ -8,6 +8,7 @@ public class Params {
 	private Integer musicId;
 	private Integer typeId;
 	private Integer filterId;
+	private Integer contentId;
 	private Integer userId;
 	private Integer fanId;
 	private String order;
@@ -54,6 +55,12 @@ public class Params {
 	}
 	public void setFilterId(Integer filterId) {
 		this.filterId = filterId;
+	}
+	public Integer getContentId() {
+		return contentId;
+	}
+	public void setContentId(Integer contentId) {
+		this.contentId = contentId;
 	}
 	public Integer getUserId() {
 		return userId;

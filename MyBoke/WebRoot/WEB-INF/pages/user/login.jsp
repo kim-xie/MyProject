@@ -258,8 +258,8 @@
 				}
 				if(userVal && pwdVal && $user.blur() && $pwd.blur()){
 					showTip("bounceInDown","icon-correct","green","登陆中请稍等...");
-					$login.val("登陆中...").off("click");
-					$error.off("click");
+					$login.val("登陆中...").off("onclick");
+					$error.off("onclick");
 					var params = {userName:userVal,userPassword:pwdVal};
 					$.ajax({
 						type:"post",
@@ -280,8 +280,8 @@
 			  					$user.val("");
 			  					$pwd.val("");
 			  					$user.focus();
-			  					$login.val("登录").on("click");
-								$error.on("click");
+			  					$login.val("登录").on("onclick");
+								$error.on("onclick");
 								$user.next().css("display","none");
 								$pwd.next().css("display","none");
 								loginIndex++;
@@ -340,8 +340,8 @@
 			  					$user.val("");
 			  					$pwd.val("");
 			  					$user.focus();
-			  					$login.val("登录").on("click");
-								$error.on("click");
+			  					$login.val("登录").on("onclick");
+								$error.on("onclick");
 								$user.next().css("display","none");
 								$pwd.next().css("display","none");
 								loginIndex++;
@@ -352,8 +352,8 @@
 			  					$("#verifycode").val("");
 			  					$("#verifycode").next().css("display","none");
 			  					$("#verifycode").focus();
-			  					$login.val("登录").on("click");
-								$error.on("click");
+			  					$login.val("登录").on("onclick");
+								$error.on("onclick");
 								loginIndex++;
 			  				}
 						}

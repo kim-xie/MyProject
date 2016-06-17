@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.king.bean.Comment;
 import com.king.bean.Params;
@@ -51,7 +52,7 @@ public class CommentController extends BaseController implements ServletContextA
 	
 	/**
 	 * 查询评论信息
-	 * 方法名：saveComment
+	 * 方法名：loadComment
 	 * 创建人：king 
 	 * 时间：2016年5月29日-上午12:03:10 
 	 * @param comment
@@ -62,9 +63,31 @@ public class CommentController extends BaseController implements ServletContextA
 	 */
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST,value="/load")
-	public List<HashMap<String, Object>>  saveComment(Params params){
+	public List<HashMap<String, Object>>  loadComment(Params params){
 		params.setStatus(1);
 		List<HashMap<String, Object>> comments = commentService.findComments(params);
 		return comments;
+	}
+	
+	/**
+	 * 查询评论信息
+	 * 方法名：loadContentComment
+	 * 创建人：king 
+	 * 时间：2016年5月29日-上午12:03:10 
+	 * @param comment
+	 * @param request
+	 * @return Comment
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@ResponseBody
+	@RequestMapping(method=RequestMethod.POST,value="/loadContentComments")
+	public ModelAndView  loadContentComment(Params params){
+		ModelAndView modelAndView = new ModelAndView();
+		params.setStatus(1);
+		List<HashMap<String, Object>> comments = commentService.findContentComments(params);
+		modelAndView.setViewName("content/detail");
+		modelAndView.addObject("comments", comments);
+		return modelAndView;
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.king.bean.[beanName];
 import com.king.bean.Params;
+import com.king.bean.User;
 import com.king.service.[smallBeanName].I[beanName]Service;
 
 /**

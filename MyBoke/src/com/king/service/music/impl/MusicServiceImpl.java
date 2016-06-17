@@ -42,8 +42,9 @@ public class MusicServiceImpl implements IMusicService{
 	}
 
 	@Override
-	public int save(Music music) {
-		return musicMapper.save(music);
+	public boolean save(Music music) {
+		int count = musicMapper.save(music);
+		return count>0?true:false;
 	}
 
 	@Override

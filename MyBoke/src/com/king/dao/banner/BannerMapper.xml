@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.dao.banner.IBannerMapper" >
+	
+	<!-- 查询所有Banner -->
+	<select id="findBanners" resultType="Banner" parameterType="Params">
+		select 
+			id,
+			img,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			is_delete as isDelete,
+			status
+		FROM
+			banner 
+		ORDER BY ${order}
+		LIMIT #{pageNo} ,#{pageSize};				
+	</select>
+	
+	<!-- 根据id查询Banner -->
+	<select id="getBanner" resultType="Banner">
+		SELECT 
+		  	id,
+			img,
+			create_time as createTime,
+			update_time as updateTime,
+			user_id as userId,
+			is_delete as isDelete,
+			status
+		FROM
+		 	banner
+		WHERE 
+			id = #{id}
+	</select>
+	
+	<!-- 查询Banner的总记录数  -->
+	<select id="countBanner" resultType="int" parameterType="Params">
+		SELECT
+			count(1) 
+		FROM
+			banner 
+	</select>
+	
+	<!-- 添加Banner -->
+	<insert id="saveBanner" parameterType="Banner" useGeneratedKeys="true" keyProperty="id" flushCache="true" >
+	  	INSERT INTO banner(
+			id,
+			img,
+			update_time,
+			user_id,
+			is_delete,
+			status
+	  	) VALUES (
+		  	#{id},
+		  	#{img},
+		  	#{updateTime},
+		  	#{userId},
+		  	#{isDelete}
+		  	#{status}
+	  	)
+	 </insert>
+	
+	<!-- 更新Banner -->
+	<update id="updateBanner" parameterType="Banner">
+		update banner
+		<set>
+			<if test="isDelete!=null">is_delete=#{isDelete},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除Banner -->
+	<delete id="deleteBanner" parameterType="Params">
+		<!-- delete from banner where id = #{id} 真删 -->
+		update banner set is_delete = 1 where id = #{id}
+	</delete>
+	
+</mapper>

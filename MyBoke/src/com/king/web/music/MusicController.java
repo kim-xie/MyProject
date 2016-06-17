@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.king.bean.Music;
 import com.king.bean.Params;
+import com.king.bean.User;
 import com.king.service.music.IMusicService;
 import com.king.web.BaseController;
 /**
@@ -107,9 +108,40 @@ public class MusicController extends BaseController{
 	}
 	
 	/**
+	 * @Title: save 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @param music
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
+	@RequestMapping("/save.do")
+	@ResponseBody
+	public String saveMusic(Music music){
+		if(music != null){
+			User user = (User) request.getSession().getAttribute("user");
+			music.setUserId(user.getUserId());
+			music.setIsDelete(0);
+			music.setStatus(1);
+			music.setComments(0);
+			music.setHits(0);
+			music.setCollections(0);
+			music.setLoves(0);
+			boolean flay = musicService.save(music);
+			if(flay){
+				return "success";
+			}else{
+				return "fail";
+			}
+		}else{
+			return "error";
+		}
+	}
+	
+	/**
 	 * @Title: update 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
-	 * @param @param content
+	 * @param @param music
 	 * @param @return  参数说明 
 	 * @return String  返回类型 
 	 * @throws

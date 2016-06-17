@@ -44,5 +44,6 @@
 		<mapper resource="com/king/dao/log/LogMapper.xml" />
 		<mapper resource="com/king/dao/comment/CommentMapper.xml" />
 		<mapper resource="com/king/dao/fan/FanMapper.xml" />
+		<mapper resource="com/king/dao/banner/BannerMapper.xml" />
 	</mappers>
 </configuration> 

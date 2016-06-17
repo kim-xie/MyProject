@@ -103,8 +103,8 @@
 			  status,
 			  is_delete,
 			  user_id,
-			  username,
-			  header_pic 
+			  size,
+			  time
 	  	) VALUES (
 			  	#{title},
 			  	#{description},
@@ -118,8 +118,8 @@
 			  	#{status},
 			  	#{isDelete},
 			  	#{userId},
-			  	#{userName},
-			  	#{headerPic}
+			  	#{size},
+			  	#{time}
 	  	)
 	</insert>
 	

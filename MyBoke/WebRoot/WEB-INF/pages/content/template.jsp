@@ -30,7 +30,8 @@
 				</div>
 				<div class="data">
 					<i class="iconfont icon-time"></i>
-					${content.createTime}
+					${king:formatDate(content.createTime,'yyyy-MM-dd')}
+					<%-- ${king:timeFormat(content.createTime)} --%>
 				</div>
 			</div>
 		</div>

@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.king.bean.Banner;
 import com.king.bean.ContentParams;
 import com.king.bean.Params;
 import com.king.bean.User;
 import com.king.bean.UserParams;
+import com.king.service.banner.IBannerService;
 import com.king.service.content.ContentService;
 import com.king.service.music.IMusicService;
 import com.king.service.user.UserService;
@@ -35,7 +37,8 @@ public class IndexController extends BaseController implements ServletContextAwa
 	private IMusicService musicService;
 	@Resource(name="contentService")
 	private ContentService contentService;
-	
+	@Resource(name="bannerService")
+	private IBannerService bannerService;
 	/**
 	 * @Title: userList 
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -50,12 +53,15 @@ public class IndexController extends BaseController implements ServletContextAwa
 		int itemCount = musicService.count(params);
 		// 用户
 		User user = (User) application.getAttribute("user_log");
-		System.out.println(user.getUserId());
 		userParams.setFilterId(user.getUserId());
 		List<User> users = userService.findAllUsers(userParams);
 		// 内容
 		int count = contentService.countContent(contentparams);
+		//banner
+		List<Banner> banners = bannerService.findBanners(params);
+		
 		model.setViewName("index");
+		model.addObject("banners", banners);
 		model.addObject("itemCount", itemCount);
 		model.addObject("count", count);
 		model.addObject("users",users);

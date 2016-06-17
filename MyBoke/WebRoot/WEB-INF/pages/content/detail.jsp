@@ -25,7 +25,7 @@
                         <span>分类：<a href="javascript:void(0);">${content.tag}</a></span>
                         <span> 
                         	<i class="iconfont icon-time font18" style="margin-right:6px;"></i>
-                        		${content.createTime}
+                        		${king:formatDate(content.createTime,'yyyy-MM-dd HH:mm:ss')}
                         </span>
                     </div>
                     <div class="Classification">
@@ -171,29 +171,48 @@
 							</ul>
 						</div>
 					</div>
-					
-                    <div class="comment_cont">
-                        <div class="single_comment clearfix">
-                            <a href="javascript:void(0)" class="single_img fl"><img src="${basePath}${content.headerPic}" width="60" height="60"></a>
-                            <div class="fl single_cont">
-                                <p class="single_name"><a href="javascript:void(0)">${content.userName}</a><i>今天17:50</i></p>
-                                <p class="yijian">确实是很水，老板从拿到项目给我的时候就说只有两个礼拜时间，而且没有原型，确实很粗糙，我也没想到能上首页，自己也觉得不是太合适，但是也感谢ui中国给了我一个鼓励，希望大神们多多包涵，小弟会更加努力的</p>
-                                <p class="huifu">
-                                   <a href="javascript:void(0)" onclick="replay(this);" data-opid="">回复</a>
-                                   <a href="javascript:void(0)" class="">分享</a> 
-                                </p>
-                                <p class="fbpl"></p>
-                            </div>
-                        </div>
-                    </div>
+					<!-- 评论内容框  -->
+                    <div class="comment_cont"></div>
                 </div>
             </div>
             <script type="text/javascript">
-            $(function(){
-            	if(window.localStorage){
-					localStorage.getItem("king");
-				} 
-            });
+           $(function(){
+        	   loadComment(0,5);
+           });
+            // 加载评论数据
+            function loadComment(pageNo,pageSize){
+            	var timer = null;
+            	clearTimeout(timer);
+				timer = setTimeout(function(){
+					var contentId = $("body").data("opid");
+					var params = {pageNo:pageNo*pageSize,pageSize:pageSize,contentId:contentId};
+					$.ajax({
+						type:"post",
+						data:params,
+						url:basePath+"/comment/load.do",
+						success:function(dataArr){
+							if(dataArr && dataArr.length>0){
+								for(var i=0,len=dataArr.length;i<len;i++){
+									var data = dataArr[i];
+									$(".comment_cont").append("<div class='single_comment clearfix'>"+
+		"                            <a href='javascript:void(0)' class='single_img fl'><img src='"+basePath+data.headerPic+"' width='60' height='60'></a>"+
+		"                            <div class='fl single_cont'>"+
+		"                                <p class='single_name'><a href='javascript:void(0)'>"+data.username+"</a><i>"+data.createTime+"</i></p>"+
+		"                                <p class='yijian'>"+data.description+"</p>"+
+		"                                <p class='huifu'>"+
+		"                                   <a href='javascript:void(0)' onclick='replay(this);' data-opid=''>回复</a>"+
+		"                                   <a href='javascript:void(0)' class=''>分享</a> "+
+		"                                </p>"+
+		"                                <p class='fbpl'></p>"+
+		"                            </div>"+
+		"                        </div>");
+		 						}
+							}
+						}
+					});
+				},300);
+			}
+            
             // 设置缓存
             function setCacheData(obj){
             	var content = $(".t_msg").html();
@@ -202,7 +221,7 @@
         				localStorage.setItem("king",content);
         			}
         		}
-        	}
+        	};
          	// 保存评论
         	function saveComment(obj){
         		var content = $(".t_msg").html();
@@ -297,6 +316,10 @@
 				success:function(data){
 					if(data == "success"){
 						loading("感谢您的点赞。。。",4);
+						$(".praise a").text("已赞").removeAttr("onclick");
+						if(window.localStorage){
+        					localStorage.setItem("zan","已赞");
+        				} 
 					}else{
 						loading("操作失败。。。",4);
 					}
@@ -321,6 +344,7 @@
 				success:function(data){
 					if(data == "success"){
 						loading("感谢您的收藏。。。",4);
+						$(".collect_box a").text("已收藏").removeAttr("onclick");
 					}else{
 						loading("操作失败。。。",4);
 					}
