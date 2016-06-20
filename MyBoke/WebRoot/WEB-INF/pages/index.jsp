@@ -93,8 +93,11 @@
 	.musicUploadBox .input{width:474px;height:30px;font-size:16px;font-weight:600;text-indent:0.5em;}
 	.musicUploadBox .editer{width:570px;height:100%;background:#fff;overflow:hidden;padding:10px;}
 	.musicUploadBox .editer .upload_pic,.upload_music{position:relative;width:550px;height:320px;border:1px dashed #ccc;text-align:center;margin:20px 0;}
-	.musicUploadBox .editer .upload_pic,.upload_music .m-pic,.m-src{line-height:320px;font-size:20px;color:#999;font-weight:600;}
-	.musicUploadBox .editer .upload_pic .m-pic #preview{position:absolute;top:0;left:0;}
+	.musicUploadBox .editer .upload_pic #prograssbar{position:absolute;top:-20px;left:0;height:10px;background:green;width:0%;}
+	.musicUploadBox .editer .upload_music{height:80px;}
+	.musicUploadBox .editer .upload_pic .m-pic{line-height:320px;font-size:20px;color:#999;font-weight:600;}
+	.musicUploadBox .editer .upload_music .m-src{line-height:80px;font-size:20px;color:#999;font-weight:600;}
+	.musicUploadBox .editer .upload_pic .m-pic #img{position:absolute;top:0;left:0;}
 	.musicUploadBox .editer .upload_pic .m-pic,.m-src a{text-decoration: none;}
 	.musicUploadBox .editer p{float:left;font-size:14px;font-weight:600;margin:20px 0;}
 	.musicUploadBox .editer p .fabiao{height:30px;line-height:30px;}
@@ -115,15 +118,19 @@
 	
 	/* tab切换栏  start */
 	.tabBox{padding-left:0;padding-right:30px;}
+	.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+	    width: 100%;
+	}
 	.tabBox .tab{position:relative;top:30px;color:#7c7c7c;font-size:16px;font-weight:600;}
 	.tabBox .tab .active a{background:url(${basePath}/resources/imgs/share/bg2.jpg);}
 	.tabBox .row .panel{padding:0;}
-	.tabBox .row .panel .panel-body{padding:0;}
+	.tabBox .row .panel .panel-body{padding:0;border:2px solid transparent;transition:all 1s;}
+	.tabBox .row .panel .panel-body:hover{border:2px solid #3498db;transition:all 1s;}
 	.tabBox .row .panel .pic{padding:0;height:120px;}
 	.tabBox .row .panel .pic img{height:120px;width:100%;}
 	.tabBox .list:nth-child(4n+1){position:relative;}
 	.tabBox .list:hover .shade{opacity:1;}
-	.tabBox .list:hover .cover .img{transform:scale(1.1)}
+	.tabBox .list:hover .cover .img{transform:scale(1.1);}
 	.tabBox .list .shade{box-shadow:0 0 12px rgba(0, 0, 0, 0.1);position:absolute;left:0;top:0;width:100%;height:100%;background:#fff;z-index:1;opacity:0;}
 	.tabBox .list .cover{overflow:hidden;position:relative;z-index:2;margin-top:15px;}
 	.tabBox .list .info{position:relative;z-index:2;border-bottom:1px solid #e2e8eb;padding:5px 0 20px 0;}
@@ -145,7 +152,6 @@
 	h4 a{text-decoration:none;}
 	h4 .title{line-height:28px;display: block;max-width: 450px;font-size: 18px;color: #2c3e50;font-weight: normal;}
 	.bg-blue {background-color: #3498db!important;color: #fff !important;}
-	.ellipsis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
 	.mt10{margin-top: 10px !important;}
 	.container .panel .row p{max-height:44px;overflow: hidden;margin-top:10px;color: #7f8c8d;}
 	.msg span{margin-right:10px;}
@@ -155,6 +161,7 @@
 	
   </style>
   <link rel="stylesheet" type="text/css" href="${basePath}/resources/js/umeditor/themes/default/css/umeditor.css">
+  <script type="text/javascript" src="${basePath}/resources/js/king_upload.js"></script>
   <script type="text/javascript" src="${basePath}/resources/js/wnl/wnl.js"></script>
   <script type="text/javascript" src="${basePath}/resources/sg/tz_page.js"></script>
   <script type="text/javascript" charset="utf-8" src="${basePath}/resources/js/umeditor/umeditor.config.js"></script>
@@ -328,10 +335,10 @@
 		 			<input type="text" placeholder="描述不得超过200个字" maxlength="200" class="txt_description">
 		 		</span>
 		 		<div class="upload_pic">
-		 			<input type="file" id="file" onchange="uploadFile(this)" style="display:none;">
+		 			<!-- <input type="file" id="file" onchange="uploadContentImg(this)" style="display:none;"> -->
 		 			<span class="txt-pic">
-		 				<a href="javascript:void(0);" onclick="openBrowse(this)">请添加封面图片</a>
-		 				<img id="preview" src="" width="548" height="318" style="display:none;">
+		 				<a href="javascript:void(0);" onclick="openBrowse(this,'#preview')">请添加封面图片</a>
+		 				<img id="preview" src="" data-dir="imgs/contentImg" width="548" height="318" style="display:none;">
 		 			</span>
 		 		</div>
 				<script id="myEditor" type="text/plain" style="width:550px;height:300px;margin:10px 0;overflow-X:hidden;overflow-Y:auto;"></script>
@@ -350,18 +357,19 @@
 		 <div class="musicUploadBox">
 		 	<div class="editer">
 		 		<div class="upload_pic">
-		 			<input type="file" id="file" onchange="uploadFile(this)" style="display:none;">
+		 			<input type="file" id="file" onchange="uploadFile()" style="display:none;">
 		 			<span class="m-pic">
-		 				<a href="javascript:void(0);" onclick="openBrowse(this)">请添加封面图片</a>
-		 				<img id="preview" src="" width="548" height="318" style="display:none;">
+		 				<a href="javascript:void(0);" onclick="openBrowse(this,'#img')">请添加封面图片</a>
+		 				<img id="img" src="" data-img="" width="548" data-dir="mp3/img" height="318" style="display:none;">
 		 			</span>
+		 			<!-- <span id="prograssbar"></span> -->
 		 		</div>
 		 		
 		 		<div class="upload_music">
-		 			<input type="file" id="file" onchange="uploadFile(this)" style="display:none;">
+		 			<input type="file" id="file" accept="image/jpg,image/jpeg,image/png,image/gif,audio/mp3" onchange="uploadFile()" style="display:none;">
 		 			<span class="m-src">
-		 				<a href="javascript:void(0);" onclick="openBrowse(this)">请添加音乐</a>
-		 				<audio id="audio" src=""></audio>
+		 				<a href="javascript:void(0);" onclick="openBrowse(this,'#audio')">请添加音乐</a>
+		 				<audio id="audio" src="" data-link="" data-dir="mp3/song"></audio>
 		 			</span>
 		 		</div>
 		 		
@@ -372,28 +380,28 @@
 		 		
 		 		<p>
 					音乐标题：
-					<input type="text" class="input m_title" placeholder="音乐标题" maxlength="40">	
+					<input type="text" class="input m_title" readonly="readonly" placeholder="音乐标题">	
 		 		</p>
 		 		
 		 		<p>
 					演唱歌手：
-					<input type="text" class="input m_singer" placeholder="演唱歌手" maxlength="40">	
+					<input type="text" class="input m_singer" readonly="readonly" placeholder="演唱歌手">	
 		 		</p>
 		 		
 		 		<p>
 					音乐大小：
-					<input type="text" class="input m_size" placeholder="音乐文件大小" maxlength="40">	
+					<input type="text" class="input m_size" readonly="readonly" placeholder="音乐文件大小">	
 		 		</p>
 		 		
 		 		<p>
 					播放时长：
-					<input type="text" class="input m_time" placeholder="音乐播放时长" maxlength="40">	
+					<input type="text" class="input m_time" readonly="readonly" placeholder="音乐播放时长">	
 		 		</p>
 		 		
 		 		<p>
 					音乐类型：
 					<select class="input m_category">
-						<option>--请选择--</option>
+						<option value="">--请选择--</option>
 						<option value="1">流行</option>
 						<option value="2">摇滚</option>
 						<option value="3">民谣</option>
@@ -594,63 +602,6 @@
 			}	
 		}
 		
-		/*点击按钮的时候--触发文件上传*/
-		function openBrowse(obj){ 
-			//判断浏览器的兼容性问题
-			var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false; 
-			if(ie){ //如果是ie浏览器
-				document.getElementById("file").click(); 
-				document.getElementById("filename").value=document.getElementById("file").value;
-			}else{
-				var a=document.createEvent("MouseEvents");//FF的处理 
-				a.initEvent("click", true, true);  
-				document.getElementById("file").dispatchEvent(a); 
-			} 
-		};
-		function uploadFile() {
-			//获取文件上传的js列表对象
-		    var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
- 		    //alert(fileObj.type);
- 		    //alert(fileObj.name);
- 		    //alert(fileObj.size);
-		    // 创建一个ajax对象
-		    var xhr = new XMLHttpRequest();
-		    //开始和后台的upload.jsp页面进行交换
-		    xhr.open("post", basePath+"/upload/PicUpload.do",true);
-		    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-		    //创建一个FormData 对象
-		    var fd = new FormData();
-		    //设置文件上传的文件对象
-		    fd.append("doc", fileObj);
-		    //发送文件上传的进度
-		    xhr.send(fd);
-		    //上传成功进入的回调函数
-		    xhr.onreadystatechange = function(){
-  				if(xhr.readyState==4 && xhr.status == 200){
-  					var data = $.trim(xhr.responseText);
-  					if(data){
-						var json = JSON.parse(data);
-						var src = json.url;
-						$("#preview").css("display","block").attr("src",basePath+src);
-					}
-  				}
-  			};
-			//监听文件上传的进度
-		    //xhr.upload.addEventListener("progress", progressFunction, false);
-		};
-		//上传进度的回调函数
-// 		function progressFunction(evt) {
-// 		     var percentageDiv = document.getElementById("percentage");
-// 		     var percentDom = document.getElementById("percent");
-// 		     if (evt.lengthComputable) {
-// 		    	// 获取文件上传的数据和文件的总大小计算百分比
-// 		         var p = Math.round(evt.loaded / evt.total * 100) + "%";
-// 		    	// 设定给页面的进度条，显示百分比
-// 		         percentageDiv.innerHTML = p;
-// 		         percentDom.style.width = p;
-// 		     }
-// 		} ;
-						
     /*格式化时间*/
 	function timeFormate(time){
 		return time<10 ? "0" + time:time;
@@ -719,8 +670,6 @@
 		 $(this).addClass("open").siblings().removeClass("open");
 	 });
 	 
-	 
-	
 	/*发表文章*/
 	function saveContent(obj){
 		var titleVal = $(".txt_title").val();
@@ -746,22 +695,45 @@
 				}
 				if(data == "success"){
 					loading("文章发表成功...",5);
-					$(".editer .txt_title").val("");
-					$(".editer .txt_description").val("");
-					$(".editer .txt-pic img").attr("src","");
-					setEditorText("","myEditor");
-					$(".editer p .input").val("");
+					location.reload();
 					$(".editerBox").slideUp();
-					$("#content").addClass("active");
+					$(".nav-tabs #content").trigger("click");
 				}
 			}
 		}); 
 	};
 	
+	// 音乐上传成功的回调函数
+	var audioDom = document.getElementById("audio");
+	function uploadsuccess(dom,jdata){
+		if(jdata.target=="#img"){
+			$(jdata.target).css("display","block").data("img",jdata.url).attr("src",basePath+jdata.url);
+		}else if(jdata.target=="#preview"){
+			$(jdata.target).css("display","block").attr("src",basePath+jdata.url);
+		}else if(jdata.target=="#audio"){
+			$(jdata.target).attr("src",basePath+jdata.url).data("link",jdata.url);
+			$(jdata.target).attr("controls","controls").prev().hide();
+			var name = jdata.name;
+			var title = name.split("-")[1].trim().split(".")[0];
+			var singer = name.split("-")[0];
+			$(".m_size").val(jdata.size);
+			$(".m_title").val(title);
+			$(".m_singer").val(singer);
+			
+			audioDom.oncanplaythrough = function(){
+				var time = this.duration;
+				var m = Math.floor(time / 60) ;
+				var s = Math.floor(time % 60);
+				if(m<10) m = "0"+m;
+				if(s<10) s = "0"+s;
+				$(".m_time").val(m+":"+s);
+			};
+		}
+	}
 	/*发表音乐*/
-	function saveMusic(obj){
-		var img = $("").attr("src");
-		var src = $("").attr("src");
+	function saveMusic(obj){ //http://localhost:8080/MyBoke
+		var img = $("#img").attr("src").substring(28);
+		var src = $("#audio").attr("src").substring(28);
 		var title = $(".m_title").val();
 		var description = $(".m_description").val();
 		var singer = $(".m_singer").val();
@@ -773,7 +745,9 @@
 			loading("请填写完整内容",4);
 			return false;
 		}
-		var params = {title:title,description:description,img:img,category_id:category_id,src:src,singer:singer,size:size,time:time};
+		var params = {title:title,description:description,img:img,categoryId:category_id,src:src,singer:singer,size:size,time:time};
+		//alert(JSON.stringify(params));
+		//return;
 		$.ajax({
 			type:"post",
 			url:basePath+"/music/save.do",
@@ -786,9 +760,9 @@
 				}
 				if(data == "success"){
 					loading("音乐发表成功...",5);
-					$(".input").val("");
-					$("").attr("src","");
+					location.reload();
 					$(".musicUploadBox").slideUp();
+					$(".nav-tabs #music").trigger("click");
 				}
 			}
 		}); 

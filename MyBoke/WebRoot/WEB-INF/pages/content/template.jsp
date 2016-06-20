@@ -14,7 +14,7 @@
 					<a class="tag bg-blue" target="_blank" href="">${content.tag}</a>
 					<a class="ellipsis title" href="" title="" target="_blank">${content.title}</a>
 				</h4>
-				<p>
+				<p class="ellipsis">
 					${content.description}
 				</p>
 				<div class="pull-left" style="line-height:30px;">

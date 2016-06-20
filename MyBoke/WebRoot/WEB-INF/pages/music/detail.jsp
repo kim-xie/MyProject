@@ -55,7 +55,7 @@
 			<input type="hidden" id="headerPic" value="<%=request.getSession().getAttribute("userHeaderPic")%>">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center m_box" style="padding:0;">
-					<img src="${basePath}${music.img}" class="img-responsive center-block" alt="Responsive image">
+					<img src="${basePath}${music.img}" class="img-responsive center-block" alt="Responsive image" style="width:100%;max-height:320px;">
 					<div class="p_over"></div>
 					<div class="txt_over">
 						<h1>

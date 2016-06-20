@@ -15,72 +15,93 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.king.util.ImageUtil;
 import com.king.util.TmFileUtil;
+import com.king.util.TmStringUtils;
 import com.king.web.BaseController;
 
 @Controller
 @RequestMapping("/upload")
 public class UploadController extends BaseController{
-	
+	/**
+	 * 调转到头像上传页面
+	 * @Title: index 
+	 * @Description: TODO(这里用一句话描述这个方法的作用) 
+	 * @param @return  参数说明 
+	 * @return String  返回类型 
+	 * @throws
+	 */
 	@RequestMapping("/toUpload.do")
 	public String index(){
 		return "upload/upload";
 	}
-	
 	/**
-	 * 上传内容封面图片
-	 * @Title: uploadFile 
+	 * 音乐上传
 	 * @Description: TODO(这里用一句话描述这个方法的作用) 
-	 * @param @return  参数说明 
-	 * @return List<HashMap<String,Object>>  返回类型 
+	 * @param @param file
+	 * @param @param request
+	 * @param @param response
+	 * @param @return
+	 * @param @throws IllegalStateException
+	 * @param @throws IOException
+	 * @param @throws JSONException  参数说明 
+	 * @return String  返回类型 
 	 * @throws
 	 */
-	@ResponseBody 
-	@RequestMapping(method=RequestMethod.POST,value="/PicUpload.do")
-	public String uploadFile(@RequestParam("doc") MultipartFile fileObj)
+	@ResponseBody
+	@RequestMapping(method=RequestMethod.POST,value="/file.do")
+	public String uploadMusic(@RequestParam("doc") MultipartFile file)
 			throws IllegalStateException, IOException, JSONException {
-		if(!fileObj.isEmpty()){
-			
+		//获取原文件名
+		String oldName = file.getOriginalFilename();
+		// 文件大小
+		long size = file.getSize();
+		// 文件大小单位为KB
+		//String sizeString = TmFileUtil.countFileSize(size);
+		// 生成的新的文件名
+		String newFileName = TmFileUtil.generateFileName(oldName, 10, "yyyyMMddHHmmss");
+		//获取文件后缀
+		String ext = oldName.substring(oldName.lastIndexOf(".")+1);
+		String dir = request.getParameter("dir");
+		if(TmStringUtils.isEmpty(dir))dir = "imgs";
+		String fpath = "/resources/"+dir+"/";
+		@SuppressWarnings("deprecation")
+		String path = request.getRealPath(fpath);
+		String url = fpath + newFileName;
+		File parent = new File(path);
+		if(!parent.exists())parent.mkdirs();
+		//上传文件到目标文件夹--文件的赋值
+		file.transferTo(new File(parent, newFileName));// 文件上传
+		
+		/*String url = null;
+		if(TmStringUtils.isNotEmpty(ext)&& ext.equalsIgnoreCase("mp3")){
 			@SuppressWarnings("deprecation")
-			String path = request.getRealPath("/resources/imgs/contentImg");
+			String path = request.getRealPath("/resources/mp3/song");
 			File parent = new File(path);
 			if(!parent.exists())parent.mkdirs();
-			
-			System.out.println("获取文件数据================="+fileObj.getBytes());
-			System.out.println("获取文件的MINE类型================="+fileObj.getContentType());
-			System.out.println("获取文件的名称================="+fileObj.getName());
-			System.out.println("获取上传文件的原名================="+fileObj.getOriginalFilename());
-			System.out.println("获取文件的大小================="+fileObj.getSize());
-			System.out.println("判断是否有文件上传================="+fileObj.isEmpty());
-			
-			// 装载要返回的数据
-			HashMap<String, Object> map = new HashMap<String,Object>();
-			// 上传时的文件名
-			String oldName = fileObj.getOriginalFilename();
-			// 文件大小
-			long size = fileObj.getSize();
-			// 文件大小单位为KB
-			String sizeString = TmFileUtil.countFileSize(size);
-			// 文件后缀名
-			String ext = TmFileUtil.getExtNoPoint(oldName);
-			// 生成的新的文件名
-			String newFileName = TmFileUtil.generateFileName(oldName, 10, "yyyyMMddHHmmss");
+			//上传文件到目标文件夹--文件的赋值
+			file.transferTo(new File(parent, newFileName));// 文件上传
 			// 保存路径
-			String url = "/resources/imgs/contentImg/"+newFileName;
-			// 转存文件
-			fileObj.transferTo(new File(parent, newFileName));
-			
-			map.put("oldname",oldName);
-			map.put("ext",ext);
-			map.put("sizeString",sizeString);
-			map.put("size",size);
-			map.put("name",newFileName);
-			map.put("url",url);
-			
-			return JSONUtil.serialize(map);
-		}else{
-			return null;
+			url = "/resources/mp3/song/"+newFileName;
 		}
-	};
+		
+		if(TmStringUtils.isNotEmpty(ext)&& ext.equalsIgnoreCase("jpg") || ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("png") ||ext.equalsIgnoreCase("gif")){
+			@SuppressWarnings("deprecation")
+			String path = request.getRealPath("/resources/mp3/img");
+			File parent = new File(path);
+			if(!parent.exists())parent.mkdirs();
+			//上传文件到目标文件夹--文件的赋值
+			file.transferTo(new File(parent, newFileName));// 文件上传
+			// 保存路径
+			url = "/resources/mp3/img/"+newFileName;
+		}*/
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("name", oldName);// 文件的原始名称
+		map.put("newName", newFileName);// 文件的新名称
+		map.put("ext", ext);// 文件的后缀
+		map.put("size", size);// 文件的真实大小
+		map.put("url",url);// 获取文件的具体服务器的目录
+		return JSONUtil.serialize(map);
+	}
 	
 	/**
 	 * @Title: upload 

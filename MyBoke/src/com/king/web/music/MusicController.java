@@ -115,8 +115,8 @@ public class MusicController extends BaseController{
 	 * @return String  返回类型 
 	 * @throws
 	 */
-	@RequestMapping("/save.do")
 	@ResponseBody
+	@RequestMapping("/save")
 	public String saveMusic(Music music){
 		if(music != null){
 			User user = (User) request.getSession().getAttribute("user");

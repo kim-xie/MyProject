@@ -78,12 +78,12 @@
 			  commons-io-2.0.1.jar
      -->
      <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-     	<!-- 限制文件上大小，单位是:字节 -->
-     	<property name="maxUploadSize" value="5242880"></property>
+     	<!-- 限制文件上大小，单位是:字节   20MB-->
+     	<property name="maxUploadSize" value="20971520"></property>
      	<!-- 请求编码的格式 -->
      	<property name="defaultEncoding" value="UTF-8"></property>
      	<!-- 上传的临时目录的制定 -->
-     	<property name="uploadTempDir" value="resources/imgs/header_pic/temp/"></property>
+     	<property name="uploadTempDir" value="/temp"></property>
      </bean>
      
 	<!-- 配置拦截器 -->

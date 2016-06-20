@@ -4,7 +4,7 @@
 <mapper namespace="com.king.dao.content.ContentMapper">
 	<!-- 查询所有 -->
 	<select id="findContents" parameterType="ContentParams" resultType="Content">
-			SELECT 
+			<![CDATA[ SELECT 
 				id,
 				userid as userId,
         		username as userName,
@@ -31,6 +31,7 @@
 				image,
 				thumnail,
 				create_time as createTime
+				 ]]>
 			FROM 
 				content
 			<trim prefix="WHERE" prefixOverrides="AND | OR">  
@@ -85,7 +86,7 @@
 	
 	<!-- 根据id查询内容  -->
 	<select id="getContent" resultType="Content">
-		SELECT 
+		<![CDATA[ SELECT 
           id,
           userid as userId,
           username as userName,
@@ -116,6 +117,7 @@
           content 
         WHERE 
         	id=#{id}
+        ]]>
 	</select>
 	
 	<update id="updateContent" parameterType="Content">
