@@ -39,7 +39,7 @@
   -->
   
   <!-- 框架异常处理 -->
-  <error-page>
+  <!-- <error-page>
   	<exception-type>404</exception-type>
   	<error-code>error/error.html</error-code>
   </error-page>
@@ -50,7 +50,7 @@
    <error-page>
   	<exception-type>java.lang.exception</exception-type>
   	<error-code>error/error.html</error-code>
-  </error-page>
+  </error-page> -->
   
   <!-- post请求统一编码过滤器 -->
   <filter>
